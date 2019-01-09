@@ -10,10 +10,12 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import hu.csanysoft.invaders.Actors.Ghost;
 import hu.csanysoft.invaders.Actors.Laser;
 import hu.csanysoft.invaders.Global.Assets;
+import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.Invaders;
 import hu.csanysoft.invaders.MyBaseClasses.Game.MyLevel;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyActor;
@@ -23,7 +25,7 @@ public class GameStage extends MyStage {
 
     MyLevel firstLevel, secondLevel, thirdLevel;
     Ghost ghost, ghost2, ghost3, ghost4, ghost5, ghost6;
-    ArrayList<Laser> lasers = new ArrayList<Laser>();
+    public ArrayList<Laser> lasers = new ArrayList<Laser>();
     ArrayList<Ghost> ghosts = new ArrayList<Ghost>();
     boolean nextLevel = false;
 
@@ -36,19 +38,13 @@ public class GameStage extends MyStage {
         addLevel(firstLevel);
         addLevel(secondLevel);
         addLevel(thirdLevel);
-
-        ghost = new Ghost();
-        ghost.setPosition(100,100);
-        ghost2 = new Ghost();
-        ghost2.setPosition(100,100);
-        ghost3 = new Ghost();
-        ghost3.setPosition(500,100);
-        ghost4 = new Ghost();
-        ghost4.setPosition(100,100);
-        ghost5 = new Ghost();
-        ghost5.setPosition(300,100);
-        ghost6 = new Ghost();
-        ghost6.setPosition(600,100);
+        Random rand = new Random();
+        ghost = new Ghost(rand.nextInt((int)(Globals.WORLD_WIDTH/3 - 128)) + 128,500);
+        ghost2 = new Ghost(rand.nextInt((int)(Globals.WORLD_WIDTH/3 - 128)),500);
+        ghost3 = new Ghost(rand.nextInt((int)(Globals.WORLD_WIDTH/3 - 128)) + Globals.WORLD_WIDTH/3,500);
+        ghost4 = new Ghost(rand.nextInt((int)(Globals.WORLD_WIDTH/3 - 128)),500);
+        ghost5 = new Ghost(rand.nextInt((int)(Globals.WORLD_WIDTH/3 - 128)) + Globals.WORLD_WIDTH/3,500);
+        ghost6 = new Ghost(rand.nextInt((int)(Globals.WORLD_WIDTH/3 - 128)) + Globals.WORLD_WIDTH/3*2,500);
 
         ghosts.add(ghost);
         ghosts.add(ghost2);
@@ -66,7 +62,7 @@ public class GameStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                Laser laser = new Laser(x,y);
+                Laser laser = new Laser(x,y, true);
                 addActor(laser);
                 lasers.add(laser);
             }
@@ -85,7 +81,7 @@ public class GameStage extends MyStage {
             if(level.isShowingActors()) {
                 for (Ghost ghost : ghosts) {
                     if(level.isActorOnLevel(ghost)) {
-                        ghost.moveBy(0, 1);
+                        //ghost.moveBy(0, 1);
                         for (Laser laser : lasers) {
                                 if (laser.overlaps(ghost)) {
                                     level.removeActorFromLevel(ghost);
