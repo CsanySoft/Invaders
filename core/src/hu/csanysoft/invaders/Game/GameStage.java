@@ -32,12 +32,13 @@ public class GameStage extends MyStage {
     public ArrayList<Laser> lasers = new ArrayList<Laser>();
     ArrayList<Ghost> ghosts = new ArrayList<Ghost>();
     boolean nextLevel = false;
-    Ship ship;
+    public Ship ship;
     float timer = 0;
+    float szorzo = 0.03f;
+    float szamolo = 0;
 
     public boolean isShooting = false;
 
-    InputMultiplexer inputMultiplexer = new InputMultiplexer();
 
 
     public GameStage(Invaders game) {
@@ -59,12 +60,14 @@ public class GameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        elapsedTime += delta;
         timer += delta;
         setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + ship.getY() - ship.getHeight() * 1.5f);
         setCameraMoveToX(Globals.WORLD_WIDTH / 2);
         getViewport().setScreenPosition(getViewport().getScreenX(),getViewport().getScreenY()+1);
-        if(timer > 5) {
+
+        szamolo = elapsedTime * szorzo;
+        if(szamolo > 4) szamolo = 4;
+        if(timer > 5 - szamolo) {
             timer = 0;
             Ghost ghost = new Ghost(new Random().nextInt(Globals.WORLD_WIDTH - 129) + new Random().nextFloat(),getCameraMoveToY() + Globals.WORLD_HEIGHT);
             ghosts.add(ghost);
@@ -78,6 +81,16 @@ public class GameStage extends MyStage {
                     ghost.remove();
                     ghost = null;
                 }
+                for (Laser laser:lasers) {
+                    if(laser!=null && ghost!=null) {
+                        if(laser.overlaps(ghost) && laser.isFel()) {
+
+                            getActors().removeValue(ghost, true);
+                            ghost.remove();
+                            ghost = null;
+                        } else if(!laser.isFel() && laser.overlaps(ship)) ship.setVisible(false);
+                    }
+                }
             }
 
         }
@@ -90,7 +103,6 @@ public class GameStage extends MyStage {
                     laser = null;
                 }
             }
-
         }
     }
 

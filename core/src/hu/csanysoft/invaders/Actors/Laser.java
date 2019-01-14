@@ -16,10 +16,14 @@ public class Laser extends OneSpriteStaticActor {
         addBaseCollisionRectangleShape();
     }
 
+    public boolean isFel() {
+        return fel;
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);
-        if(fel)moveBy(0, 2);
+        if(fel)moveBy(0, 10);
         else moveBy(0,-2);
     }
 }
