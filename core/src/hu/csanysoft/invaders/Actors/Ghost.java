@@ -43,7 +43,6 @@ public class Ghost extends OneSpriteStaticActor {
             if(x-getX() > 30) balra = false;
         } else {
             moveBy(speed, 0);
-            if(isVisible())System.out.println("x = " + x + ", getX() = " + getX());
             if(getX() - x > 30) balra = true;
         }
     }

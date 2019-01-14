@@ -97,6 +97,8 @@ abstract public class MyStage extends Stage implements InitableInterface {
     }
 
     public void setCameraMoveToX(float cameraTargetX) {
+        OrthographicCamera c = (OrthographicCamera)getCamera();
+        c.position.set(getCameraMoveToX(),cameraTargetY,0);
         this.cameraTargetX = cameraTargetX;
     }
 
@@ -105,6 +107,8 @@ abstract public class MyStage extends Stage implements InitableInterface {
     }
 
     public void setCameraMoveToY(float cameraTargetY) {
+        OrthographicCamera c = (OrthographicCamera)getCamera();
+        c.position.set(getCameraMoveToX(),cameraTargetY,0);
         this.cameraTargetY = cameraTargetY;
     }
 

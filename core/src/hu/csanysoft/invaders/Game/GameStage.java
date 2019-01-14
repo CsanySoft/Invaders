@@ -1,5 +1,6 @@
 package hu.csanysoft.invaders.Game;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,6 +15,7 @@ import java.util.Random;
 
 import hu.csanysoft.invaders.Actors.Ghost;
 import hu.csanysoft.invaders.Actors.Laser;
+import hu.csanysoft.invaders.Actors.Ship;
 import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.Invaders;
@@ -23,40 +25,19 @@ import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyStage;
 
 public class GameStage extends MyStage {
 
-    MyLevel firstLevel, secondLevel, thirdLevel;
-    Ghost ghost, ghost2, ghost3, ghost4, ghost5, ghost6;
+
     public ArrayList<Laser> lasers = new ArrayList<Laser>();
     ArrayList<Ghost> ghosts = new ArrayList<Ghost>();
     boolean nextLevel = false;
+    Ship ship;
+    float timer = 0;
 
     public GameStage(Invaders game) {
         super(new ExtendViewport(1280, 720, new OrthographicCamera(1280, 720)), new SpriteBatch(), game);
 
-        firstLevel = new MyLevel(Assets.manager.get(Assets.SPACE_TEXTURE), this);
-        secondLevel = new MyLevel(Assets.manager.get(Assets.SPACE_TEXTURE), this);
-        thirdLevel = new MyLevel(Assets.manager.get(Assets.SPACE_TEXTURE), this);
-        addLevel(firstLevel);
-        addLevel(secondLevel);
-        addLevel(thirdLevel);
-        Random rand = new Random();
-        ghost = new Ghost(rand.nextInt((int)(Globals.WORLD_WIDTH/3 - 128)) + 128,500);
-        ghost2 = new Ghost(rand.nextInt((int)(Globals.WORLD_WIDTH/3 - 128)),500);
-        ghost3 = new Ghost(rand.nextInt((int)(Globals.WORLD_WIDTH/3 - 128)) + Globals.WORLD_WIDTH/3,500);
-        ghost4 = new Ghost(rand.nextInt((int)(Globals.WORLD_WIDTH/3 - 128)),500);
-        ghost5 = new Ghost(rand.nextInt((int)(Globals.WORLD_WIDTH/3 - 128)) + Globals.WORLD_WIDTH/3,500);
-        ghost6 = new Ghost(rand.nextInt((int)(Globals.WORLD_WIDTH/3 - 128)) + Globals.WORLD_WIDTH/3*2,500);
-
-        ghosts.add(ghost);
-        ghosts.add(ghost2);
-        ghosts.add(ghost3);
-        ghosts.add(ghost4);
-        ghosts.add(ghost5);
-        ghosts.add(ghost6);
-
-        firstLevel.addActorToLevel(ghost);
-        secondLevel.addActorToLevel(ghost2, ghost3);
-        thirdLevel.addActorToLevel(ghost4, ghost5, ghost6);
-        firstLevel.showActors(true);
+        ship = new Ship();
+        addActor(ship);
+        ship.setPosition(getWidth()/2 - ship.getWidth() / 2, ship.getHeight() * 1.5f);
 
         addListener(new ClickListener(){
             @Override
@@ -65,8 +46,11 @@ public class GameStage extends MyStage {
                 Laser laser = new Laser(x,y, true);
                 addActor(laser);
                 lasers.add(laser);
+
             }
         });
+
+
     }
 
     @Override
@@ -77,28 +61,39 @@ public class GameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        for (MyLevel level : getLevels()) {
-            if(level.isShowingActors()) {
-                for (Ghost ghost : ghosts) {
-                    if(level.isActorOnLevel(ghost)) {
-                        //ghost.moveBy(0, 1);
-                        for (Laser laser : lasers) {
-                                if (laser.overlaps(ghost)) {
-                                    level.removeActorFromLevel(ghost);
-                                    if(level.getActors().size()==1) nextLevel = true;
-                                }
-                        }
-                    }
+        elapsedTime += delta;
+        timer += delta;
+        setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + ship.getY() - ship.getHeight() * 1.5f);
+        setCameraMoveToX(Globals.WORLD_WIDTH / 2);
+        getViewport().setScreenPosition(getViewport().getScreenX(),getViewport().getScreenY()+1);
+        if(timer > 5) {
+            timer = 0;
+            Ghost ghost = new Ghost(new Random().nextInt(Globals.WORLD_WIDTH - 129) + new Random().nextFloat(),getCameraMoveToY() + Globals.WORLD_HEIGHT);
+            ghosts.add(ghost);
+            addActor(ghost);
+        }
+
+        for (Ghost ghost : ghosts) {
+            if(ghost != null) {
+                if(ghost.getY() + ghost.getHeight() * 4 < getCameraMoveToY()) {
+                    getActors().removeValue(ghost, true);
+                    ghost.remove();
+                    ghost = null;
                 }
             }
+
         }
-        if(nextLevel) {
-            nextLevel = false;
-            for(Laser laser : lasers) {
-                getActors().removeValue(laser, true);
+
+        for (Laser laser : lasers) {
+            if(laser != null) {
+                if(laser.getY() + laser.getHeight() * 4 < getCameraMoveToY()) {
+                    getActors().removeValue(laser, true);
+                    laser.remove();
+                    laser = null;
+                }
             }
-            lasers.clear();
-            nextLevel();
+
         }
+
     }
 }
