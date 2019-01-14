@@ -1,5 +1,7 @@
 package hu.csanysoft.invaders.Game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -29,8 +31,20 @@ public class GameStage extends MyStage {
     ArrayList<Ghost> ghosts = new ArrayList<Ghost>();
     boolean nextLevel = false;
 
+    public boolean isShooting = false;
+
+    InputMultiplexer inputMultiplexer = new InputMultiplexer();
+
+    ControlStage controlStage;
+
     public GameStage(Invaders game) {
         super(new ExtendViewport(1280, 720, new OrthographicCamera(1280, 720)), new SpriteBatch(), game);
+        controlStage = new ControlStage(game, this);
+        inputMultiplexer.addProcessor(this);
+        inputMultiplexer.addProcessor(0, controlStage);
+        Gdx.input.setInputProcessor(inputMultiplexer);
+        controlStage.init();
+
 
         firstLevel = new MyLevel(Assets.manager.get(Assets.SPACE_TEXTURE), this);
         secondLevel = new MyLevel(Assets.manager.get(Assets.SPACE_TEXTURE), this);
@@ -77,6 +91,7 @@ public class GameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
+        controlStage.act();
         for (MyLevel level : getLevels()) {
             if(level.isShowingActors()) {
                 for (Ghost ghost : ghosts) {
@@ -100,5 +115,11 @@ public class GameStage extends MyStage {
             lasers.clear();
             nextLevel();
         }
+    }
+
+    @Override
+    public void dispose() {
+        controlStage.dispose();
+        super.dispose();
     }
 }
