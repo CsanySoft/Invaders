@@ -1,6 +1,9 @@
 package hu.csanysoft.invaders.Game;
 
 import com.badlogic.gdx.graphics.Color;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -32,8 +35,20 @@ public class GameStage extends MyStage {
     Ship ship;
     float timer = 0;
 
+    public boolean isShooting = false;
+
+    InputMultiplexer inputMultiplexer = new InputMultiplexer();
+
+    ControlStage controlStage;
+
     public GameStage(Invaders game) {
         super(new ExtendViewport(1280, 720, new OrthographicCamera(1280, 720)), new SpriteBatch(), game);
+        controlStage = new ControlStage(game, this);
+        inputMultiplexer.addProcessor(this);
+        inputMultiplexer.addProcessor(0, controlStage);
+        Gdx.input.setInputProcessor(inputMultiplexer);
+        controlStage.init();
+
 
         ship = new Ship();
         addActor(ship);
@@ -46,11 +61,8 @@ public class GameStage extends MyStage {
                 Laser laser = new Laser(x,y, true);
                 addActor(laser);
                 lasers.add(laser);
-
             }
         });
-
-
     }
 
     @Override
@@ -63,6 +75,7 @@ public class GameStage extends MyStage {
         super.act(delta);
         elapsedTime += delta;
         timer += delta;
+        controlStage.act();
         setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + ship.getY() - ship.getHeight() * 1.5f);
         setCameraMoveToX(Globals.WORLD_WIDTH / 2);
         getViewport().setScreenPosition(getViewport().getScreenX(),getViewport().getScreenY()+1);
@@ -94,6 +107,11 @@ public class GameStage extends MyStage {
             }
 
         }
+    }
 
+    @Override
+    public void dispose() {
+        controlStage.dispose();
+        super.dispose();
     }
 }
