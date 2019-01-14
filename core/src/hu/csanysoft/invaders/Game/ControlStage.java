@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import hu.csanysoft.invaders.Actors.Laser;
 import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.Invaders;
@@ -44,6 +45,13 @@ public class ControlStage extends MyStage {
                         gameStage.isShooting = false;
                         System.out.println("NO SHOOT");
                         super.touchUp(event, x, y, pointer, button);
+                    }
+
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        Laser laser = new Laser(x, y, true);
+                        addActor(laser);
                     }
                 });
             }

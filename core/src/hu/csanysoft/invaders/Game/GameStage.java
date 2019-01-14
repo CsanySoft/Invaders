@@ -39,30 +39,16 @@ public class GameStage extends MyStage {
 
     InputMultiplexer inputMultiplexer = new InputMultiplexer();
 
-    ControlStage controlStage;
 
     public GameStage(Invaders game) {
         super(new ExtendViewport(1280, 720, new OrthographicCamera(1280, 720)), new SpriteBatch(), game);
-        controlStage = new ControlStage(game, this);
-        inputMultiplexer.addProcessor(this);
-        inputMultiplexer.addProcessor(0, controlStage);
-        Gdx.input.setInputProcessor(inputMultiplexer);
-        controlStage.init();
+
 
 
         ship = new Ship();
         addActor(ship);
         ship.setPosition(getWidth()/2 - ship.getWidth() / 2, ship.getHeight() * 1.5f);
 
-        addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                Laser laser = new Laser(x,y, true);
-                addActor(laser);
-                lasers.add(laser);
-            }
-        });
     }
 
     @Override
@@ -75,7 +61,6 @@ public class GameStage extends MyStage {
         super.act(delta);
         elapsedTime += delta;
         timer += delta;
-        controlStage.act();
         setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + ship.getY() - ship.getHeight() * 1.5f);
         setCameraMoveToX(Globals.WORLD_WIDTH / 2);
         getViewport().setScreenPosition(getViewport().getScreenX(),getViewport().getScreenY()+1);
@@ -111,7 +96,6 @@ public class GameStage extends MyStage {
 
     @Override
     public void dispose() {
-        controlStage.dispose();
         super.dispose();
     }
 }
