@@ -21,4 +21,6 @@ public class OneSpriteStaticActor extends OneSpriteActor {
         return sprite.getTexture();
     }
 
+    public Sprite getSprite() {return sprite;}
+
 }
