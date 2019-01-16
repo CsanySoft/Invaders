@@ -103,10 +103,13 @@ public class GameStage extends MyStage {
 
         for (Laser laser : lasers) {
             if(laser != null) {
-                if(laser.getY() + laser.getHeight() * 4 < getCameraMoveToY()) {
+                if(laser.isFel() && laser.getY() > getCameraMoveToY() + Globals.WORLD_HEIGHT/2) {
                     getActors().removeValue(laser, true);
                     laser.remove();
-                    laser = null;
+                }
+                else if(!laser.isFel() && laser.getY() < getCameraMoveToY() - Globals.WORLD_HEIGHT + laser.getHeight()){
+                    getActors().removeValue(laser, true);
+                    laser.remove();
                 }
             }
         }
