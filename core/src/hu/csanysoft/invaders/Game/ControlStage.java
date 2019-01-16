@@ -52,9 +52,7 @@ public class ControlStage extends MyStage {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
-                        Laser laser = new Laser(gameStage.ship.getX() + gameStage.ship.getWidth() / 2 - 15, gameStage.ship.getY() + gameStage.ship.getHeight(), true);
-                        gameStage.addActor(laser);
-                        gameStage.lasers.add(laser);
+
                     }
                 });
             }

@@ -29,6 +29,8 @@ public class GameStage extends MyStage {
     float szorzo = 0.03f;
     float szamolo = 0;
     float speed = 2;
+    final float shoottimer = .5f;
+    float lastshot = 0;
     Background backgroundActor;
     Random rand = new Random();
 
@@ -58,6 +60,7 @@ public class GameStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         timer += delta;
+        lastshot += delta;
         setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + ship.getY() - ship.getHeight() * 1.5f);
         setCameraMoveToX(Globals.WORLD_WIDTH / 2);
         getViewport().setScreenPosition(getViewport().getScreenX(),getViewport().getScreenY()+1);
@@ -106,6 +109,13 @@ public class GameStage extends MyStage {
                     laser = null;
                 }
             }
+        }
+
+        if(lastshot > shoottimer && isShooting){
+            Laser laser = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), true);
+            addActor(laser);
+            lasers.add(laser);
+            lastshot = 0;
         }
 
 
