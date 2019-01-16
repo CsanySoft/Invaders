@@ -47,7 +47,7 @@ public class Ghost extends MultiSpriteActor {
 
 
         getSprite("alap").setX((float)(x + Math.sin(moveTime*5) * 30));
-        getSprite("szem").setX((float)(x + Math.sin((moveTime-.05f)*5) * 30));
+        getSprite("szem").setX((float)(x+12.8 + Math.sin((moveTime-.05f)*5) * 30));
 
         /*if(balra) {
             getSprite("alap").setX(getSprite("alap").getX()-speed);
