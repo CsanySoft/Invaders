@@ -24,7 +24,7 @@ public class Laser extends OneSpriteStaticActor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        if(fel)moveBy(0, 10);
+        if(fel)moveBy(0, 20);
         else moveBy(0,-2);
 
     }
