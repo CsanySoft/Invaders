@@ -38,23 +38,12 @@ public class ControlStage extends MyStage {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         gameStage.isShooting = true;
-                        System.out.println("SHOOT");
                         return super.touchDown(event, x, y, pointer, button);
                     }
-
                     @Override
                     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                         gameStage.isShooting = false;
-                        System.out.println("NO SHOOT");
                         super.touchUp(event, x, y, pointer, button);
-                    }
-
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        super.clicked(event, x, y);
-                        Laser laser = new Laser(gameStage.ship.getX() + gameStage.ship.getWidth() / 2 - 15, gameStage.ship.getY() + gameStage.ship.getHeight(), true);
-                        gameStage.addActor(laser);
-                        gameStage.lasers.add(laser);
                     }
                 });
             }
