@@ -17,6 +17,7 @@ public class Ghost extends MultiSpriteActor {
     Random rand;
     float speed;
     float timer = 2;
+    float moveTime = 0;
 
     public Ghost(float x, float y) {
         super(300,300);
@@ -35,6 +36,7 @@ public class Ghost extends MultiSpriteActor {
     public void act(float delta) {
         super.act(delta);
         timer-=delta;
+        moveTime += delta*speed;
         if(isVisible() && elapsedTime > Math.random()*(5-3+1)+3) {
             Laser laser = new Laser(getX()+getWidth()/2, getY()-getHeight(), false);
             getStage().addActor(laser);
@@ -44,7 +46,10 @@ public class Ghost extends MultiSpriteActor {
         }
 
 
-        if(balra) {
+        getSprite("alap").setX((float)(x + Math.sin(moveTime*5) * 30));
+        getSprite("szem").setX((float)(x + Math.sin((moveTime-.05f)*5) * 30));
+
+        /*if(balra) {
             getSprite("alap").setX(getSprite("alap").getX()-speed);
             //moveBy(0-speed, 0);
             if(x-getSprite("alap").getX() > 30) {
@@ -64,6 +69,6 @@ public class Ghost extends MultiSpriteActor {
             getSprite("szem").setX(getSprite("szem").getX()-speed);
         } else {
             getSprite("szem").setX(getSprite("szem").getX()+speed);
-        }
+        }*/
     }
 }

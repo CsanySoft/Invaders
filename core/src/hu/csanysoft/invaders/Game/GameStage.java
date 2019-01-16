@@ -35,6 +35,7 @@ public class GameStage extends MyStage {
     Random rand = new Random();
 
     public boolean isShooting = false;
+    public boolean isAlive = true;
 
 
 
@@ -95,7 +96,10 @@ public class GameStage extends MyStage {
                             getActors().removeValue(ghost, true);
                             ghost.remove();
                             ghost = null;
-                        } else if(!laser.isFel() && laser.overlaps(ship)) ship.setVisible(false);
+                        } else if(!laser.isFel() && laser.overlaps(ship) && isAlive) {
+                            ship.setVisible(false);
+                            isAlive = false;
+                        }
                     }
                 }
             }
@@ -115,7 +119,7 @@ public class GameStage extends MyStage {
             }
         }
 
-        if(lastshot > shoottimer && isShooting){
+        if(lastshot > shoottimer && isShooting && isAlive){
             Laser laser = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), true);
             addActor(laser);
             lasers.add(laser);
