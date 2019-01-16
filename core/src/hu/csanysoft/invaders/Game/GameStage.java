@@ -1,5 +1,6 @@
 package hu.csanysoft.invaders.Game;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -31,11 +32,13 @@ public class GameStage extends MyStage {
     float speed = 2;
     final float shoottimer = .5f;
     float lastshot = 0;
+    float flytimer = 0;
     Background backgroundActor;
     Random rand = new Random();
 
     public boolean isShooting = false;
     public boolean isAlive = true;
+    public boolean flyout = false;
 
 
 
@@ -62,13 +65,26 @@ public class GameStage extends MyStage {
         super.act(delta);
         timer += delta;
         lastshot += delta;
-        setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + ship.getY() - ship.getHeight() * 1.5f);
-        setCameraMoveToX(Globals.WORLD_WIDTH / 2);
-        getViewport().setScreenPosition(getViewport().getScreenX(),getViewport().getScreenY()+1);
+        if(!flyout){
+            if(ship.getY() > 500) {
+                setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + ship.getY() - ship.getHeight() * 1.5f);
+                setCameraMoveToX(Globals.WORLD_WIDTH / 2);
+                getViewport().setScreenPosition(getViewport().getScreenX(), getViewport().getScreenY() + 1);
+            }else{
+                setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + 500 - ship.getHeight() * 1.5f);
+                setCameraMoveToX(Globals.WORLD_WIDTH / 2);
+                getViewport().setScreenPosition(getViewport().getScreenX(), getViewport().getScreenY() + 1);
+                backgroundActor.setPosition(getCameraMoveToX()-Globals.WORLD_WIDTH/2, getCameraMoveToY()-Globals.WORLD_HEIGHT/2);
+            }
+        }else{
+            flytimer += delta;
+            ship.setMultiplier(flytimer*3);
+            backgroundActor.setPosition(getCameraMoveToX()-Globals.WORLD_WIDTH/2, getCameraMoveToY()-Globals.WORLD_HEIGHT/2);
+        }
 
         szamolo = elapsedTime * szorzo;
         if(szamolo > 4) szamolo = 4f;
-        if(timer > 5 - szamolo) {
+        if(timer > 5 - szamolo && !flyout) {
             timer = 0;
             Ghost ghost = new Ghost(new Random().nextInt(Globals.WORLD_WIDTH - 129) + new Random().nextFloat(),getCameraMoveToY() + Globals.WORLD_HEIGHT);
             ghost.getSprite("alap").setColor(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1);
@@ -84,7 +100,7 @@ public class GameStage extends MyStage {
         ship.setSpeed(speed);
         for (Ghost ghost : ghosts) {
             if(ghost != null) {
-                if(ghost.getY() + ghost.getHeight() * 8 < getCameraMoveToY()) {
+                if(ghost.getY() + ghost.getHeight() < getCameraMoveToY() - Globals.WORLD_HEIGHT/2) {
                     getActors().removeValue(ghost, true);
                     ghost.remove();
                     ghost = null;
@@ -133,6 +149,20 @@ public class GameStage extends MyStage {
         }
 
 
+    }
+
+    void nextStage(){
+        flyout = true;
+        backgroundActor.setMoving(false);
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        if(keyCode == Input.Keys.X){
+            flyout = true;
+
+        }
+        return super.keyDown(keyCode);
     }
 
     @Override

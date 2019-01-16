@@ -12,6 +12,7 @@ import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class Ship extends OneSpriteStaticActor {
 
     public float speed = 2;
+    float multiplier = 1;
 
     public Ship() {
         super(Assets.manager.get(Assets.SHIP_TEXTURE));
@@ -24,10 +25,14 @@ public class Ship extends OneSpriteStaticActor {
         this.speed = speed;
     }
 
+    public void setMultiplier(float multiplier) {
+        this.multiplier = multiplier;
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);
-        moveBy(0,speed);
+        moveBy(0,speed * multiplier);
         if(getX()>0){
             if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
                 moveBy(-5,0);
