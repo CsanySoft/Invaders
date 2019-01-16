@@ -1,6 +1,7 @@
 package hu.csanysoft.invaders.Game;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -44,6 +45,7 @@ public class GameStage extends MyStage {
         ship = new Ship();
         addActor(ship);
         ship.setPosition(getWidth()/2 - ship.getWidth() / 2, ship.getHeight() * 1.5f);
+
 
     }
 
@@ -105,6 +107,8 @@ public class GameStage extends MyStage {
                 }
             }
         }
+
+
     }
 
     @Override
