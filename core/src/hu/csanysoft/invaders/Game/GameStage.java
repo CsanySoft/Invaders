@@ -67,7 +67,8 @@ public class GameStage extends MyStage {
         if(timer > 5 - szamolo) {
             timer = 0;
             Ghost ghost = new Ghost(new Random().nextInt(Globals.WORLD_WIDTH - 129) + new Random().nextFloat(),getCameraMoveToY() + Globals.WORLD_HEIGHT);
-            ghost.getSprite().setColor(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1);
+            ghost.getSprite("alap").setColor(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1);
+            ghost.getSprite("szem").setColor(1, 1 - szamolo/4, 1 - szamolo/4, 1);
             ghosts.add(ghost);
             addActor(ghost);
         }

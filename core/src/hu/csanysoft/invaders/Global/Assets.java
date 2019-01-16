@@ -37,8 +37,11 @@ public class Assets {
     public static final AssetDescriptor<Texture> SPACE_TEXTURE
             = new AssetDescriptor<Texture>("space.jpg", Texture.class);
 
-    public static final AssetDescriptor<Texture> GHOST_TEXTURE
-            = new AssetDescriptor<Texture>("ghost.png", Texture.class);
+    public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
+            = new AssetDescriptor<Texture>("ghost_alap.png", Texture.class);
+
+    public static final AssetDescriptor<Texture> GHOST_SZEM_TEXTURE
+            = new AssetDescriptor<Texture>("ghost_szem.png", Texture.class);
 
     public static final AssetDescriptor<Texture> LASER_TEXTURE
             = new AssetDescriptor<Texture>("laser.png", Texture.class);
@@ -63,7 +66,8 @@ public class Assets {
 
         manager.load(ARIAL_30_FONT);
         manager.load(SPACE_TEXTURE);
-        manager.load(GHOST_TEXTURE);
+        manager.load(GHOST_ALAP_TEXTURE);
+        manager.load(GHOST_SZEM_TEXTURE);
         manager.load(LASER_TEXTURE);
         manager.load(EMPTY_TEXTURE);
         manager.load(SHIP_TEXTURE);
