@@ -17,6 +17,7 @@ public class Ship extends OneSpriteStaticActor {
         super(Assets.manager.get(Assets.SHIP_TEXTURE));
         setSize(getWidth() * 0.2f, getHeight() * 0.2f);
         addBaseCollisionRectangleShape();
+        
     }
 
     public void setSpeed(float speed) {
