@@ -84,7 +84,7 @@ public class GameStage extends MyStage {
         ship.setSpeed(speed);
         for (Ghost ghost : ghosts) {
             if(ghost != null) {
-                if(ghost.getY() + ghost.getHeight() * 4 < getCameraMoveToY()) {
+                if(ghost.getY() + ghost.getHeight() * 8 < getCameraMoveToY()) {
                     getActors().removeValue(ghost, true);
                     ghost.remove();
                     ghost = null;
@@ -121,8 +121,14 @@ public class GameStage extends MyStage {
 
         if(lastshot > shoottimer && isShooting && isAlive){
             Laser laser = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), true);
+            Laser laserb = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), true,true, false);
+            Laser laserj = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), true, false, true);
             addActor(laser);
+            addActor(laserb);
+            addActor(laserj);
             lasers.add(laser);
+            lasers.add(laserb);
+            lasers.add(laserj);
             lastshot = 0;
         }
 

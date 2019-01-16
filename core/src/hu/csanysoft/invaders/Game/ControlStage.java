@@ -23,7 +23,7 @@ public class ControlStage extends MyStage {
     GameStage gameStage;
 
     public ControlStage(Invaders game, GameStage gs) {
-        super(new ExtendViewport(1280, 720, new OrthographicCamera(1280, 720)), new SpriteBatch(), game);
+        super(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)), new SpriteBatch(), game);
         gameStage = gs;
     }
 
