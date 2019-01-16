@@ -20,7 +20,15 @@ public class Ship extends OneSpriteStaticActor {
     public void act(float delta) {
         super.act(delta);
         moveBy(0,2);
-        if(getX()>0) if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) moveBy(-5,0);
-        if(getX() < Globals.WORLD_WIDTH - getWidth()) if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) moveBy(5,0);
+        if(getX()>0){
+            if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) moveBy(-5,0);
+            if(Gdx.input.getAccelerometerY() < -1) moveBy((int)(2 * Math.rint(Gdx.input.getAccelerometerY())), 0);
+        }
+        if(getX() < Globals.WORLD_WIDTH - getWidth()) {
+            if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) moveBy(5,0);
+            if(Gdx.input.getAccelerometerY() > 1) moveBy((int)(2 * Math.rint(Gdx.input.getAccelerometerY())), 0);
+        }
+
+
     }
 }
