@@ -17,10 +17,12 @@ import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.Invaders;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyStage;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
+import hu.csanysoft.invaders.MyBaseClasses.UI.MyLabel;
 
 public class ControlStage extends MyStage {
 
     GameStage gameStage;
+    static MyLabel pointCounter;
 
     public ControlStage(Invaders game, GameStage gs) {
         super(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)), new SpriteBatch(), game);
@@ -48,6 +50,17 @@ public class ControlStage extends MyStage {
                 });
             }
         });
+        addActor(pointCounter = new MyLabel("0", game.getLabelStyle()){
+            @Override
+            public void init() {
+                super.init();
+                setPosition(10, Globals.WORLD_HEIGHT-getHeight()-10);
+            }
+        });
+    }
+
+    public static void setPoints(int points){
+        pointCounter.setText(points);
     }
 
     @Override
