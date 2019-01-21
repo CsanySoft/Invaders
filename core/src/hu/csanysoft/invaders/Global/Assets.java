@@ -46,14 +46,19 @@ public class Assets {
     public static final AssetDescriptor<Texture> LASER_TEXTURE
             = new AssetDescriptor<Texture>("laser.png", Texture.class);
 
+    /*
     public static final AssetDescriptor<Texture> SHIP_TEXTURE
             = new AssetDescriptor<Texture>("ship.png", Texture.class);
+            */
 
     public static final AssetDescriptor<Texture> EMPTY_TEXTURE
             = new AssetDescriptor<Texture>("zolipls.png", Texture.class);
 
-    public static final AssetDescriptor<Texture> SHIP2_TEXTURE
+    public static final AssetDescriptor<Texture> SHIP_TEXTURE
             = new AssetDescriptor<Texture>("spaceship.png", Texture.class);
+
+    public static final AssetDescriptor<Texture> SHIP2_TEXTURE
+            = new AssetDescriptor<Texture>("spaceship2.png", Texture.class);
 
     public static final AssetDescriptor<Texture> WHITE_TEXTURE
             = new AssetDescriptor<Texture>("white.jpg", Texture.class);
