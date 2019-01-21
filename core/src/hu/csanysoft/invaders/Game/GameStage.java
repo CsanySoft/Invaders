@@ -38,6 +38,7 @@ public class GameStage extends MyStage {
     Random rand = new Random();
     Image white;
     float whiteTimer=0;
+    short weapon = 1;
 
     public int points = 0;
 
@@ -154,12 +155,29 @@ public class GameStage extends MyStage {
             Laser laser = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), true);
             Laser laserb = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), true,true, false);
             Laser laserj = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), true, false, true);
-            addActor(laser);
-            addActor(laserb);
-            addActor(laserj);
-            lasers.add(laser);
-            lasers.add(laserb);
-            lasers.add(laserj);
+            switch(weapon) {
+                case 1:
+                    addActor(laser);
+                    lasers.add(laser);
+                    lasers.add(laserb);
+                    lasers.add(laserj);
+                    break;
+                case 2:
+                    addActor(laserb);
+                    addActor(laserj);
+                    lasers.add(laserb);
+                    lasers.add(laserj);
+                    break;
+                case 3:
+                    addActor(laser);
+                    addActor(laserb);
+                    addActor(laserj);
+                    lasers.add(laser);
+                    lasers.add(laserb);
+                    lasers.add(laserj);
+                    break;
+            }
+
             lastshot = 0;
         }
 
@@ -182,6 +200,11 @@ public class GameStage extends MyStage {
         if(keyCode == Input.Keys.X){
             flyout = true;
             white.setPosition(getCameraMoveToX()-Globals.WORLD_WIDTH/2, getCameraMoveToY()-Globals.WORLD_HEIGHT/2);
+        } else if(keyCode == Input.Keys.U) {
+            if(weapon < 4 && points >= -5000) {
+                weapon++;
+                points -= 100;
+            }
         }
         return super.keyDown(keyCode);
     }
