@@ -83,7 +83,7 @@ public class GameStage extends MyStage {
         }
 
         szamolo = elapsedTime * szorzo;
-        if(szamolo > 4) szamolo = 4f;
+        if(szamolo > 4.6f) szamolo = 4.6f;
         if(timer > 5 - szamolo && !flyout) {
             timer = 0;
             Ghost ghost = new Ghost(new Random().nextInt(Globals.WORLD_WIDTH - 129) + new Random().nextFloat(),getCameraMoveToY() + Globals.WORLD_HEIGHT);
