@@ -44,6 +44,8 @@ public class AnimatedOffsetSprite extends OffsetSprite {
         super(new TextureAtlas(Gdx.files.internal(file)).getRegions().get(0).getTexture(), xOffset, yOffset, width, height);
         textureAtlas = new TextureAtlas(Gdx.files.internal(file));
         setTexture(textureAtlas.getRegions().get(0).getTexture());
+        //setSize(width, height);
+        //setPosition(xOffset, yOffset);
         init();
     }
 
