@@ -60,6 +60,9 @@ public class Assets {
     public static final AssetDescriptor<Texture> SHIP2_TEXTURE
             = new AssetDescriptor<Texture>("spaceship2.png", Texture.class);
 
+    public static final AssetDescriptor<Texture> ENEMY1_TEXTURE
+            = new AssetDescriptor<Texture>("enemy1.png", Texture.class);
+
     public static final AssetDescriptor<Texture> WHITE_TEXTURE
             = new AssetDescriptor<Texture>("white.jpg", Texture.class);
 
@@ -83,6 +86,7 @@ public class Assets {
         manager.load(EMPTY_TEXTURE);
         manager.load(SHIP_TEXTURE);
         manager.load(SHIP2_TEXTURE);
+        manager.load(ENEMY1_TEXTURE);
         manager.load(WHITE_TEXTURE);
     }
 
