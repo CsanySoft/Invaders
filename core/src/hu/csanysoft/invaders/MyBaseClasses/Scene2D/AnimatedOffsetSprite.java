@@ -19,6 +19,8 @@ public class AnimatedOffsetSprite extends OffsetSprite {
     private int prevFrame = 0;
 
 
+    private float elapsedTime = 0;
+
     public boolean isLooping() {
         return looping;
     }
@@ -34,12 +36,14 @@ public class AnimatedOffsetSprite extends OffsetSprite {
     public AnimatedOffsetSprite(String file, float xOffset, float yOffset) {
         super(new TextureAtlas(Gdx.files.internal(file)).getRegions().get(0).getTexture(), xOffset, yOffset);
         textureAtlas = new TextureAtlas(Gdx.files.internal(file));
+        setTexture(textureAtlas.getRegions().get(0).getTexture());
         init();
     }
 
     public AnimatedOffsetSprite(String file, float xOffset, float yOffset, float width, float height) {
         super(new TextureAtlas(Gdx.files.internal(file)).getRegions().get(0).getTexture(), xOffset, yOffset, width, height);
         textureAtlas = new TextureAtlas(Gdx.files.internal(file));
+        setTexture(textureAtlas.getRegions().get(0).getTexture());
         init();
     }
 
@@ -59,6 +63,7 @@ public class AnimatedOffsetSprite extends OffsetSprite {
 
 
     public void act(float delta) {
+        elapsedTime += delta;
         if (running) {
             animationTime+=delta;
             int actualFrame=((int) (animationTime * fps)) % textureAtlas.getRegions().size;
@@ -79,6 +84,7 @@ public class AnimatedOffsetSprite extends OffsetSprite {
 
     public void setFrame(int frame)
     {
+        if(textureAtlas == null) return;
         this.setRegion(textureAtlas.getRegions().get(frame % textureAtlas.getRegions().size));
     }
 
@@ -105,4 +111,21 @@ public class AnimatedOffsetSprite extends OffsetSprite {
         return textureAtlas;
     }
 
+    @Override
+    public void setRotation(float degrees) {
+        super.setRotation(degrees);
+        setFrame(((int) (elapsedTime * fps)));
+    }
+
+    @Override
+    public void setPosition(float x, float y) {
+        super.setPosition(x, y);
+        setFrame(((int) (elapsedTime * fps)));
+    }
+
+    @Override
+    public void setSize(float width, float height) {
+        super.setSize(width, height);
+        setFrame(((int) (elapsedTime * fps)));
+    }
 }

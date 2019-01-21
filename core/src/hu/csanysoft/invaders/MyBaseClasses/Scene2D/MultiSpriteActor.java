@@ -52,7 +52,7 @@ public abstract class MultiSpriteActor extends MyActor implements InitableInterf
     @Override
     public void act(float delta) {
         super.act(delta);
-        for(OffsetSprite sprite: (OffsetSprite[]) spriteMap.entrySet().toArray()){
+        for(Object sprite: spriteMap.entrySet().toArray()){
             if(sprite instanceof AnimatedOffsetSprite){
                 ((AnimatedOffsetSprite) sprite).act(delta);
             }

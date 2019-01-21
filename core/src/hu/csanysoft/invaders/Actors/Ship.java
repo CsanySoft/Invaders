@@ -2,19 +2,26 @@ package hu.csanysoft.invaders.Actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.AssetDescriptor;
 
 import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Global.Globals;
+import hu.csanysoft.invaders.MyBaseClasses.Scene2D.AnimatedOffsetSprite;
+import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MultiSpriteActor;
+import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OffsetSprite;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
-public class Ship extends OneSpriteStaticActor {
+public class Ship extends MultiSpriteActor {
 
     public float speed = 2;
     float multiplier = 1;
+    OffsetSprite sprite;
+    AnimatedOffsetSprite flameSprite;
 
     public Ship() {
-        super(Assets.manager.get(Assets.SHIP2_TEXTURE));
-        setSize(getWidth() * 0.2f, getHeight() * 0.2f);
+        super(100, 100);
+        addSprite(sprite = new OffsetSprite(Assets.manager.get(Assets.SHIP_TEXTURE), 0, 0, 100, 100));
+        addSprite(flameSprite = new AnimatedOffsetSprite("rocket_anim.txt", 25, -100, 50, 50));
         addBaseCollisionRectangleShape();
         
     }
