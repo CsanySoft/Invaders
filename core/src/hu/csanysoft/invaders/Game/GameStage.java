@@ -56,7 +56,7 @@ public class GameStage extends MyStage {
 
         ship = new Ship();
         addActor(ship);
-        ship.setPosition(getWidth()/2 - ship.getWidth() / 2, ship.getHeight() * 1.5f);
+        ship.setPosition(getWidth()/2 - ship.getWidth() / 2, ship.getHeight() * .5f);
         white = new Image(Assets.manager.get(Assets.WHITE_TEXTURE));
         white.setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
         addActor(white);
@@ -75,11 +75,11 @@ public class GameStage extends MyStage {
         lastshot += delta;
         if(!flyout){
             if(ship.getY() > 500) {
-                setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + ship.getY() - ship.getHeight() * 1.5f);
+                setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + ship.getY() - ship.getHeight() * .5f);
                 setCameraMoveToX(Globals.WORLD_WIDTH / 2);
                 getViewport().setScreenPosition(getViewport().getScreenX(), getViewport().getScreenY() + 1);
             }else{
-                setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + 500 - ship.getHeight() * 1.5f);
+                setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + 500 - ship.getHeight() * .5f);
                 setCameraMoveToX(Globals.WORLD_WIDTH / 2);
                 getViewport().setScreenPosition(getViewport().getScreenX(), getViewport().getScreenY() + 1);
                 backgroundActor.setPosition(getCameraMoveToX()-Globals.WORLD_WIDTH/2, getCameraMoveToY()-Globals.WORLD_HEIGHT/2);
