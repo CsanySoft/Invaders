@@ -55,6 +55,9 @@ public class Assets {
     public static final AssetDescriptor<Texture> SHIP2_TEXTURE
             = new AssetDescriptor<Texture>("spaceship.png", Texture.class);
 
+    public static final AssetDescriptor<Texture> GAMEOVER_TEXTURE
+            = new AssetDescriptor<Texture>("gameover.png", Texture.class);
+
     public static void prepare() {
         manager = new AssetManager();
         Texture.setAssetManager(manager);
@@ -75,6 +78,7 @@ public class Assets {
         manager.load(EMPTY_TEXTURE);
         manager.load(SHIP_TEXTURE);
         manager.load(SHIP2_TEXTURE);
+        manager.load(GAMEOVER_TEXTURE);
     }
 
     public static void afterLoaded() {
