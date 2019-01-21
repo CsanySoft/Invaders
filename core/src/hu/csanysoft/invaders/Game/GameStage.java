@@ -115,8 +115,13 @@ public class GameStage extends MyStage {
                     if(laser!=null && ghost!=null) {
                         if(laser.overlaps(ghost) && laser.isFel() && laser.isVisible() && ghost.isVisible()) {
                             getActors().removeValue(ghost, true);
+                            getActors().removeValue(laser, true);
                             ghost.remove();
+                            laser.remove();
+                            ghost.setVisible(false);
+                            laser.setVisible(false);
                             ghost = null;
+                            laser = null;
                             points += 10;
                         } else if(!laser.isFel() && laser.overlaps(ship) && isAlive) {
                             ship.setVisible(false);
