@@ -16,7 +16,7 @@ public class Ship extends OneSpriteStaticActor {
 
     public Ship() {
         super(Assets.manager.get(Assets.SHIP2_TEXTURE));
-        setSize(getWidth() * 0.2f, getHeight() * 0.4f);
+        setSize(getWidth() * 0.2f, getHeight() * 0.2f);
         addBaseCollisionRectangleShape();
         
     }
@@ -33,16 +33,16 @@ public class Ship extends OneSpriteStaticActor {
     public void act(float delta) {
         super.act(delta);
         moveBy(0,speed * multiplier);
-        if(getX()>0){
+        if(getX()>=0){
             if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
                 moveBy(-5,0);
             }
-            if(Gdx.input.getAccelerometerX() < 0.5f) moveBy((int)(-2 * Math.rint(Gdx.input.getAccelerometerX())), 0);
+            if(Gdx.input.getAccelerometerX() > 0.5f) moveBy((int)(-2 * Math.rint(Gdx.input.getAccelerometerX())), 0);
 
         }
         if(getX() < Globals.WORLD_WIDTH - getWidth()) {
             if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) moveBy(5,0);
-            if(Gdx.input.getAccelerometerX() > 0.5f) moveBy((int)(-2 * Math.rint(Gdx.input.getAccelerometerX())), 0);
+            if(Gdx.input.getAccelerometerX() < 0.5f) moveBy((int)(-2 * Math.rint(Gdx.input.getAccelerometerX())), 0);
         }
 
     }

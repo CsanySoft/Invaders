@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 import java.util.ArrayList;
@@ -35,6 +36,9 @@ public class GameStage extends MyStage {
     float flytimer = 0;
     Background backgroundActor;
     Random rand = new Random();
+    Image white;
+    float whiteTimer=0;
+    short weapon = 1;
 
     public int points = 0;
 
@@ -52,9 +56,11 @@ public class GameStage extends MyStage {
 
         ship = new Ship();
         addActor(ship);
-        ship.setPosition(getWidth()/2 - ship.getWidth() / 2, ship.getHeight() * 1.5f);
-
-
+        ship.setPosition(getWidth()/2 - ship.getWidth() / 2, ship.getHeight() * .5f);
+        white = new Image(Assets.manager.get(Assets.WHITE_TEXTURE));
+        white.setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
+        addActor(white);
+        white.setColor(255,255,255,0);
     }
 
     @Override
@@ -69,11 +75,11 @@ public class GameStage extends MyStage {
         lastshot += delta;
         if(!flyout){
             if(ship.getY() > 500) {
-                setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + ship.getY() - ship.getHeight() * 1.5f);
+                setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + ship.getY() - ship.getHeight() * .5f);
                 setCameraMoveToX(Globals.WORLD_WIDTH / 2);
                 getViewport().setScreenPosition(getViewport().getScreenX(), getViewport().getScreenY() + 1);
             }else{
-                setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + 500 - ship.getHeight() * 1.5f);
+                setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + 500 - ship.getHeight() * .5f);
                 setCameraMoveToX(Globals.WORLD_WIDTH / 2);
                 getViewport().setScreenPosition(getViewport().getScreenX(), getViewport().getScreenY() + 1);
                 backgroundActor.setPosition(getCameraMoveToX()-Globals.WORLD_WIDTH/2, getCameraMoveToY()-Globals.WORLD_HEIGHT/2);
@@ -85,7 +91,7 @@ public class GameStage extends MyStage {
         }
 
         szamolo = elapsedTime * szorzo;
-        if(szamolo > 4) szamolo = 4f;
+        if(szamolo > 4.6f) szamolo = 4.6f;
         if(timer > 5 - szamolo && !flyout) {
             timer = 0;
             Ghost ghost = new Ghost(new Random().nextInt(Globals.WORLD_WIDTH - 129) + new Random().nextFloat(),getCameraMoveToY() + Globals.WORLD_HEIGHT);
@@ -115,8 +121,13 @@ public class GameStage extends MyStage {
                     if(laser!=null && ghost!=null) {
                         if(laser.overlaps(ghost) && laser.isFel() && laser.isVisible() && ghost.isVisible()) {
                             getActors().removeValue(ghost, true);
+                            getActors().removeValue(laser, true);
                             ghost.remove();
+                            laser.remove();
+                            ghost.setVisible(false);
+                            laser.setVisible(false);
                             ghost = null;
+                            laser = null;
                             points += 10;
                         } else if(!laser.isFel() && laser.overlaps(ship) && isAlive) {
                             ship.setVisible(false);
@@ -144,18 +155,39 @@ public class GameStage extends MyStage {
             Laser laser = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), true);
             Laser laserb = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), true,true, false);
             Laser laserj = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), true, false, true);
-            addActor(laser);
-            addActor(laserb);
-            addActor(laserj);
-            lasers.add(laser);
-            lasers.add(laserb);
-            lasers.add(laserj);
+            switch(weapon) {
+                case 1:
+                    addActor(laser);
+                    lasers.add(laser);
+                    lasers.add(laserb);
+                    lasers.add(laserj);
+                    break;
+                case 2:
+                    addActor(laserb);
+                    addActor(laserj);
+                    lasers.add(laserb);
+                    lasers.add(laserj);
+                    break;
+                case 3:
+                    addActor(laser);
+                    addActor(laserb);
+                    addActor(laserj);
+                    lasers.add(laser);
+                    lasers.add(laserb);
+                    lasers.add(laserj);
+                    break;
+            }
+
             lastshot = 0;
         }
 
         ControlStage.setPoints(points);
 
 
+
+        if(flyout) {
+            white.setColor(255,255,255,whiteTimer+=0.008f);
+        }
     }
 
     void nextStage(){
@@ -167,7 +199,12 @@ public class GameStage extends MyStage {
     public boolean keyDown(int keyCode) {
         if(keyCode == Input.Keys.X){
             flyout = true;
-
+            white.setPosition(getCameraMoveToX()-Globals.WORLD_WIDTH/2, getCameraMoveToY()-Globals.WORLD_HEIGHT/2);
+        } else if(keyCode == Input.Keys.U) {
+            if(weapon < 4 && points >= -5000) {
+                weapon++;
+                points -= 100;
+            }
         }
         return super.keyDown(keyCode);
     }

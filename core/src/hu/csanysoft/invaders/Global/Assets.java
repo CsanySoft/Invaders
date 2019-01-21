@@ -46,17 +46,23 @@ public class Assets {
     public static final AssetDescriptor<Texture> LASER_TEXTURE
             = new AssetDescriptor<Texture>("laser.png", Texture.class);
 
-    public static final AssetDescriptor<Texture> SHIP_TEXTURE
-            = new AssetDescriptor<Texture>("ship.png", Texture.class);
-
     public static final AssetDescriptor<Texture> EMPTY_TEXTURE
             = new AssetDescriptor<Texture>("zolipls.png", Texture.class);
 
-    public static final AssetDescriptor<Texture> SHIP2_TEXTURE
+    public static final AssetDescriptor<Texture> SHIP_TEXTURE
             = new AssetDescriptor<Texture>("spaceship.png", Texture.class);
+
+    public static final AssetDescriptor<Texture> SHIP2_TEXTURE
+            = new AssetDescriptor<Texture>("spaceship2.png", Texture.class);
 
     public static final AssetDescriptor<Texture> GAMEOVER_TEXTURE
             = new AssetDescriptor<Texture>("gameover.png", Texture.class);
+
+    public static final AssetDescriptor<Texture> ENEMY1_TEXTURE
+            = new AssetDescriptor<Texture>("enemy1.png", Texture.class);
+
+    public static final AssetDescriptor<Texture> WHITE_TEXTURE
+            = new AssetDescriptor<Texture>("white.jpg", Texture.class);
 
     public static void prepare() {
         manager = new AssetManager();
@@ -79,6 +85,8 @@ public class Assets {
         manager.load(SHIP_TEXTURE);
         manager.load(SHIP2_TEXTURE);
         manager.load(GAMEOVER_TEXTURE);
+        manager.load(ENEMY1_TEXTURE);
+        manager.load(WHITE_TEXTURE);
     }
 
     public static void afterLoaded() {
