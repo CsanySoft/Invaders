@@ -1,8 +1,6 @@
 package hu.csanysoft.invaders.Game;
 
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -19,7 +17,6 @@ import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.Invaders;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyStage;
-import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class GameStage extends MyStage {
 

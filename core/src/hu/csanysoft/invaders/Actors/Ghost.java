@@ -1,6 +1,5 @@
 package hu.csanysoft.invaders.Actors;
 
-import com.badlogic.gdx.graphics.Texture;
 
 import java.util.Random;
 
@@ -8,7 +7,6 @@ import hu.csanysoft.invaders.Game.GameStage;
 import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MultiSpriteActor;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OffsetSprite;
-import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class Ghost extends MultiSpriteActor {
 
