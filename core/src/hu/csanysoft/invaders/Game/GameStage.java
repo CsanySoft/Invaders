@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 import java.util.ArrayList;
@@ -35,6 +36,8 @@ public class GameStage extends MyStage {
     float flytimer = 0;
     Background backgroundActor;
     Random rand = new Random();
+    Image white;
+    float whiteTimer=0;
 
     public int points = 0;
 
@@ -53,8 +56,10 @@ public class GameStage extends MyStage {
         ship = new Ship();
         addActor(ship);
         ship.setPosition(getWidth()/2 - ship.getWidth() / 2, ship.getHeight() * 1.5f);
-
-
+        white = new Image(Assets.manager.get(Assets.WHITE_TEXTURE));
+        white.setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
+        addActor(white);
+        white.setColor(255,255,255,0);
     }
 
     @Override
@@ -161,6 +166,10 @@ public class GameStage extends MyStage {
         ControlStage.setPoints(points);
 
 
+
+        if(flyout) {
+            white.setColor(255,255,255,whiteTimer+=0.008f);
+        }
     }
 
     void nextStage(){
@@ -172,7 +181,7 @@ public class GameStage extends MyStage {
     public boolean keyDown(int keyCode) {
         if(keyCode == Input.Keys.X){
             flyout = true;
-
+            white.setPosition(getCameraMoveToX()-Globals.WORLD_WIDTH/2, getCameraMoveToY()-Globals.WORLD_HEIGHT/2);
         }
         return super.keyDown(keyCode);
     }
