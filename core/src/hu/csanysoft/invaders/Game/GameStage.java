@@ -36,6 +36,8 @@ public class GameStage extends MyStage {
     Background backgroundActor;
     Random rand = new Random();
 
+    public int points = 0;
+
     public boolean isShooting = false;
     public boolean isAlive = true;
     public boolean flyout = false;
@@ -113,13 +115,9 @@ public class GameStage extends MyStage {
                     if(laser!=null && ghost!=null) {
                         if(laser.overlaps(ghost) && laser.isFel() && laser.isVisible() && ghost.isVisible()) {
                             getActors().removeValue(ghost, true);
-                            getActors().removeValue(laser, true);
                             ghost.remove();
-                            laser.remove();
-                            ghost.setVisible(false);
-                            laser.setVisible(false);
-                            laser = null;
                             ghost = null;
+                            points += 10;
                         } else if(!laser.isFel() && laser.overlaps(ship) && isAlive) {
                             ship.setVisible(false);
                             isAlive = false;
@@ -154,6 +152,8 @@ public class GameStage extends MyStage {
             lasers.add(laserj);
             lastshot = 0;
         }
+
+        ControlStage.setPoints(points);
 
 
     }
