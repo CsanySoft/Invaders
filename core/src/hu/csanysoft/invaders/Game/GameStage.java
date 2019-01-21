@@ -100,6 +100,10 @@ public class GameStage extends MyStage {
         ship.setSpeed(speed);
         for (Ghost ghost : ghosts) {
             if(ghost != null) {
+                if(ghost.overlaps(ship) && isAlive) {
+                    ship.setVisible(false);
+                    isAlive = false;
+                }
                 if(ghost.getY() + ghost.getHeight() < getCameraMoveToY() - Globals.WORLD_HEIGHT/2) {
                     getActors().removeValue(ghost, true);
                     ghost.remove();
@@ -107,10 +111,14 @@ public class GameStage extends MyStage {
                 }
                 for (Laser laser:lasers) {
                     if(laser!=null && ghost!=null) {
-                        if(laser.overlaps(ghost) && laser.isFel()) {
-
+                        if(laser.overlaps(ghost) && laser.isFel() && laser.isVisible() && ghost.isVisible()) {
                             getActors().removeValue(ghost, true);
+                            getActors().removeValue(laser, true);
                             ghost.remove();
+                            laser.remove();
+                            ghost.setVisible(false);
+                            laser.setVisible(false);
+                            laser = null;
                             ghost = null;
                         } else if(!laser.isFel() && laser.overlaps(ship) && isAlive) {
                             ship.setVisible(false);
@@ -121,7 +129,6 @@ public class GameStage extends MyStage {
             }
 
         }
-
         for (Laser laser : lasers) {
             if(laser != null) {
                 if(laser.isFel() && laser.getY() > getCameraMoveToY() + Globals.WORLD_HEIGHT/2) {

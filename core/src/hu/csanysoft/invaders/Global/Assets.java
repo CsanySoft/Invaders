@@ -52,6 +52,9 @@ public class Assets {
     public static final AssetDescriptor<Texture> EMPTY_TEXTURE
             = new AssetDescriptor<Texture>("zolipls.png", Texture.class);
 
+    public static final AssetDescriptor<Texture> SHIP2_TEXTURE
+            = new AssetDescriptor<Texture>("spaceship.png", Texture.class);
+
     public static void prepare() {
         manager = new AssetManager();
         Texture.setAssetManager(manager);
@@ -71,6 +74,7 @@ public class Assets {
         manager.load(LASER_TEXTURE);
         manager.load(EMPTY_TEXTURE);
         manager.load(SHIP_TEXTURE);
+        manager.load(SHIP2_TEXTURE);
     }
 
     public static void afterLoaded() {
