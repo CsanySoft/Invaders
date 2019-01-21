@@ -14,10 +14,6 @@ import hu.csanysoft.invaders.Invaders;
 import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyActor;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyScreen;
-import hu.csanysoft.invaders.Global.Assets;
-import hu.csanysoft.invaders.Invaders;
-import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyActor;
-import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyScreen;
 
 public class LoadingScreen extends MyScreen {
 

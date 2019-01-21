@@ -2,7 +2,6 @@ package hu.csanysoft.invaders;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -12,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Stack;
 
-import hu.csanysoft.invaders.Game.GameStage;
 import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Menu.LoadingScreen;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyScreen;

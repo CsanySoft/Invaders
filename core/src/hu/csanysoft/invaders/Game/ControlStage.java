@@ -1,17 +1,11 @@
 package hu.csanysoft.invaders.Game;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
-import hu.csanysoft.invaders.Actors.Laser;
 import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.Invaders;
