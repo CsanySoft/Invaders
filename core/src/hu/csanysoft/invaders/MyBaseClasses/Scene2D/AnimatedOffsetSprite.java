@@ -33,25 +33,21 @@ public class AnimatedOffsetSprite extends OffsetSprite {
         return actualFrame;
     }
 
-    public AnimatedOffsetSprite(String file, float xOffset, float yOffset) {
-        super(new TextureAtlas(Gdx.files.internal(file)).getRegions().get(0).getTexture(), xOffset, yOffset);
-        textureAtlas = new TextureAtlas(Gdx.files.internal(file));
-        setTexture(textureAtlas.getRegions().get(0).getTexture());
+    public AnimatedOffsetSprite(TextureAtlas textureAtlas, float xOffset, float yOffset) {
+        super(textureAtlas.getRegions().get(0).getTexture(), xOffset, yOffset);
+        this.textureAtlas = textureAtlas;
         init();
     }
 
-    public AnimatedOffsetSprite(String file, float xOffset, float yOffset, float width, float height) {
-        super(new TextureAtlas(Gdx.files.internal(file)).getRegions().get(0).getTexture(), xOffset, yOffset, width, height);
-        textureAtlas = new TextureAtlas(Gdx.files.internal(file));
-        setTexture(textureAtlas.getRegions().get(0).getTexture());
-        //setSize(width, height);
-        //setPosition(xOffset, yOffset);
+    public AnimatedOffsetSprite(TextureAtlas textureAtlas, float xOffset, float yOffset, float width, float height) {
+        super(textureAtlas.getRegions().get(0).getTexture(), xOffset, yOffset, width, height);
+        this.textureAtlas = textureAtlas;
         init();
     }
 
 
     public void init() {
-        setSize(textureAtlas.getRegions().get(0).getRegionWidth(), textureAtlas.getRegions().get(0).getRegionHeight());
+
     }
 
     public float getFps() {
@@ -113,21 +109,4 @@ public class AnimatedOffsetSprite extends OffsetSprite {
         return textureAtlas;
     }
 
-    @Override
-    public void setRotation(float degrees) {
-        super.setRotation(degrees);
-        setFrame(((int) (elapsedTime * fps)));
-    }
-
-    @Override
-    public void setPosition(float x, float y) {
-        super.setPosition(x, y);
-        setFrame(((int) (elapsedTime * fps)));
-    }
-
-    @Override
-    public void setSize(float width, float height) {
-        super.setSize(width, height);
-        setFrame(((int) (elapsedTime * fps)));
-    }
 }

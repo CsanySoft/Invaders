@@ -23,7 +23,7 @@ public class Ship extends MultiSpriteActor {
     public Ship(Texture texture) {
         super(100, 100);
         addSprite(sprite = new OffsetSprite(texture, 0, 0, 100, 100));
-        addSprite(flameSprite = new AnimatedOffsetSprite("rocket_anim.txt", 25, -50, 50, 50));
+        addSprite(flameSprite = new AnimatedOffsetSprite(Assets.manager.get(Assets.ROCKET_ATLAS), 25, -50, 50, 50));
         addBaseCollisionRectangleShape();
         this.texture = texture;
     }
