@@ -11,8 +11,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import hu.csanysoft.invaders.Actors.Background;
+import hu.csanysoft.invaders.Actors.Enemy;
 import hu.csanysoft.invaders.Actors.Ghost;
 import hu.csanysoft.invaders.Actors.Laser;
+import hu.csanysoft.invaders.Actors.Meteorite;
 import hu.csanysoft.invaders.Actors.Ship;
 import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Global.Globals;
@@ -30,7 +32,7 @@ public class GameStage extends MyStage {
     public boolean isShooting = false;
     public boolean isAlive = true;
     public boolean flyout = false;
-    ArrayList<Ghost> ghosts = new ArrayList<Ghost>();
+    ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     float timer = 0;
     float szorzo = 0.03f;
     float szamolo = 0;
@@ -116,11 +118,17 @@ this.weapon = weapon;
         if (szamolo > 4.6f) szamolo = 4.6f;
         if (timer > 5 - szamolo && !flyout) {
             timer = 0;
-            Ghost ghost = new Ghost(new Random().nextInt(Globals.WORLD_WIDTH - 129) + new Random().nextFloat(), getCameraMoveToY() + Globals.WORLD_HEIGHT);
-            ghost.getSprite("alap").setColor(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1);
-            ghost.getSprite("szem").setColor(1, 1 - szamolo / 4, 1 - szamolo / 4, 1);
-            ghosts.add(ghost);
-            addActor(ghost);
+            if(rand.nextInt(2) == 1) {
+                Ghost enemy = new Ghost(new Random().nextInt(Globals.WORLD_WIDTH - 129) + new Random().nextFloat(), getCameraMoveToY() + Globals.WORLD_HEIGHT);
+                enemy.getSprite("alap").setColor(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1);
+                enemy.getSprite("szem").setColor(1, 1 - szamolo / 4, 1 - szamolo / 4, 1);
+                enemies.add(enemy);
+                addActor(enemy);
+            }else{
+                Meteorite enemy = new Meteorite(new Random().nextInt(Globals.WORLD_WIDTH - 129) + new Random().nextFloat(), getCameraMoveToY() + Globals.WORLD_HEIGHT);
+                enemies.add(enemy);
+                addActor(enemy);
+            }
         }
 
         if (speed < 5) {
@@ -130,34 +138,34 @@ this.weapon = weapon;
         }
 
         ship.setSpeed(speed);
-        for (Ghost ghost : ghosts) {
-            if (ghost != null && ghost.isVisible()) {
-                if (ghost.overlaps(ship) && isAlive) {
+        for (Enemy enemy : enemies) {
+            if (enemy != null && enemy.isVisible()) {
+                if (enemy.overlaps(ship) && isAlive) {
                     gameover();
                 }
-                if (ghost.getY() + ghost.getHeight() < getCameraMoveToY() - Globals.WORLD_HEIGHT / 2) {
-                    getActors().removeValue(ghost, true);
-                    ghost.remove();
-                    ghost = null;
+                if (enemy.getY() + enemy.getHeight() < getCameraMoveToY() - Globals.WORLD_HEIGHT / 2) {
+                    getActors().removeValue(enemy, true);
+                    enemy.remove();
+                    enemy = null;
                 }
                 for (Laser laser : lasers) {
-                    if (laser != null && ghost != null) {
+                    if (laser != null && enemy != null) {
 
                         if (flyout) {
                             if (whiteTimer > 1) whiteTimer = 1;
-                            ghost.getSprite("alap").setColor(ghost.getSprite("alap").getColor().r, ghost.getSprite("alap").getColor().g, ghost.getSprite("alap").getColor().b, 1 - whiteTimer);
-                            ghost.getSprite("szem").setColor(ghost.getSprite("szem").getColor().r, ghost.getSprite("szem").getColor().g, ghost.getSprite("szem").getColor().b, 1 - whiteTimer);
+                            enemy.getSprite("alap").setColor(enemy.getSprite("alap").getColor().r, enemy.getSprite("alap").getColor().g, enemy.getSprite("alap").getColor().b, 1 - whiteTimer);
+                            enemy.getSprite("szem").setColor(enemy.getSprite("szem").getColor().r, enemy.getSprite("szem").getColor().g, enemy.getSprite("szem").getColor().b, 1 - whiteTimer);
                             laser.getSprite().setColor(laser.getSprite().getColor().r, laser.getSprite().getColor().g, laser.getSprite().getColor().b, 1 - whiteTimer);
                         }
 
-                        if (laser.overlaps(ghost) && laser.isFel() && laser.isVisible() && ghost.isVisible()) {
-                            getActors().removeValue(ghost, true);
+                        if (laser.overlaps(enemy) && laser.isFel() && laser.isVisible() && enemy.isVisible()) {
+                            getActors().removeValue(enemy, true);
                             getActors().removeValue(laser, true);
-                            ghost.remove();
+                            enemy.remove();
                             laser.remove();
-                            ghost.setVisible(false);
+                            enemy.setVisible(false);
                             laser.setVisible(false);
-                            ghost = null;
+                            enemy = null;
                             laser = null;
                             points += 10;
                         } else if (!laser.isFel() && laser.overlaps(ship) && isAlive  && !flyout) {
