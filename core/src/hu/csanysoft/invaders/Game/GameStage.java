@@ -183,22 +183,22 @@ this.weapon = weapon;
 
             switch(weapon) {
                 case 1:
-                    Laser laser1 = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), 0);
+                    Laser laser1 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 0);
                     addActor(laser1);
                     lasers.add(laser1);
                     break;
                 case 2:
-                    Laser laser2 = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), 45);
-                    Laser laser3 = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), -45);
+                    Laser laser2 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 45);
+                    Laser laser3 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), -45);
                     addActor(laser2);
                     addActor(laser3);
                     lasers.add(laser2);
                     lasers.add(laser3);
                     break;
                 case 3:
-                    Laser laser4 = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), 0);
-                    Laser laser5 = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), -20);
-                    Laser laser6 = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), 20);
+                    Laser laser4 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 0);
+                    Laser laser5 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), -20);
+                    Laser laser6 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 20);
                     addActor(laser4);
                     addActor(laser5);
                     addActor(laser6);
