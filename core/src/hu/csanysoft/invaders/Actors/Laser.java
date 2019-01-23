@@ -20,6 +20,7 @@ public class Laser extends OneSpriteStaticActor {
         setRotation(180-angle);
         setSize(getWidth()/3, getHeight());
         this.angle = angle;
+        Assets.manager.get(Assets.SOUND_LASER).play();
     }
 
     public boolean isFel() {
