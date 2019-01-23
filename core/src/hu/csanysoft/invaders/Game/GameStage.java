@@ -203,7 +203,8 @@ this.weapon = weapon;
                     lasers.add(laser2);
                     lasers.add(laser3);
                     break;
-                case 3:
+
+                    default:
                     Laser laser4 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 0);
                     Laser laser5 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), -20);
                     Laser laser6 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 20);
