@@ -7,6 +7,7 @@ import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
@@ -63,8 +64,8 @@ public class Assets {
     public static final AssetDescriptor<Texture> WHITE_TEXTURE
             = new AssetDescriptor<Texture>("white.jpg", Texture.class);
 
-    public static final AssetDescriptor<Texture> METEORITE_TEXTURE
-            = new AssetDescriptor<Texture>("meteorite.png", Texture.class);
+    public static final AssetDescriptor<TextureAtlas> ROCKET_ATLAS
+            = new AssetDescriptor<TextureAtlas>("rocket_anim.txt", TextureAtlas.class);
 
     public static void prepare() {
         manager = new AssetManager();
@@ -89,7 +90,7 @@ public class Assets {
         manager.load(GAMEOVER_TEXTURE);
         manager.load(ENEMY1_TEXTURE);
         manager.load(WHITE_TEXTURE);
-        manager.load(METEORITE_TEXTURE);
+        manager.load(ROCKET_ATLAS);
     }
 
     public static void afterLoaded() {

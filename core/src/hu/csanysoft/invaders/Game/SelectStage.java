@@ -46,7 +46,7 @@ public class SelectStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                game.setScreen(new GameScreen(game, texture1, (short)1), false);
+                game.setScreen(new GameScreen(game, texture1, (short)1), true);
                 dispose();
             }
         });
@@ -55,7 +55,7 @@ public class SelectStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                game.setScreen(new GameScreen(game, texture2, (short)1), false);
+                game.setScreen(new GameScreen(game, texture2, (short)1), true);
                 dispose();
             }
         });
