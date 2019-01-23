@@ -159,7 +159,6 @@ public class MyLevel {
         for (MyActor a : actors) if(a.equals(actor)) return true;
         return false;
     }
-
     public class ActorIsNotOnLevelException extends Exception {
         public ActorIsNotOnLevelException() {
             super();
