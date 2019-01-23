@@ -17,13 +17,20 @@ public class Ship extends MultiSpriteActor {
     public float speed = 2;
     float multiplier = 1;
     OffsetSprite sprite;
-    AnimatedOffsetSprite flameSprite;
+    AnimatedOffsetSprite flameSprite, flameSprite2;
     Texture texture;
 
     public Ship(Texture texture) {
         super(100, 100);
-        addSprite(sprite = new OffsetSprite(texture, 0, 0, 100, 100));
-        addSprite(flameSprite = new AnimatedOffsetSprite(Assets.manager.get(Assets.ROCKET_ATLAS), 25, -50, 50, 50));
+        if(texture == Assets.manager.get(Assets.SHIP2_TEXTURE)) {
+            addSprite(sprite = new OffsetSprite(texture, 0, 0, 100, 100));
+            addSprite(flameSprite = new AnimatedOffsetSprite(Assets.manager.get(Assets.ROCKET_ATLAS), 25, -50, 50, 50));
+        } else {
+            addSprite(sprite = new OffsetSprite(texture, 0, 0, 100, 100));
+            addSprite(flameSprite = new AnimatedOffsetSprite(Assets.manager.get(Assets.ROCKET_ATLAS), -15.75f, -50, 50, 50));
+            addSprite(flameSprite2 = new AnimatedOffsetSprite(Assets.manager.get(Assets.ROCKET_ATLAS), sprite.getWidth()-35.75f, -50, 50, 50));
+        }
+
         addBaseCollisionRectangleShape();
         this.texture = texture;
     }

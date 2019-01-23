@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.MyBaseClasses.Game.InitableInterface;
 
 /**
@@ -129,7 +130,7 @@ abstract public class MyActor extends Actor implements InitableInterface {
 
     public MyActor() {
         super();
-        debug();
+        if( Globals.DEBUG_ALL)debug();
     }
 
     @Override
