@@ -116,6 +116,14 @@ public class GameStage extends MyStage {
                 }
                 for (Laser laser:lasers) {
                     if(laser!=null && ghost!=null) {
+
+                        if(flyout) {
+                            if(whiteTimer > 1) whiteTimer = 1;
+                            ghost.getSprite("alap").setColor(ghost.getSprite("alap").getColor().r, ghost.getSprite("alap").getColor().g, ghost.getSprite("alap").getColor().b, 1-whiteTimer);
+                            ghost.getSprite("szem").setColor(ghost.getSprite("szem").getColor().r, ghost.getSprite("szem").getColor().g, ghost.getSprite("szem").getColor().b, 1-whiteTimer);
+                            laser.getSprite().setColor(laser.getSprite().getColor().r, laser.getSprite().getColor().g, laser.getSprite().getColor().b, 1-whiteTimer);
+                        }
+
                         if(laser.overlaps(ghost) && laser.isFel() && laser.isVisible() && ghost.isVisible()) {
                             getActors().removeValue(ghost, true);
                             getActors().removeValue(laser, true);
