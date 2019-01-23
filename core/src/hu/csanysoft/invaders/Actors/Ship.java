@@ -18,13 +18,18 @@ public class Ship extends MultiSpriteActor {
     float multiplier = 1;
     OffsetSprite sprite;
     AnimatedOffsetSprite flameSprite;
+    Texture texture;
 
     public Ship(Texture texture) {
         super(100, 100);
         addSprite(sprite = new OffsetSprite(texture, 0, 0, 100, 100));
         addSprite(flameSprite = new AnimatedOffsetSprite("rocket_anim.txt", 25, -50, 50, 50));
         addBaseCollisionRectangleShape();
-        
+        this.texture = texture;
+    }
+
+    public Texture getTexture() {
+        return texture;
     }
 
     public void setSpeed(float speed) {

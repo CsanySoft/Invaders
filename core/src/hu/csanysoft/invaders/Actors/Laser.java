@@ -7,25 +7,19 @@ import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class Laser extends OneSpriteStaticActor {
 
     boolean fel, bal=false, jobb=false;
+    float angle;
 
-    public Laser(float x, float y, boolean fel) {
+
+    public Laser(float x, float y, float angle) {
         super(Assets.manager.get(Assets.LASER_TEXTURE));
         setPosition(x, y);
-        this.fel = fel;
+        this.fel = angle != 180;
         addBaseCollisionRectangleShape();
+        this.bal = angle < 0  && angle != 180;
+        this.jobb = angle > 0 && angle != 180;
+        setRotation(180-angle);
         setSize(getWidth()/3, getHeight());
-    }
-
-    public Laser(float x, float y, boolean fel, boolean bal, boolean jobb) {
-        super(Assets.manager.get(Assets.LASER_TEXTURE));
-        setPosition(x, y);
-        this.fel = fel;
-        addBaseCollisionRectangleShape();
-        this.bal = bal;
-        this.jobb = jobb;
-        if(bal) setRotation(45);
-        else if (jobb) setRotation(-45);
-        setSize(getWidth()/3, getHeight());
+        this.angle = angle;
     }
 
     public boolean isFel() {
@@ -37,7 +31,7 @@ public class Laser extends OneSpriteStaticActor {
         super.act(delta);
         if(fel)moveBy(0, 20);
         else moveBy(0,-2);
-        if(jobb) moveBy(20,0);
-        if(bal) moveBy(-20,0);
+        if(jobb) moveBy(angle/2,0);
+        if(bal) moveBy(angle/2,0);
     }
 }
