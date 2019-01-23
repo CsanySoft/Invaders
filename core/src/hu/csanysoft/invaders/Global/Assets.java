@@ -63,6 +63,9 @@ public class Assets {
     public static final AssetDescriptor<Texture> WHITE_TEXTURE
             = new AssetDescriptor<Texture>("white.jpg", Texture.class);
 
+    public static final AssetDescriptor<Texture> METEORITE_TEXTURE
+            = new AssetDescriptor<Texture>("meteorite.png", Texture.class);
+
     public static void prepare() {
         manager = new AssetManager();
         Texture.setAssetManager(manager);
@@ -86,6 +89,7 @@ public class Assets {
         manager.load(GAMEOVER_TEXTURE);
         manager.load(ENEMY1_TEXTURE);
         manager.load(WHITE_TEXTURE);
+        manager.load(METEORITE_TEXTURE);
     }
 
     public static void afterLoaded() {
