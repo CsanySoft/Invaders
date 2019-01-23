@@ -119,7 +119,7 @@ this.weapon = weapon;
         if (szamolo > 4.6f) szamolo = 4.6f;
         if (timer > 5 - szamolo && !flyout) {
             timer = 0;
-            if(rand.nextInt(2) == 1) {
+            if(rand.nextInt(10) > 3) {
                 Ghost enemy = new Ghost(new Random().nextInt(Globals.WORLD_WIDTH - 129) + new Random().nextFloat(), getCameraMoveToY() + Globals.WORLD_HEIGHT);
                 enemy.getSprite("alap").setColor(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1);
                 enemy.getSprite("szem").setColor(1, 1 - szamolo / 4, 1 - szamolo / 4, 1);
@@ -139,6 +139,7 @@ this.weapon = weapon;
         }
 
         ship.setSpeed(speed);
+        ArrayList<Enemy> willBeAdded = new ArrayList<Enemy>();
         for (Enemy enemy : enemies) {
             if (enemy != null && enemy.isVisible()) {
                 if (enemy.overlaps(ship) && isAlive) {
@@ -160,13 +161,13 @@ this.weapon = weapon;
                         }
 
                         if (laser.overlaps(enemy) && laser.isFel() && laser.isVisible() && enemy.isVisible()) {
-                            /*if(enemy instanceof Meteorite){
+                            if(enemy instanceof Meteorite && ! (enemy instanceof SubMeteorite)){
                                 System.out.println("SÜTI");
                                 SubMeteorite m1 = new SubMeteorite(enemy.getX(), enemy.getY(), 1); SubMeteorite m2 = new SubMeteorite(enemy.getX(), enemy.getY(), 2);
                                 SubMeteorite m3 = new SubMeteorite(enemy.getX(), enemy.getY(), 3); SubMeteorite m4 = new SubMeteorite(enemy.getX(), enemy.getY(), 4);
-                                enemies.add(m1); enemies.add(m2); enemies.add(m3); enemies.add(m4);
+                                willBeAdded.add(m1); willBeAdded.add(m2); willBeAdded.add(m3); willBeAdded.add(m4);
                                 addActor(m1); addActor(m2); addActor(m3); addActor(m4);
-                            }*/
+                            }
                             getActors().removeValue(enemy, true);
                             getActors().removeValue(laser, true);
                             enemy.remove();
@@ -183,6 +184,9 @@ this.weapon = weapon;
                     }
                 }
             }
+        }
+        if(willBeAdded.size()>0){
+            for(Enemy e: willBeAdded) enemies.add(e);
         }
         for (Laser laser : lasers) {
             if (laser != null) {
