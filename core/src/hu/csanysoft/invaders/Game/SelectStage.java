@@ -31,9 +31,10 @@ public class SelectStage extends MyStage {
         Image background = new Image(Assets.manager.get(Assets.SPACE_TEXTURE));
         background.setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
 
+        addActor(background);
         addActor(ship1);
         addActor(ship2);
-        addActor(background);
+
 
         ship1.setSize(ship1.getWidth()/2, ship1.getHeight()/2);
         ship2.setSize(ship2.getWidth()/2, ship2.getHeight()/2);
@@ -45,7 +46,7 @@ public class SelectStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                game.setScreen(new GameScreen(game, texture1));
+                game.setScreen(new GameScreen(game, texture1), false);
                 dispose();
             }
         });
@@ -54,7 +55,7 @@ public class SelectStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                game.setScreen(new GameScreen(game, texture2));
+                game.setScreen(new GameScreen(game, texture2), false);
                 dispose();
             }
         });

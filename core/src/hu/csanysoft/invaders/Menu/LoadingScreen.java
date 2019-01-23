@@ -112,7 +112,7 @@ public class LoadingScreen extends MyScreen {
 
         if(Assets.manager.update()) {
             if(Gdx.input.isTouched()) {
-                game.setScreen(new SelectScreen(game));
+                game.setScreen(new SelectScreen(game), true);
             }
         }
 
