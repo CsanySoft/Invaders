@@ -34,6 +34,8 @@ public class ControlStage extends MyStage {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         gameStage.isShooting = true;
+                        if(!gameStage.isAlive)
+                            game.setScreenBackByStackPop();
                         return super.touchDown(event, x, y, pointer, button);
                     }
                     @Override
