@@ -29,6 +29,7 @@ public class SelectStage extends MyStage {
         ship1 = new Image(texture1);
         ship2 = new Image(texture2);
         Image background = new Image(Assets.manager.get(Assets.SPACE_TEXTURE));
+        Assets.manager.get(Assets.MUSIC_BACKGROUND).play();
         background.setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
 
         addActor(background);
@@ -64,6 +65,5 @@ public class SelectStage extends MyStage {
 
     @Override
     public void init() {
-        //TODO ezt megcsinálni: Assets.manager.get(Assets.MUSIC_BACKGROUND).setLooping(true);
     }
 }
