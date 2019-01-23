@@ -36,7 +36,7 @@ public class Ghost extends MultiSpriteActor {
         timer-=delta;
         moveTime += delta*speed;
         if(isVisible() && elapsedTime > Math.random()*(5-3+1)+3) {
-            Laser laser = new Laser(getX()+getWidth()/2, getY()-getHeight(), false);
+            Laser laser = new Laser(getX()+getWidth()/2, getY()-getHeight(), 180);
             getStage().addActor(laser);
             GameStage gameStage = (GameStage) getStage();
             gameStage.lasers.add(laser);
