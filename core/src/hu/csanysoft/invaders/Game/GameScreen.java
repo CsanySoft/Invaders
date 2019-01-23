@@ -45,7 +45,7 @@ public class GameScreen extends MyScreen {
 
     @Override
     public void init() {
-        setBackGroundColor(1,1,1);
+        setBackGroundColor(0,0,00);
     }
 
     @Override
