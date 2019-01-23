@@ -81,6 +81,7 @@ public class Assets {
     public static final AssetDescriptor<Texture> TUTORIAL_TEXTURE
             = new AssetDescriptor<Texture>("tutorial.png", Texture.class);
 
+
     public static void prepare() {
         manager = new AssetManager();
         Texture.setAssetManager(manager);

@@ -16,6 +16,7 @@ import hu.csanysoft.invaders.Actors.Ghost;
 import hu.csanysoft.invaders.Actors.Laser;
 import hu.csanysoft.invaders.Actors.Meteorite;
 import hu.csanysoft.invaders.Actors.Ship;
+import hu.csanysoft.invaders.Actors.SubMeteorite;
 import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.Invaders;
@@ -125,9 +126,9 @@ this.weapon = weapon;
                 enemies.add(enemy);
                 addActor(enemy);
             }else{
-                Meteorite enemy = new Meteorite(new Random().nextInt(Globals.WORLD_WIDTH - 129) + new Random().nextFloat(), getCameraMoveToY() + Globals.WORLD_HEIGHT);
-                enemies.add(enemy);
-                addActor(enemy);
+                Meteorite met = new Meteorite(new Random().nextInt(Globals.WORLD_WIDTH - 129) + new Random().nextFloat(), getCameraMoveToY() + Globals.WORLD_HEIGHT);
+                enemies.add(met);
+                addActor(met);
             }
         }
 
@@ -159,6 +160,13 @@ this.weapon = weapon;
                         }
 
                         if (laser.overlaps(enemy) && laser.isFel() && laser.isVisible() && enemy.isVisible()) {
+                            /*if(enemy instanceof Meteorite){
+                                System.out.println("SÜTI");
+                                SubMeteorite m1 = new SubMeteorite(enemy.getX(), enemy.getY(), 1); SubMeteorite m2 = new SubMeteorite(enemy.getX(), enemy.getY(), 2);
+                                SubMeteorite m3 = new SubMeteorite(enemy.getX(), enemy.getY(), 3); SubMeteorite m4 = new SubMeteorite(enemy.getX(), enemy.getY(), 4);
+                                enemies.add(m1); enemies.add(m2); enemies.add(m3); enemies.add(m4);
+                                addActor(m1); addActor(m2); addActor(m3); addActor(m4);
+                            }*/
                             getActors().removeValue(enemy, true);
                             getActors().removeValue(laser, true);
                             enemy.remove();
@@ -168,6 +176,7 @@ this.weapon = weapon;
                             enemy = null;
                             laser = null;
                             points += 10;
+
                         } else if (!laser.isFel() && laser.overlaps(ship) && isAlive  && !flyout) {
                             gameover();
                         }
