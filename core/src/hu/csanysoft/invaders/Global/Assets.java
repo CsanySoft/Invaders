@@ -68,7 +68,7 @@ public class Assets {
             = new AssetDescriptor<TextureAtlas>("rocket_anim.txt", TextureAtlas.class);
 
     public static final AssetDescriptor<Texture> METEORITE_TEXTURE
-            = new AssetDescriptor<Texture>("enemy1.png", Texture.class);
+            = new AssetDescriptor<Texture>("meteorite.png", Texture.class);
 
     public static final AssetDescriptor<Texture> TUTORIAL_TEXTURE
             = new AssetDescriptor<Texture>("tutorial.png", Texture.class);
