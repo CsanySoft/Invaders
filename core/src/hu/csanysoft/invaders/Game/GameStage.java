@@ -2,6 +2,7 @@ package hu.csanysoft.invaders.Game;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -48,13 +49,13 @@ public class GameStage extends MyStage {
 
 
 
-    public GameStage(Invaders game) {
+    public GameStage(Invaders game, Texture texture) {
         super(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)), new SpriteBatch(), game);
 
         backgroundActor = new Background();
         addActor(backgroundActor);
 
-        ship = new Ship();
+        ship = new Ship(texture);
         addActor(ship);
         ship.setPosition(getWidth()/2 - ship.getWidth() / 2, ship.getHeight() * .5f);
         white = new Image(Assets.manager.get(Assets.WHITE_TEXTURE));
@@ -118,6 +119,14 @@ public class GameStage extends MyStage {
                 }
                 for (Laser laser:lasers) {
                     if(laser!=null && ghost!=null) {
+
+                        if(flyout) {
+                            if(whiteTimer > 1) whiteTimer = 1;
+                            ghost.getSprite("alap").setColor(ghost.getSprite("alap").getColor().r, ghost.getSprite("alap").getColor().g, ghost.getSprite("alap").getColor().b, 1-whiteTimer);
+                            ghost.getSprite("szem").setColor(ghost.getSprite("szem").getColor().r, ghost.getSprite("szem").getColor().g, ghost.getSprite("szem").getColor().b, 1-whiteTimer);
+                            laser.getSprite().setColor(laser.getSprite().getColor().r, laser.getSprite().getColor().g, laser.getSprite().getColor().b, 1-whiteTimer);
+                        }
+
                         if(laser.overlaps(ghost) && laser.isFel() && laser.isVisible() && ghost.isVisible()) {
                             getActors().removeValue(ghost, true);
                             getActors().removeValue(laser, true);

@@ -34,7 +34,7 @@ public class Assets {
             = new AssetDescriptor<BitmapFont>(fontParameter.fontFileName, BitmapFont.class, fontParameter);
 
     public static final AssetDescriptor<Texture> SPACE_TEXTURE
-            = new AssetDescriptor<Texture>("space.jpg", Texture.class);
+            = new AssetDescriptor<Texture>("stars.png", Texture.class);
 
     public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
             = new AssetDescriptor<Texture>("ghost_alap.png", Texture.class);

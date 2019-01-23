@@ -3,6 +3,7 @@ package hu.csanysoft.invaders.Actors;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetDescriptor;
+import com.badlogic.gdx.graphics.Texture;
 
 import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Global.Globals;
@@ -18,9 +19,9 @@ public class Ship extends MultiSpriteActor {
     OffsetSprite sprite;
     AnimatedOffsetSprite flameSprite;
 
-    public Ship() {
+    public Ship(Texture texture) {
         super(100, 100);
-        addSprite(sprite = new OffsetSprite(Assets.manager.get(Assets.SHIP_TEXTURE), 0, 0, 100, 100));
+        addSprite(sprite = new OffsetSprite(texture, 0, 0, 100, 100));
         addSprite(flameSprite = new AnimatedOffsetSprite("rocket_anim.txt", 25, -50, 50, 50));
         addBaseCollisionRectangleShape();
         
