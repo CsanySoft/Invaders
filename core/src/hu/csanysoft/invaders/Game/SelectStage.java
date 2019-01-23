@@ -28,9 +28,12 @@ public class SelectStage extends MyStage {
 
         ship1 = new Image(texture1);
         ship2 = new Image(texture2);
+        Image background = new Image(Assets.manager.get(Assets.SPACE_TEXTURE));
+        background.setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
 
         addActor(ship1);
         addActor(ship2);
+        addActor(background);
 
         ship1.setSize(ship1.getWidth()/2, ship1.getHeight()/2);
         ship2.setSize(ship2.getWidth()/2, ship2.getHeight()/2);
