@@ -160,7 +160,7 @@ this.weapon = weapon;
                             ghost = null;
                             laser = null;
                             points += 10;
-                        } else if (!laser.isFel() && laser.overlaps(ship) && isAlive) {
+                        } else if (!laser.isFel() && laser.overlaps(ship) && isAlive  && !flyout) {
                             gameover();
                         }
                     }
@@ -215,12 +215,17 @@ this.weapon = weapon;
 
         moveBackgrounds();
 
+        if(points == 100*weapon) {
+            flyout = true;
+
+        }
 
         if (flyout) {
+            white.setPosition(getCameraMoveToX() - Globals.WORLD_WIDTH / 2, getCameraMoveToY() - Globals.WORLD_HEIGHT / 2);
             white.setColor(255, 255, 255, whiteTimer += 0.008f);
             if(!ship.isInFrustum(4)) {
-                game.setScreen(new GameScreen(game, ship.getTexture(), ++weapon));
-                dispose();
+                nextStage();
+
             }
             for(Background bg : backgroundActors) bg.setMoving(false);
             for(Background bg : foregroundActors) bg.setMoving(false);
@@ -249,16 +254,17 @@ this.weapon = weapon;
     }
 
 
+
     void nextStage() {
-        flyout = true;
         for (Background bg : backgroundActors) bg.setMoving(false);
+        game.setScreen(new GameScreen(game, ship.getTexture(), ++weapon));
+        dispose();
     }
 
     @Override
     public boolean keyDown(int keyCode) {
         if (keyCode == Input.Keys.X) {
-            flyout = true;
-            white.setPosition(getCameraMoveToX() - Globals.WORLD_WIDTH / 2, getCameraMoveToY() - Globals.WORLD_HEIGHT / 2);
+flyout=true;
         } else if (keyCode == Input.Keys.U) {
             if (weapon < 4 && points >= -5000) {
                 weapon++;
