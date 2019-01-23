@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 import hu.csanysoft.invaders.Game.GameScreen;
+import hu.csanysoft.invaders.Game.SelectScreen;
 import hu.csanysoft.invaders.Invaders;
 import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyActor;
@@ -111,7 +112,7 @@ public class LoadingScreen extends MyScreen {
 
         if(Assets.manager.update()) {
             if(Gdx.input.isTouched()) {
-                game.setScreen(new GameScreen(game));
+                game.setScreen(new SelectScreen(game), true);
             }
         }
 
