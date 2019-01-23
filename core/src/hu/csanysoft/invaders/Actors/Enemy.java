@@ -18,7 +18,6 @@ public class Enemy extends MultiSpriteActor {
 
     public Enemy(float x, float y) {
         super(300,300);
-
         addBaseCollisionRectangleShape();
         setPosition(x,y);
         this.x = x; this.y = y;
