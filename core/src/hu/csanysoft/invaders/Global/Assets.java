@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -70,6 +71,9 @@ public class Assets {
     public static final AssetDescriptor<Texture> METEORITE_TEXTURE
             = new AssetDescriptor<Texture>("meteorite.png", Texture.class);
 
+    public static final AssetDescriptor<Music> SOUND_LASER
+            = new AssetDescriptor<Music>("sound/laser.mp3", Music.class);
+
     public static final AssetDescriptor<Texture> TUTORIAL_TEXTURE
             = new AssetDescriptor<Texture>("tutorial.png", Texture.class);
 
@@ -98,6 +102,7 @@ public class Assets {
         manager.load(WHITE_TEXTURE);
         manager.load(ROCKET_ATLAS);
         manager.load(METEORITE_TEXTURE);
+        manager.load(SOUND_LASER);
         manager.load(TUTORIAL_TEXTURE);
     }
 
