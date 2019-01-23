@@ -2,6 +2,7 @@ package hu.csanysoft.invaders.Game;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -17,6 +18,7 @@ import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.Invaders;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyStage;
+import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class GameStage extends MyStage {
 
@@ -33,6 +35,7 @@ public class GameStage extends MyStage {
     float flytimer = 0;
     Background backgroundActors[];
     Background foregroundActors[];
+    OneSpriteStaticActor gameover;
     Random rand = new Random();
     Image white;
     float whiteTimer=0;
@@ -46,7 +49,7 @@ public class GameStage extends MyStage {
 
 
 
-    public GameStage(Invaders game) {
+    public GameStage(Invaders game, Texture texture) {
         super(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)), new SpriteBatch(), game);
         backgroundActors = new Background[3];
         foregroundActors = new Background[3];
@@ -66,17 +69,13 @@ public class GameStage extends MyStage {
 
 
 
-
-
-        ship = new Ship();
+        ship = new Ship(texture);
         addActor(ship);
         ship.setPosition(getWidth()/2 - ship.getWidth() / 2, ship.getHeight() * .5f);
         white = new Image(Assets.manager.get(Assets.WHITE_TEXTURE));
         white.setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
         addActor(white);
         white.setColor(255,255,255,0);
-
-
     }
 
     @Override
@@ -98,12 +97,10 @@ public class GameStage extends MyStage {
                 setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + 500 - ship.getHeight() * .5f);
                 setCameraMoveToX(Globals.WORLD_WIDTH / 2);
                 getViewport().setScreenPosition(getViewport().getScreenX(), getViewport().getScreenY() + 1);
-                //backgroundActors.setPosition(getCameraMoveToX()-Globals.WORLD_WIDTH/2, getCameraMoveToY()-Globals.WORLD_HEIGHT/2);
             }
         }else{
             flytimer += delta;
             ship.setMultiplier(flytimer*3);
-            //backgroundActors.setPosition(getCameraMoveToX()-Globals.WORLD_WIDTH/2, getCameraMoveToY()-Globals.WORLD_HEIGHT/2);
         }
 
         szamolo = elapsedTime * szorzo;
@@ -125,10 +122,9 @@ public class GameStage extends MyStage {
 
         ship.setSpeed(speed);
         for (Ghost ghost : ghosts) {
-            if(ghost != null) {
+            if(ghost != null && ghost.isVisible()) {
                 if(ghost.overlaps(ship) && isAlive) {
-                    ship.setVisible(false);
-                    isAlive = false;
+                    gameover();
                 }
                 if(ghost.getY() + ghost.getHeight() < getCameraMoveToY() - Globals.WORLD_HEIGHT/2) {
                     getActors().removeValue(ghost, true);
@@ -137,6 +133,14 @@ public class GameStage extends MyStage {
                 }
                 for (Laser laser:lasers) {
                     if(laser!=null && ghost!=null) {
+
+                        if(flyout) {
+                            if(whiteTimer > 1) whiteTimer = 1;
+                            ghost.getSprite("alap").setColor(ghost.getSprite("alap").getColor().r, ghost.getSprite("alap").getColor().g, ghost.getSprite("alap").getColor().b, 1-whiteTimer);
+                            ghost.getSprite("szem").setColor(ghost.getSprite("szem").getColor().r, ghost.getSprite("szem").getColor().g, ghost.getSprite("szem").getColor().b, 1-whiteTimer);
+                            laser.getSprite().setColor(laser.getSprite().getColor().r, laser.getSprite().getColor().g, laser.getSprite().getColor().b, 1-whiteTimer);
+                        }
+
                         if(laser.overlaps(ghost) && laser.isFel() && laser.isVisible() && ghost.isVisible()) {
                             getActors().removeValue(ghost, true);
                             getActors().removeValue(laser, true);
@@ -148,13 +152,11 @@ public class GameStage extends MyStage {
                             laser = null;
                             points += 10;
                         } else if(!laser.isFel() && laser.overlaps(ship) && isAlive) {
-                            ship.setVisible(false);
-                            isAlive = false;
+                            gameover();
                         }
                     }
                 }
             }
-
         }
         for (Laser laser : lasers) {
             if(laser != null) {
@@ -207,6 +209,12 @@ public class GameStage extends MyStage {
         if(flyout) {
             white.setColor(255,255,255,whiteTimer+=0.008f);
         }
+        if(gameover != null){
+            gameover.setPosition(
+                    getCameraMoveToX() - gameover.getWidth()/2,
+                    getCameraMoveToY()- gameover.getHeight()/2
+            );
+        }
     }
 
     void moveBackgrounds(){
@@ -241,5 +249,13 @@ public class GameStage extends MyStage {
     @Override
     public void dispose() {
         super.dispose();
+    }
+
+    public void gameover() {
+        ship.setVisible(false);
+        isAlive = false;
+        gameover = new OneSpriteStaticActor(Assets.manager.get(Assets.GAMEOVER_TEXTURE));
+        gameover.setSize(gameover.getWidth()/3.6f, gameover.getHeight()/3.6f);
+        addActor(gameover);
     }
 }
