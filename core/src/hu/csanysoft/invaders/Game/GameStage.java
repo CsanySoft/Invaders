@@ -18,7 +18,6 @@ import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.Invaders;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyStage;
-import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteActor;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class GameStage extends MyStage {
@@ -34,7 +33,8 @@ public class GameStage extends MyStage {
     final float shoottimer = .5f;
     float lastshot = 0;
     float flytimer = 0;
-    Background backgroundActor;
+    Background backgroundActors[];
+    Background foregroundActors[];
     OneSpriteStaticActor gameover;
     Random rand = new Random();
     Image white;
@@ -51,9 +51,23 @@ public class GameStage extends MyStage {
 
     public GameStage(Invaders game, Texture texture) {
         super(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)), new SpriteBatch(), game);
+        backgroundActors = new Background[3];
+        foregroundActors = new Background[3];
+        for (int i = 0; i < 3; i++){
+            backgroundActors[i] = new Background();
+            addActor(backgroundActors[i]);
+            backgroundActors[i].setPosition(0, Globals.WORLD_HEIGHT*i);
+            backgroundActors[i].setSpeed(speed/2);
+        }
+        for (int i = 0; i < 3; i++){
+            foregroundActors[i] = new Background();
+            addActor(foregroundActors[i]);
+            foregroundActors[i].setPosition(0, Globals.WORLD_HEIGHT*i);
+            foregroundActors[i].setSpeed(speed/4);
+        }
 
-        backgroundActor = new Background();
-        addActor(backgroundActor);
+
+
 
         ship = new Ship(texture);
         addActor(ship);
@@ -83,12 +97,10 @@ public class GameStage extends MyStage {
                 setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + 500 - ship.getHeight() * .5f);
                 setCameraMoveToX(Globals.WORLD_WIDTH / 2);
                 getViewport().setScreenPosition(getViewport().getScreenX(), getViewport().getScreenY() + 1);
-                backgroundActor.setPosition(getCameraMoveToX()-Globals.WORLD_WIDTH/2, getCameraMoveToY()-Globals.WORLD_HEIGHT/2);
             }
         }else{
             flytimer += delta;
             ship.setMultiplier(flytimer*3);
-            backgroundActor.setPosition(getCameraMoveToX()-Globals.WORLD_WIDTH/2, getCameraMoveToY()-Globals.WORLD_HEIGHT/2);
         }
 
         szamolo = elapsedTime * szorzo;
@@ -102,10 +114,12 @@ public class GameStage extends MyStage {
             addActor(ghost);
         }
 
-        if(speed < 5)
-            speed+=delta/10;
+        if(speed < 5) {
+            speed += delta / 10;
+            for(Background bg : backgroundActors) bg.setSpeed(speed/2);
+            for(Background bg : foregroundActors) bg.setSpeed(speed/4);
+        }
 
-        backgroundActor.setSpeed(speed);
         ship.setSpeed(speed);
         for (Ghost ghost : ghosts) {
             if(ghost != null && ghost.isVisible()) {
@@ -188,6 +202,10 @@ public class GameStage extends MyStage {
         }
 
         ControlStage.setPoints(points);
+
+        moveBackgrounds();
+
+
         if(flyout) {
             white.setColor(255,255,255,whiteTimer+=0.008f);
         }
@@ -199,9 +217,19 @@ public class GameStage extends MyStage {
         }
     }
 
+    void moveBackgrounds(){
+        if(backgroundActors[0].getY() < getCameraMoveToY() - Globals.WORLD_HEIGHT*1.5) backgroundActors[0].setY(backgroundActors[2].getY()+Globals.WORLD_HEIGHT);
+        if(backgroundActors[1].getY() < getCameraMoveToY() - Globals.WORLD_HEIGHT*1.5) backgroundActors[1].setY(backgroundActors[0].getY()+Globals.WORLD_HEIGHT);
+        if(backgroundActors[2].getY() < getCameraMoveToY() - Globals.WORLD_HEIGHT*1.5) backgroundActors[2].setY(backgroundActors[1].getY()+Globals.WORLD_HEIGHT);
+        if(foregroundActors[0].getY() < getCameraMoveToY() - Globals.WORLD_HEIGHT*1.5) foregroundActors[0].setY(foregroundActors[2].getY()+Globals.WORLD_HEIGHT);
+        if(foregroundActors[1].getY() < getCameraMoveToY() - Globals.WORLD_HEIGHT*1.5) foregroundActors[1].setY(foregroundActors[0].getY()+Globals.WORLD_HEIGHT);
+        if(foregroundActors[2].getY() < getCameraMoveToY() - Globals.WORLD_HEIGHT*1.5) foregroundActors[2].setY(foregroundActors[1].getY()+Globals.WORLD_HEIGHT);
+    }
+
+
     void nextStage(){
         flyout = true;
-        backgroundActor.setMoving(false);
+        for(Background bg : backgroundActors) bg.setMoving(false);
     }
 
     @Override
@@ -231,4 +259,3 @@ public class GameStage extends MyStage {
         addActor(gameover);
     }
 }
-
