@@ -40,6 +40,8 @@ public class GameStage extends MyStage {
     Image white;
     float whiteTimer=0;
     short weapon = 1;
+    boolean shipAt500 = false;
+
 
     public int points = 0;
 
@@ -93,6 +95,11 @@ public class GameStage extends MyStage {
                 setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + ship.getY() - ship.getHeight() * .5f);
                 setCameraMoveToX(Globals.WORLD_WIDTH / 2);
                 getViewport().setScreenPosition(getViewport().getScreenX(), getViewport().getScreenY() + 1);
+                if(!shipAt500){
+                    shipAt500 = true;
+                    for(Background bg : backgroundActors) bg.setMoving(true);
+                    for(Background bg : foregroundActors) bg.setMoving(true);
+                }
             }else{
                 setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + 500 - ship.getHeight() * .5f);
                 setCameraMoveToX(Globals.WORLD_WIDTH / 2);
@@ -208,6 +215,8 @@ public class GameStage extends MyStage {
 
         if(flyout) {
             white.setColor(255,255,255,whiteTimer+=0.008f);
+            for(Background bg : backgroundActors) bg.setMoving(false);
+            for(Background bg : foregroundActors) bg.setMoving(false);
         }
         if(gameover != null){
             gameover.setPosition(
