@@ -64,6 +64,6 @@ public class SelectStage extends MyStage {
 
     @Override
     public void init() {
-
+        //TODO ezt megcsinálni: Assets.manager.get(Assets.MUSIC_BACKGROUND).setLooping(true);
     }
 }

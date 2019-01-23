@@ -75,6 +75,9 @@ public class Assets {
     public static final AssetDescriptor<Sound> SOUND_LASER
             = new AssetDescriptor<Sound>("sound/laser.wav", Sound.class);
 
+    public static final AssetDescriptor<Music>  MUSIC_BACKGROUND
+            = new AssetDescriptor<Music>("sound/popcorn.mp3", Music.class);
+
     public static final AssetDescriptor<Texture> TUTORIAL_TEXTURE
             = new AssetDescriptor<Texture>("tutorial.png", Texture.class);
 
@@ -105,6 +108,7 @@ public class Assets {
         manager.load(METEORITE_TEXTURE);
         manager.load(SOUND_LASER);
         manager.load(TUTORIAL_TEXTURE);
+        manager.load(MUSIC_BACKGROUND);
     }
 
     public static void afterLoaded() {
