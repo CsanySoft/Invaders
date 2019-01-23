@@ -17,6 +17,8 @@ import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.Invaders;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyStage;
+import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteActor;
+import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class GameStage extends MyStage {
 
@@ -32,6 +34,7 @@ public class GameStage extends MyStage {
     float lastshot = 0;
     float flytimer = 0;
     Background backgroundActor;
+    OneSpriteStaticActor gameover;
     Random rand = new Random();
     Image white;
     float whiteTimer=0;
@@ -104,10 +107,9 @@ public class GameStage extends MyStage {
         backgroundActor.setSpeed(speed);
         ship.setSpeed(speed);
         for (Ghost ghost : ghosts) {
-            if(ghost != null) {
+            if(ghost != null && ghost.isVisible()) {
                 if(ghost.overlaps(ship) && isAlive) {
-                    ship.setVisible(false);
-                    isAlive = false;
+                    gameover();
                 }
                 if(ghost.getY() + ghost.getHeight() < getCameraMoveToY() - Globals.WORLD_HEIGHT/2) {
                     getActors().removeValue(ghost, true);
@@ -127,13 +129,11 @@ public class GameStage extends MyStage {
                             laser = null;
                             points += 10;
                         } else if(!laser.isFel() && laser.overlaps(ship) && isAlive) {
-                            ship.setVisible(false);
-                            isAlive = false;
+                            gameover();
                         }
                     }
                 }
             }
-
         }
         for (Laser laser : lasers) {
             if(laser != null) {
@@ -179,11 +179,14 @@ public class GameStage extends MyStage {
         }
 
         ControlStage.setPoints(points);
-
-
-
         if(flyout) {
             white.setColor(255,255,255,whiteTimer+=0.008f);
+        }
+        if(gameover != null){
+            gameover.setPosition(
+                    getCameraMoveToX() - gameover.getWidth()/2,
+                    getCameraMoveToY()- gameover.getHeight()/2
+            );
         }
     }
 
@@ -210,4 +213,13 @@ public class GameStage extends MyStage {
     public void dispose() {
         super.dispose();
     }
+
+    public void gameover() {
+        ship.setVisible(false);
+        isAlive = false;
+        gameover = new OneSpriteStaticActor(Assets.manager.get(Assets.GAMEOVER_TEXTURE));
+        gameover.setSize(gameover.getWidth()/3.6f, gameover.getHeight()/3.6f);
+        addActor(gameover);
+    }
 }
+
