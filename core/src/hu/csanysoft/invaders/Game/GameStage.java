@@ -2,6 +2,7 @@ package hu.csanysoft.invaders.Game;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -45,13 +46,13 @@ public class GameStage extends MyStage {
 
 
 
-    public GameStage(Invaders game) {
+    public GameStage(Invaders game, Texture texture) {
         super(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)), new SpriteBatch(), game);
 
         backgroundActor = new Background();
         addActor(backgroundActor);
 
-        ship = new Ship();
+        ship = new Ship(texture);
         addActor(ship);
         ship.setPosition(getWidth()/2 - ship.getWidth() / 2, ship.getHeight() * .5f);
         white = new Image(Assets.manager.get(Assets.WHITE_TEXTURE));
