@@ -51,7 +51,7 @@ public class GameStage extends MyStage {
 
 
 
-    public GameStage(Invaders game, Texture texture) {
+    public GameStage(Invaders game, Texture texture, short weapon) {
         super(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)), new SpriteBatch(), game);
         backgroundActors = new Background[3];
         foregroundActors = new Background[3];
@@ -69,7 +69,7 @@ public class GameStage extends MyStage {
         }
 
 
-
+        this.weapon = weapon;
 
         ship = new Ship(texture);
         addActor(ship);
@@ -179,29 +179,31 @@ public class GameStage extends MyStage {
         }
 
         if(lastshot > shoottimer && isShooting && isAlive){
-            Laser laser = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), true);
-            Laser laserb = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), true,true, false);
-            Laser laserj = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), true, false, true);
+
             switch(weapon) {
                 case 1:
-                    addActor(laser);
-                    lasers.add(laser);
-                    lasers.add(laserb);
-                    lasers.add(laserj);
+                    Laser laser1 = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), 0);
+                    addActor(laser1);
+                    lasers.add(laser1);
                     break;
                 case 2:
-                    addActor(laserb);
-                    addActor(laserj);
-                    lasers.add(laserb);
-                    lasers.add(laserj);
+                    Laser laser2 = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), 45);
+                    Laser laser3 = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), -45);
+                    addActor(laser2);
+                    addActor(laser3);
+                    lasers.add(laser2);
+                    lasers.add(laser3);
                     break;
                 case 3:
-                    addActor(laser);
-                    addActor(laserb);
-                    addActor(laserj);
-                    lasers.add(laser);
-                    lasers.add(laserb);
-                    lasers.add(laserj);
+                    Laser laser4 = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), 0);
+                    Laser laser5 = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), -20);
+                    Laser laser6 = new Laser(ship.getX() + ship.getWidth() / 2 - 15, ship.getY() + ship.getHeight(), 20);
+                    addActor(laser4);
+                    addActor(laser5);
+                    addActor(laser6);
+                    lasers.add(laser4);
+                    lasers.add(laser5);
+                    lasers.add(laser6);
                     break;
             }
 
@@ -215,6 +217,10 @@ public class GameStage extends MyStage {
 
         if(flyout) {
             white.setColor(255,255,255,whiteTimer+=0.008f);
+            if(!ship.isInFrustum(4)) {
+                game.setScreen(new GameScreen(game, ship.getTexture(), ++weapon));
+                dispose();
+            }
             for(Background bg : backgroundActors) bg.setMoving(false);
             for(Background bg : foregroundActors) bg.setMoving(false);
         }
