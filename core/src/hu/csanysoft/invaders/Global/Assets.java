@@ -67,6 +67,10 @@ public class Assets {
     public static final AssetDescriptor<TextureAtlas> ROCKET_ATLAS
             = new AssetDescriptor<TextureAtlas>("rocket_anim.txt", TextureAtlas.class);
 
+
+    public static final AssetDescriptor<Texture> METEORITE_TEXTURE
+            = new AssetDescriptor<Texture>("enemy1.png", Texture.class);
+
     public static void prepare() {
         manager = new AssetManager();
         Texture.setAssetManager(manager);
@@ -91,6 +95,7 @@ public class Assets {
         manager.load(ENEMY1_TEXTURE);
         manager.load(WHITE_TEXTURE);
         manager.load(ROCKET_ATLAS);
+        manager.load(METEORITE_TEXTURE);
     }
 
     public static void afterLoaded() {
