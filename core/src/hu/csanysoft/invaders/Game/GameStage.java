@@ -117,7 +117,7 @@ this.weapon = weapon;
 
         szamolo = elapsedTime * szorzo;
         if (szamolo > 4.6f) szamolo = 4.6f;
-        if (timer > 5 - szamolo && !flyout) {
+        if (timer > 5 - szamolo && !flyout && isAlive) {
             timer = 0;
             if(rand.nextInt(10) > 3) {
                 Ghost enemy = new Ghost(new Random().nextInt(Globals.WORLD_WIDTH - 129) + new Random().nextFloat(), getCameraMoveToY() + Globals.WORLD_HEIGHT);
@@ -142,7 +142,7 @@ this.weapon = weapon;
         ArrayList<Enemy> willBeAdded = new ArrayList<Enemy>();
         for (Enemy enemy : enemies) {
             if (enemy != null && enemy.isVisible()) {
-                if (enemy.overlaps(ship) && isAlive) {
+                if (enemy.overlaps(ship) && isAlive && !flyout) {
                     gameover();
                 }
                 if (enemy.getY() + enemy.getHeight() < getCameraMoveToY() - Globals.WORLD_HEIGHT / 2) {
@@ -155,8 +155,12 @@ this.weapon = weapon;
 
                         if (flyout) {
                             if (whiteTimer > 1) whiteTimer = 1;
-                            enemy.getSprite("alap").setColor(enemy.getSprite("alap").getColor().r, enemy.getSprite("alap").getColor().g, enemy.getSprite("alap").getColor().b, 1 - whiteTimer);
-                            enemy.getSprite("szem").setColor(enemy.getSprite("szem").getColor().r, enemy.getSprite("szem").getColor().g, enemy.getSprite("szem").getColor().b, 1 - whiteTimer);
+                            if(enemy instanceof Ghost) {
+                                enemy.getSprite("alap").setColor(enemy.getSprite("alap").getColor().r, enemy.getSprite("alap").getColor().g, enemy.getSprite("alap").getColor().b, 1 - whiteTimer);
+                                enemy.getSprite("szem").setColor(enemy.getSprite("szem").getColor().r, enemy.getSprite("szem").getColor().g, enemy.getSprite("szem").getColor().b, 1 - whiteTimer);
+                            }else if(enemy instanceof Meteorite){
+                                enemy.getSprite("alap").setColor(enemy.getSprite("alap").getColor().r, enemy.getSprite("alap").getColor().g, enemy.getSprite("alap").getColor().b, 1 - whiteTimer);
+                            }
                             laser.getSprite().setColor(laser.getSprite().getColor().r, laser.getSprite().getColor().g, laser.getSprite().getColor().b, 1 - whiteTimer);
                         }
 
@@ -181,6 +185,7 @@ this.weapon = weapon;
                         } else if (!laser.isFel() && laser.overlaps(ship) && isAlive  && !flyout) {
                             gameover();
                         }
+
                     }
                 }
             }
