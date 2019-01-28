@@ -14,10 +14,10 @@ public class SubMeteorite extends Meteorite {
     public void act(float delta) {
         super.act(delta);
         switch(direction){
-            case 1: moveBy(2,2); rotateBy(2); break;
-            case 2: moveBy(2, -2); rotateBy(-2); break;
-            case 3: moveBy(-2, -2); rotateBy(-2); break;
-            case 4: moveBy(-2, 2); rotateBy(2); break;
+            case 1: moveBy(2,2); break;
+            case 2: moveBy(2, -2); break;
+            case 3: moveBy(-2, -2); break;
+            case 4: moveBy(-2, 2); break;
         }
     }
 }

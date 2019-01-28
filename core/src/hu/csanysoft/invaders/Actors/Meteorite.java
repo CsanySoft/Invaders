@@ -7,6 +7,7 @@ import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class Meteorite extends Enemy {
 
+    int rotate = rand.nextInt(20)-10;
 
     public Meteorite(float x, float y) {
         super(x, y);
@@ -17,6 +18,7 @@ public class Meteorite extends Enemy {
     @Override
     public void act(float delta) {
         super.act(delta);
+        rotateBy(rotate);
 
     }
 }
