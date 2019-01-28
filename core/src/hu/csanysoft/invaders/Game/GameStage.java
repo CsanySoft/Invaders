@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
@@ -33,7 +34,6 @@ public class GameStage extends MyStage {
     public boolean isShooting = false;
     public boolean isAlive = true;
     public boolean flyout = false;
-    ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     float timer = 0;
     float szorzo = 0.03f;
     float szamolo = 0;
@@ -123,11 +123,9 @@ this.weapon = weapon;
                 Ghost enemy = new Ghost(new Random().nextInt(Globals.WORLD_WIDTH - 129) + new Random().nextFloat(), getCameraMoveToY() + Globals.WORLD_HEIGHT);
                 enemy.getSprite("alap").setColor(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1);
                 enemy.getSprite("szem").setColor(1, 1 - szamolo / 4, 1 - szamolo / 4, 1);
-                enemies.add(enemy);
                 addActor(enemy);
             }else{
                 Meteorite met = new Meteorite(new Random().nextInt(Globals.WORLD_WIDTH - 129) + new Random().nextFloat(), getCameraMoveToY() + Globals.WORLD_HEIGHT);
-                enemies.add(met);
                 addActor(met);
             }
         }
@@ -139,27 +137,29 @@ this.weapon = weapon;
         }
 
         ship.setSpeed(speed);
-        for (Enemy enemy : enemies) {
-            if (enemy != null && enemy.isVisible()) {
-                if (enemy.overlaps(ship) && isAlive) {
-                    gameover();
-                }
-                if (enemy.getY() + enemy.getHeight() < getCameraMoveToY() - Globals.WORLD_HEIGHT / 2) {
-                    getActors().removeValue(enemy, true);
-                    enemy.remove();
-                    enemy = null;
-                }
-                for (Laser laser : lasers) {
-                    if (laser != null && enemy != null) {
+        for (Actor a : getActors()) {
+            if (a instanceof Enemy) {
+                Enemy enemy = (Enemy) a;
+                    if (enemy.overlaps(ship) && isAlive) {
+                        gameover();
+                    }
+                    if (enemy.getY() + enemy.getHeight() < getCameraMoveToY() - Globals.WORLD_HEIGHT / 2) {
+                        if(enemy.isVisible())
+                            points -= 10;
+                        getActors().removeValue(enemy, true);
+                    }
+                    for (Laser laser : lasers) {
+                        if (laser != null && enemy != null) {
 
-                        if (flyout) {
-                            if (whiteTimer > 1) whiteTimer = 1;
-                            enemy.getSprite("alap").setColor(enemy.getSprite("alap").getColor().r, enemy.getSprite("alap").getColor().g, enemy.getSprite("alap").getColor().b, 1 - whiteTimer);
-                            enemy.getSprite("szem").setColor(enemy.getSprite("szem").getColor().r, enemy.getSprite("szem").getColor().g, enemy.getSprite("szem").getColor().b, 1 - whiteTimer);
-                            laser.getSprite().setColor(laser.getSprite().getColor().r, laser.getSprite().getColor().g, laser.getSprite().getColor().b, 1 - whiteTimer);
-                        }
+                            if (flyout) {
+                                if (whiteTimer > 1)
+                                    whiteTimer = 1;
+                                enemy.getSprite("alap").setColor(enemy.getSprite("alap").getColor().r, enemy.getSprite("alap").getColor().g, enemy.getSprite("alap").getColor().b, 1 - whiteTimer);
+                                enemy.getSprite("szem").setColor(enemy.getSprite("szem").getColor().r, enemy.getSprite("szem").getColor().g, enemy.getSprite("szem").getColor().b, 1 - whiteTimer);
+                                laser.getSprite().setColor(laser.getSprite().getColor().r, laser.getSprite().getColor().g, laser.getSprite().getColor().b, 1 - whiteTimer);
+                            }
 
-                        if (laser.overlaps(enemy) && laser.isFel() && laser.isVisible() && enemy.isVisible()) {
+                            if (laser.overlaps(enemy) && laser.isFel() && laser.isVisible() && enemy.isVisible()) {
                             /*if(enemy instanceof Meteorite){
                                 System.out.println("SÜTI");
                                 SubMeteorite m1 = new SubMeteorite(enemy.getX(), enemy.getY(), 1); SubMeteorite m2 = new SubMeteorite(enemy.getX(), enemy.getY(), 2);
@@ -167,93 +167,95 @@ this.weapon = weapon;
                                 enemies.add(m1); enemies.add(m2); enemies.add(m3); enemies.add(m4);
                                 addActor(m1); addActor(m2); addActor(m3); addActor(m4);
                             }*/
-                            getActors().removeValue(enemy, true);
-                            getActors().removeValue(laser, true);
-                            enemy.remove();
-                            laser.remove();
-                            enemy.setVisible(false);
-                            laser.setVisible(false);
-                            enemy = null;
-                            laser = null;
-                            points += 10;
+                                getActors().removeValue(enemy, true);
+                                getActors().removeValue(laser, true);
+                                enemy.remove();
+                                laser.remove();
+                                enemy.setVisible(false);
+                                laser.setVisible(false);
+                                enemy = null;
+                                laser = null;
+                                points += 10;
 
-                        } else if (!laser.isFel() && laser.overlaps(ship) && isAlive  && !flyout) {
-                            gameover();
+                            } else if (!laser.isFel() && laser.overlaps(ship) && isAlive && !flyout) {
+                                gameover();
+                            }
                         }
+                }
+            }
+            for (Laser laser : lasers) {
+                if (laser != null) {
+                    if (laser.isFel() && laser.getY() > getCameraMoveToY() + Globals.WORLD_HEIGHT / 2) {
+                        getActors().removeValue(laser, true);
+                        laser.remove();
+                    } else if (!laser.isFel() && laser.getY() < getCameraMoveToY() - Globals.WORLD_HEIGHT + laser.getHeight()) {
+                        getActors().removeValue(laser, true);
+                        laser.remove();
                     }
                 }
             }
-        }
-        for (Laser laser : lasers) {
-            if (laser != null) {
-                if (laser.isFel() && laser.getY() > getCameraMoveToY() + Globals.WORLD_HEIGHT / 2) {
-                    getActors().removeValue(laser, true);
-                    laser.remove();
-                } else if (!laser.isFel() && laser.getY() < getCameraMoveToY() - Globals.WORLD_HEIGHT + laser.getHeight()) {
-                    getActors().removeValue(laser, true);
-                    laser.remove();
-                }
-            }
-        }
 
-        if(lastshot > shoottimer && isShooting && isAlive){
+            if (lastshot > shoottimer && isShooting && isAlive) {
 
-            switch(weapon) {
-                case 1:
-                    Laser laser1 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 0);
-                    addActor(laser1);
-                    lasers.add(laser1);
-                    break;
-                case 2:
-                    Laser laser2 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 45);
-                    Laser laser3 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), -45);
-                    addActor(laser2);
-                    addActor(laser3);
-                    lasers.add(laser2);
-                    lasers.add(laser3);
-                    break;
+                switch (weapon) {
+                    case 1:
+                        Laser laser1 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 0);
+                        addActor(laser1);
+                        lasers.add(laser1);
+                        break;
+                    case 2:
+                        Laser laser2 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 45);
+                        Laser laser3 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), -45);
+                        addActor(laser2);
+                        addActor(laser3);
+                        lasers.add(laser2);
+                        lasers.add(laser3);
+                        break;
 
                     default:
-                    Laser laser4 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 0);
-                    Laser laser5 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), -20);
-                    Laser laser6 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 20);
-                    addActor(laser4);
-                    addActor(laser5);
-                    addActor(laser6);
-                    lasers.add(laser4);
-                    lasers.add(laser5);
-                    lasers.add(laser6);
-                    break;
+                        Laser laser4 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 0);
+                        Laser laser5 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), -20);
+                        Laser laser6 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 20);
+                        addActor(laser4);
+                        addActor(laser5);
+                        addActor(laser6);
+                        lasers.add(laser4);
+                        lasers.add(laser5);
+                        lasers.add(laser6);
+                        break;
+                }
+
+                lastshot = 0;
             }
 
-            lastshot = 0;
-        }
+            ControlStage.setPoints(points);
 
-        ControlStage.setPoints(points);
+            moveBackgrounds();
 
-        moveBackgrounds();
-
-        if(points == 100*weapon) {
-            flyout = true;
-
-        }
-
-        if (flyout) {
-            white.setPosition(getCameraMoveToX() - Globals.WORLD_WIDTH / 2, getCameraMoveToY() - Globals.WORLD_HEIGHT / 2);
-            white.setColor(255, 255, 255, whiteTimer += 0.008f);
-            if(!ship.isInFrustum(4)) {
-                nextStage();
+            if (points == 100 * weapon) {
+                flyout = true;
 
             }
-            for(Background bg : backgroundActors) bg.setMoving(false);
-            for(Background bg : foregroundActors) bg.setMoving(false);
+
+            if (flyout) {
+                white.setPosition(getCameraMoveToX() - Globals.WORLD_WIDTH / 2, getCameraMoveToY() - Globals.WORLD_HEIGHT / 2);
+                white.setColor(255, 255, 255, whiteTimer += 0.008f);
+                if (!ship.isInFrustum(4)) {
+                    nextStage();
+
+                }
+                for (Background bg : backgroundActors) bg.setMoving(false);
+                for (Background bg : foregroundActors) bg.setMoving(false);
+            }
+            if (gameover != null) {
+                gameover.setPosition(
+                        getCameraMoveToX() - gameover.getWidth() / 2,
+                        getCameraMoveToY() - gameover.getHeight() / 2
+                );
+            }
         }
-        if (gameover != null) {
-            gameover.setPosition(
-                    getCameraMoveToX() - gameover.getWidth() / 2,
-                    getCameraMoveToY() - gameover.getHeight() / 2
-            );
-        }
+        if(points < 0)
+            gameover();
     }
 
     void moveBackgrounds() {
@@ -298,6 +300,8 @@ flyout=true;
     }
 
     public void gameover() {
+        if(flyout | !isAlive)
+            return;
         ship.setVisible(false);
         isAlive = false;
         gameover = new OneSpriteStaticActor(Assets.manager.get(Assets.GAMEOVER_TEXTURE));
