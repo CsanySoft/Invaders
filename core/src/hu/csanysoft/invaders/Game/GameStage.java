@@ -170,7 +170,7 @@ this.weapon = weapon;
                                 addActor(m1); addActor(m2); addActor(m3); addActor(m4);
                             }
                                 Explosion ex = new Explosion();
-                                ex.setPosition(enemy.getX()-enemy.getOriginX(), enemy.getY()-enemy.getOriginY());
+                                ex.setPosition(enemy.getX()+enemy.getWidth()/2-ex.getWidth()/2, enemy.getY()+enemy.getHeight()/2-ex.getHeight()/2);
                                 addActor(ex);
                                 getActors().removeValue(enemy, true);
                                 getActors().removeValue(laser, true);
