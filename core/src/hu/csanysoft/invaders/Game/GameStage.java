@@ -1,9 +1,11 @@
 package hu.csanysoft.invaders.Game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -13,6 +15,7 @@ import java.util.Random;
 
 import hu.csanysoft.invaders.Actors.Background;
 import hu.csanysoft.invaders.Actors.Enemy;
+import hu.csanysoft.invaders.Actors.Explosion;
 import hu.csanysoft.invaders.Actors.Ghost;
 import hu.csanysoft.invaders.Actors.Laser;
 import hu.csanysoft.invaders.Actors.Meteorite;
@@ -28,7 +31,6 @@ public class GameStage extends MyStage {
 
 
     final float shoottimer = .5f;
-    public ArrayList<Laser> lasers = new ArrayList<Laser>();
     public Ship ship;
     public int points = 0;
     public boolean isShooting = false;
@@ -74,7 +76,6 @@ public class GameStage extends MyStage {
 
 
 this.weapon = weapon;
-
         ship = new Ship(texture);
         addActor(ship);
         ship.setPosition(getWidth() / 2 - ship.getWidth() / 2, ship.getHeight() * .5f);
@@ -148,15 +149,17 @@ this.weapon = weapon;
                             points -= 10;
                         getActors().removeValue(enemy, true);
                     }
-                    for (Laser laser : lasers) {
-                        if (laser != null && enemy != null) {
-
+                    for (Actor b : getActors().toArray()) {
+                        if (b instanceof  Laser) {
+                            Laser  laser = (Laser)b;
                             if (flyout) {
                                 if (whiteTimer > 1)
                                     whiteTimer = 1;
-                                enemy.getSprite("alap").setColor(enemy.getSprite("alap").getColor().r, enemy.getSprite("alap").getColor().g, enemy.getSprite("alap").getColor().b, 1 - whiteTimer);
-                                enemy.getSprite("szem").setColor(enemy.getSprite("szem").getColor().r, enemy.getSprite("szem").getColor().g, enemy.getSprite("szem").getColor().b, 1 - whiteTimer);
-                                laser.getSprite().setColor(laser.getSprite().getColor().r, laser.getSprite().getColor().g, laser.getSprite().getColor().b, 1 - whiteTimer);
+                                if(enemy instanceof  Ghost) {
+                                    enemy.getSprite("alap").setColor(enemy.getSprite("alap").getColor().r, enemy.getSprite("alap").getColor().g, enemy.getSprite("alap").getColor().b, 1 - whiteTimer);
+                                    enemy.getSprite("szem").setColor(enemy.getSprite("szem").getColor().r, enemy.getSprite("szem").getColor().g, enemy.getSprite("szem").getColor().b, 1 - whiteTimer);
+                                    laser.getSprite().setColor(laser.getSprite().getColor().r, laser.getSprite().getColor().g, laser.getSprite().getColor().b, 1 - whiteTimer);
+                                }
                             }
 
                             if (laser.overlaps(enemy) && laser.isFel() && laser.isVisible() && enemy.isVisible()) {
@@ -167,14 +170,15 @@ this.weapon = weapon;
                                 willBeAdded.add(m1); willBeAdded.add(m2); willBeAdded.add(m3); willBeAdded.add(m4);
                                 addActor(m1); addActor(m2); addActor(m3); addActor(m4);
                             }*/
+                                Explosion ex = new Explosion();
+                                ex.setPosition(enemy.getX()-enemy.getOriginX(), enemy.getY()-enemy.getOriginY());
+                                addActor(ex);
                                 getActors().removeValue(enemy, true);
                                 getActors().removeValue(laser, true);
                                 enemy.remove();
                                 laser.remove();
                                 enemy.setVisible(false);
                                 laser.setVisible(false);
-                                enemy = null;
-                                laser = null;
                                 points += 10;
 
                             } else if (!laser.isFel() && laser.overlaps(ship) && isAlive && !flyout) {
@@ -183,7 +187,8 @@ this.weapon = weapon;
                         }
                 }
             }
-            for (Laser laser : lasers) {
+            else if (a instanceof  Laser) {
+               Laser laser = (Laser)a;
                 if (laser != null) {
                     if (laser.isFel() && laser.getY() > getCameraMoveToY() + Globals.WORLD_HEIGHT / 2) {
                         getActors().removeValue(laser, true);
@@ -196,20 +201,16 @@ this.weapon = weapon;
             }
 
             if (lastshot > shoottimer && isShooting && isAlive) {
-
                 switch (weapon) {
                     case 1:
                         Laser laser1 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 0);
                         addActor(laser1);
-                        lasers.add(laser1);
                         break;
                     case 2:
                         Laser laser2 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 45);
                         Laser laser3 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), -45);
                         addActor(laser2);
                         addActor(laser3);
-                        lasers.add(laser2);
-                        lasers.add(laser3);
                         break;
 
                     default:
@@ -219,9 +220,6 @@ this.weapon = weapon;
                         addActor(laser4);
                         addActor(laser5);
                         addActor(laser6);
-                        lasers.add(laser4);
-                        lasers.add(laser5);
-                        lasers.add(laser6);
                         break;
                 }
 
@@ -234,7 +232,6 @@ this.weapon = weapon;
 
             if (points == 100 * weapon) {
                 flyout = true;
-
             }
 
             if (flyout) {
@@ -242,7 +239,6 @@ this.weapon = weapon;
                 white.setColor(255, 255, 255, whiteTimer += 0.008f);
                 if (!ship.isInFrustum(4)) {
                     nextStage();
-
                 }
                 for (Background bg : backgroundActors) bg.setMoving(false);
                 for (Background bg : foregroundActors) bg.setMoving(false);
@@ -256,6 +252,7 @@ this.weapon = weapon;
         }
         if(points < 0)
             gameover();
+        isShooting = Gdx.input.isKeyPressed(Input.Keys.SPACE);
     }
 
     void moveBackgrounds() {
@@ -284,12 +281,9 @@ this.weapon = weapon;
     @Override
     public boolean keyDown(int keyCode) {
         if (keyCode == Input.Keys.X) {
-flyout=true;
-        } else if (keyCode == Input.Keys.U) {
-            if (weapon < 4 && points >= -5000) {
-                weapon++;
-                points -= 100;
-            }
+            flyout=true;
+        } else if (keyCode == Input.Keys.U && weapon < 4) {
+            weapon++;
         }
         return super.keyDown(keyCode);
     }

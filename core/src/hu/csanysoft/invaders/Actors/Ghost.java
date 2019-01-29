@@ -22,7 +22,6 @@ public class Ghost extends Enemy {
             Laser laser = new Laser(getX()+getWidth()/2, getY()-getHeight(), 180);
             getStage().addActor(laser);
             GameStage gameStage = (GameStage) getStage();
-            gameStage.lasers.add(laser);
             elapsedTime=0;
         }
 
