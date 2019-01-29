@@ -24,6 +24,7 @@ import hu.csanysoft.invaders.Actors.SubMeteorite;
 import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.Invaders;
+import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyActor;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyStage;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
@@ -141,7 +142,7 @@ this.weapon = weapon;
         for (Actor a : getActors()) {
             if (a instanceof Enemy) {
                 Enemy enemy = (Enemy) a;
-                    if (enemy.overlaps(ship) && isAlive) {
+                    if (enemy.overlaps(ship) && isAlive && enemy.isVisible()) {
                         gameover();
                     }
                     if (enemy.getY() + enemy.getHeight() < getCameraMoveToY() - Globals.WORLD_HEIGHT / 2) {
@@ -163,19 +164,17 @@ this.weapon = weapon;
                             }
 
                             if (laser.overlaps(enemy) && laser.isFel() && laser.isVisible() && enemy.isVisible()) {
-                            if(enemy instanceof Meteorite && ! (enemy instanceof SubMeteorite)){
-                                System.out.println("SÜTI");
-                                SubMeteorite m1 = new SubMeteorite(enemy.getX(), enemy.getY(), 1); SubMeteorite m2 = new SubMeteorite(enemy.getX(), enemy.getY(), 2);
-                                SubMeteorite m3 = new SubMeteorite(enemy.getX(), enemy.getY(), 3); SubMeteorite m4 = new SubMeteorite(enemy.getX(), enemy.getY(), 4);
-                                addActor(m1); addActor(m2); addActor(m3); addActor(m4);
-                            }
-                                Explosion ex = new Explosion();
-                                ex.setPosition(enemy.getX()+enemy.getWidth()/2-ex.getWidth()/2, enemy.getY()+enemy.getHeight()/2-ex.getHeight()/2);
-                                addActor(ex);
-                                getActors().removeValue(enemy, true);
-                                getActors().removeValue(laser, true);
+                                if(enemy instanceof Meteorite && ! (enemy instanceof SubMeteorite)){
+                                    System.out.println("SÜTI");
+                                    SubMeteorite m1 = new SubMeteorite(enemy.getX(), enemy.getY(), 1); SubMeteorite m2 = new SubMeteorite(enemy.getX(), enemy.getY(), 2);
+                                    SubMeteorite m3 = new SubMeteorite(enemy.getX(), enemy.getY(), 3); SubMeteorite m4 = new SubMeteorite(enemy.getX(), enemy.getY(), 4);
+                                    addActor(m1); addActor(m2); addActor(m3); addActor(m4);
+                                }
+                                explode(enemy);
                                 enemy.remove();
                                 laser.remove();
+                                getActors().removeValue(enemy, true);
+                                getActors().removeValue(laser, true);
                                 enemy.setVisible(false);
                                 laser.setVisible(false);
                                 points += 10;
@@ -300,5 +299,11 @@ this.weapon = weapon;
         gameover = new OneSpriteStaticActor(Assets.manager.get(Assets.GAMEOVER_TEXTURE));
         gameover.setSize(gameover.getWidth() / 3.6f, gameover.getHeight() / 3.6f);
         addActor(gameover);
+    }
+
+    public void explode(MyActor actor){
+        Explosion ex = new Explosion();
+        ex.setPosition(actor.getX()+actor.getWidth()/2-ex.getWidth()/2, actor.getY()+actor.getHeight()/2-ex.getHeight()/2);
+        addActor(ex);
     }
 }
