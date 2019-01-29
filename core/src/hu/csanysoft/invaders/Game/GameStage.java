@@ -163,13 +163,12 @@ this.weapon = weapon;
                             }
 
                             if (laser.overlaps(enemy) && laser.isFel() && laser.isVisible() && enemy.isVisible()) {
-                            /*if(enemy instanceof Meteorite){
+                            if(enemy instanceof Meteorite && ! (enemy instanceof SubMeteorite)){
                                 System.out.println("SÜTI");
                                 SubMeteorite m1 = new SubMeteorite(enemy.getX(), enemy.getY(), 1); SubMeteorite m2 = new SubMeteorite(enemy.getX(), enemy.getY(), 2);
                                 SubMeteorite m3 = new SubMeteorite(enemy.getX(), enemy.getY(), 3); SubMeteorite m4 = new SubMeteorite(enemy.getX(), enemy.getY(), 4);
-                                willBeAdded.add(m1); willBeAdded.add(m2); willBeAdded.add(m3); willBeAdded.add(m4);
                                 addActor(m1); addActor(m2); addActor(m3); addActor(m4);
-                            }*/
+                            }
                                 Explosion ex = new Explosion();
                                 ex.setPosition(enemy.getX()-enemy.getOriginX(), enemy.getY()-enemy.getOriginY());
                                 addActor(ex);
