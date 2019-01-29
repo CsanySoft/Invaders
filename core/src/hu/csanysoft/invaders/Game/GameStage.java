@@ -145,7 +145,7 @@ this.weapon = weapon;
                         gameover();
                     }
                     if (enemy.getY() + enemy.getHeight() < getCameraMoveToY() - Globals.WORLD_HEIGHT / 2) {
-                        if(enemy.isVisible())
+                        if(enemy.isVisible() & !(enemy instanceof  SubMeteorite))
                             points -= 10;
                         getActors().removeValue(enemy, true);
                     }
@@ -294,6 +294,7 @@ this.weapon = weapon;
         if(flyout | !isAlive)
             return;
         ship.setVisible(false);
+        explode(ship);
         isAlive = false;
         gameover = new OneSpriteStaticActor(Assets.manager.get(Assets.GAMEOVER_TEXTURE));
         gameover.setSize(gameover.getWidth() / 3.6f, gameover.getHeight() / 3.6f);
