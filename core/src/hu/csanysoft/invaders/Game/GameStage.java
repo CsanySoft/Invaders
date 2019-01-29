@@ -73,6 +73,7 @@ public class GameStage extends MyStage {
             x.setSize(x.getWidth()*(rand.nextFloat()/2+1),x.getHeight());
             x.setPosition(-rand.nextInt((int)x.getWidth() - Globals.WORLD_WIDTH), Globals.WORLD_HEIGHT * i);
             x.setSpeed(0);
+            x.getSprite().flip(false, true);
         }
 
 
@@ -169,6 +170,9 @@ this.weapon = weapon;
                                     SubMeteorite m3 = new SubMeteorite(enemy.getX(), enemy.getY(), 3); SubMeteorite m4 = new SubMeteorite(enemy.getX(), enemy.getY(), 4);
                                     addActor(m1); addActor(m2); addActor(m3); addActor(m4);
                                 }
+                                if(enemy instanceof SubMeteorite){
+                                    points += 5;
+                                }else points += 10;
                                 explode(enemy);
                                 enemy.remove();
                                 laser.remove();
@@ -176,7 +180,7 @@ this.weapon = weapon;
                                 getActors().removeValue(laser, true);
                                 enemy.setVisible(false);
                                 laser.setVisible(false);
-                                points += 10;
+
 
                             } else if (!laser.isFel() && laser.overlaps(ship) && isAlive && !flyout) {
                                 gameover();
