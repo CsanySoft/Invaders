@@ -38,8 +38,7 @@ public class Assets {
 
     public static final AssetDescriptor<Texture> SPACE_TEXTURE
             = new AssetDescriptor<Texture>("stars.png", Texture.class);
-
-    public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
+public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
             = new AssetDescriptor<Texture>("ghost_alap.png", Texture.class);
 
     public static final AssetDescriptor<Texture> GHOST_SZEM_TEXTURE
@@ -81,6 +80,9 @@ public class Assets {
     public static final AssetDescriptor<Texture> TUTORIAL_TEXTURE
             = new AssetDescriptor<Texture>("tutorial.png", Texture.class);
 
+    public static final AssetDescriptor<TextureAtlas> EXPLOSION_TEXTURE
+            = new AssetDescriptor<TextureAtlas>("animations/explosion.atlas", TextureAtlas.class);
+
 
     public static void prepare() {
         manager = new AssetManager();
@@ -110,6 +112,7 @@ public class Assets {
         manager.load(SOUND_LASER);
         manager.load(TUTORIAL_TEXTURE);
         manager.load(MUSIC_BACKGROUND);
+        manager.load(EXPLOSION_TEXTURE);
     }
 
     public static void afterLoaded() {
