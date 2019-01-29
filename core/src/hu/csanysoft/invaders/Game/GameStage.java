@@ -133,8 +133,8 @@ this.weapon = weapon;
 
         if (speed < 5) {
             speed += delta / 10;
-            for (Background bg : backgroundActors) bg.setSpeed(-2 * (speed - 2));
-            for (Background bg : foregroundActors) bg.setSpeed(-3 * (speed - 2));
+            for (Background bg : backgroundActors) bg.setSpeed(-1 * (speed - 2));
+            for (Background bg : foregroundActors) bg.setSpeed(-2 * (speed - 2));
         }
 
         ship.setSpeed(speed);
