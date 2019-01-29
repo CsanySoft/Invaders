@@ -116,8 +116,7 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
     }
 
     public static void afterLoaded() {
-        //Assets.manager.get(Assets.MAIN_MUSIC).setLooping(true);
-        //Assets.manager.get(Assets.MAIN_MUSIC).play();
+
     }
     public static void unload() {
         manager.dispose();

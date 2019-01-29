@@ -61,17 +61,17 @@ public class GameStage extends MyStage {
             Background x =  new Background();
             backgroundActors[i] = x;
             addActor(x);
-            x.setPosition(0, Globals.WORLD_HEIGHT * i);
-            x.setSpeed(speed / 2);
-            x.setSize(x.getWidth()*(rand.nextFloat()/4+1),x.getHeight());
+            x.setSize(x.getWidth()*(rand.nextFloat()/2+1),x.getHeight());
+            x.setPosition(-rand.nextInt((int)x.getWidth() - Globals.WORLD_WIDTH), Globals.WORLD_HEIGHT * i);
+            x.setSpeed(0);
         }
         for (int i = 0; i < 3; i++) {
             Background x =  new Background();
             foregroundActors[i] = x;
             addActor(x);
-            x.setPosition(0, Globals.WORLD_HEIGHT * i);
-            x.setSpeed(speed / 4);
-            x.setSize(x.getWidth()*(rand.nextFloat()/4+1),x.getHeight());
+            x.setSize(x.getWidth()*(rand.nextFloat()/2+1),x.getHeight());
+            x.setPosition(-rand.nextInt((int)x.getWidth() - Globals.WORLD_WIDTH), Globals.WORLD_HEIGHT * i);
+            x.setSpeed(0);
         }
 
 
@@ -103,8 +103,6 @@ this.weapon = weapon;
                 getViewport().setScreenPosition(getViewport().getScreenX(), getViewport().getScreenY() + 1);
                 if(!shipAt500){
                     shipAt500 = true;
-                    for(Background bg : backgroundActors) bg.setMoving(true);
-                    for(Background bg : foregroundActors) bg.setMoving(true);
                 }
             } else {
                 setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + 500 - ship.getHeight() * .5f);
@@ -115,6 +113,7 @@ this.weapon = weapon;
             flytimer += delta;
             ship.setMultiplier(flytimer * 3);
         }
+
 
         szamolo = elapsedTime * szorzo;
         if (szamolo > 4.6f) szamolo = 4.6f;
@@ -133,8 +132,8 @@ this.weapon = weapon;
 
         if (speed < 5) {
             speed += delta / 10;
-            for (Background bg : backgroundActors) bg.setSpeed(speed / 2);
-            for (Background bg : foregroundActors) bg.setSpeed(speed / 4);
+            for (Background bg : backgroundActors) bg.setSpeed(-2 * (speed - 2));
+            for (Background bg : foregroundActors) bg.setSpeed(-3 * (speed - 2));
         }
 
         ship.setSpeed(speed);

@@ -7,7 +7,7 @@ import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class Background extends OneSpriteStaticActor {
 
     float speed = 2;
-    boolean moving = false;
+    boolean moving = true;
 
     public Background() {
         super(Assets.manager.get(Assets.SPACE_TEXTURE));
