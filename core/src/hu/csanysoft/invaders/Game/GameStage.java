@@ -204,8 +204,8 @@ this.weapon = weapon;
                         addActor(laser1);
                         break;
                     case 2:
-                        Laser laser2 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 45);
-                        Laser laser3 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), -45);
+                        Laser laser2 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 15);
+                        Laser laser3 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), -15);
                         addActor(laser2);
                         addActor(laser3);
                         break;
