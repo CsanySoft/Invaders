@@ -5,6 +5,8 @@ import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
 public class Explosion extends OneSpriteAnimatedActor {
     public Explosion() {
         super(Assets.manager.get(Assets.EXPLOSION_TEXTURE));
+        long f = Assets.manager.get(Assets.SOUND_BOOM).play();
+        Assets.manager.get(Assets.SOUND_BOOM).setVolume(f, 0.2f);
         setFps(20);
         setSize(getWidth()*2.5f, getHeight()*2.5f);
     }

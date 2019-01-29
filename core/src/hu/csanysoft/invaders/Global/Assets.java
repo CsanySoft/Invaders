@@ -74,6 +74,9 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
     public static final AssetDescriptor<Sound> SOUND_LASER
             = new AssetDescriptor<Sound>("sound/laser.wav", Sound.class);
 
+    public static final AssetDescriptor<Sound> SOUND_BOOM
+            = new AssetDescriptor<Sound>("sound/boom.mp3", Sound.class);
+
     public static final AssetDescriptor<Music>  MUSIC_BACKGROUND
             = new AssetDescriptor<Music>("sound/popcorn.mp3", Music.class);
 
@@ -113,6 +116,7 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
         manager.load(TUTORIAL_TEXTURE);
         manager.load(MUSIC_BACKGROUND);
         manager.load(EXPLOSION_TEXTURE);
+        manager.load(SOUND_BOOM);
     }
 
     public static void afterLoaded() {
