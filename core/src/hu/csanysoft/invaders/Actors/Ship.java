@@ -61,6 +61,5 @@ public class Ship extends MultiSpriteActor {
             if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) moveBy(5,0);
             if(Gdx.input.getAccelerometerX() < 0.5f) moveBy((int)(-2 * Math.rint(Gdx.input.getAccelerometerX())), 0);
         }
-
     }
 }

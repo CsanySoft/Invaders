@@ -32,7 +32,7 @@ public class Laser extends OneSpriteStaticActor {
     public void act(float delta) {
         super.act(delta);
         if(fel)moveBy(0, 20);
-        else moveBy(0,-2);
+        else moveBy(0,-5);
         if(jobb) moveBy(angle/2,0);
         if(bal) moveBy(angle/2,0);
     }

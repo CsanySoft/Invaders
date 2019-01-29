@@ -83,6 +83,12 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
     public static final AssetDescriptor<Texture> TUTORIAL_TEXTURE
             = new AssetDescriptor<Texture>("tutorial.png", Texture.class);
 
+    public static final AssetDescriptor<Texture> DOUBLE_TEXTURE
+            = new AssetDescriptor<Texture>("double.png", Texture.class);
+
+    public static final AssetDescriptor<Texture> TRIPLE_TEXTURE
+            = new AssetDescriptor<Texture>("triple.png", Texture.class);
+
     public static final AssetDescriptor<TextureAtlas> EXPLOSION_TEXTURE
             = new AssetDescriptor<TextureAtlas>("animations/explosion.atlas", TextureAtlas.class);
 
@@ -117,6 +123,8 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
         manager.load(MUSIC_BACKGROUND);
         manager.load(EXPLOSION_TEXTURE);
         manager.load(SOUND_BOOM);
+        manager.load(DOUBLE_TEXTURE);
+        manager.load(TRIPLE_TEXTURE);
     }
 
     public static void afterLoaded() {

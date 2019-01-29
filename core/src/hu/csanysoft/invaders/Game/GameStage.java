@@ -19,6 +19,7 @@ import hu.csanysoft.invaders.Actors.Explosion;
 import hu.csanysoft.invaders.Actors.Ghost;
 import hu.csanysoft.invaders.Actors.Laser;
 import hu.csanysoft.invaders.Actors.Meteorite;
+import hu.csanysoft.invaders.Actors.Popup;
 import hu.csanysoft.invaders.Actors.Ship;
 import hu.csanysoft.invaders.Actors.SubMeteorite;
 import hu.csanysoft.invaders.Global.Assets;
@@ -48,9 +49,11 @@ public class GameStage extends MyStage {
     OneSpriteStaticActor gameover;
     Random rand = new Random();
     Image white;
+    Popup popup;
     float whiteTimer = 0;
     short weapon = 1;
     boolean shipAt500 = false;
+    int killsSinceLastShot = 0;
 
 
 
@@ -64,6 +67,18 @@ public class GameStage extends MyStage {
             addActor(x);
             x.setSize(x.getWidth()*(rand.nextFloat()/2+1),x.getHeight());
             x.setPosition(-rand.nextInt((int)x.getWidth() - Globals.WORLD_WIDTH), Globals.WORLD_HEIGHT * i);
+            /*TODO: Ezt még nem dobta: tessék Bence, mára abbahagyom
+            Exception in thread "LWJGL Application" java.lang.IllegalArgumentException: bound must be positive
+                at java.util.Random.nextInt(Random.java:388)
+                at hu.csanysoft.invaders.Game.GameStage.<init>(GameStage.java:69)
+                at hu.csanysoft.invaders.Game.GameScreen.<init>(GameScreen.java:30)
+                at hu.csanysoft.invaders.Game.GameStage.nextStage(GameStage.java:298)
+                at hu.csanysoft.invaders.Game.GameStage.act(GameStage.java:262)
+                at hu.csanysoft.invaders.Game.GameScreen.render(GameScreen.java:52)
+                at com.badlogic.gdx.Game.render(Game.java:46)
+                at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(LwjglApplication.java:225)
+                at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(LwjglApplication.java:126)
+                    */
             x.setSpeed(0);
         }
         for (int i = 0; i < 3; i++) {
@@ -163,6 +178,27 @@ this.weapon = weapon;
                             }
 
                             if (laser.overlaps(enemy) && laser.isFel() && laser.isVisible() && enemy.isVisible()) {
+                                System.out.println(killsSinceLastShot);
+                                switch (++killsSinceLastShot){
+                                    case 2:
+                                        points += 10;
+                                        popup = new Popup(Assets.manager.get(Assets.DOUBLE_TEXTURE));
+                                        addActor(popup);
+                                        popup.setPosition(
+                                                getCameraMoveToX() - popup.getWidth() / 2,
+                                                getCameraMoveToY() - popup.getHeight() / 2
+                                        );
+                                         break;
+                                    case 3:
+                                        points += 20;
+                                        popup = new Popup(Assets.manager.get(Assets.DOUBLE_TEXTURE));
+                                        addActor(popup);
+                                        popup.setPosition(
+                                                getCameraMoveToX() - popup.getWidth() / 2,
+                                                getCameraMoveToY() - popup.getHeight() / 2
+                                        );
+                                        break;
+                                }
                                 if(enemy instanceof Meteorite && ! (enemy instanceof SubMeteorite)){
                                     System.out.println("SÜTI");
                                     SubMeteorite m1 = new SubMeteorite(enemy.getX(), enemy.getY(), 1); SubMeteorite m2 = new SubMeteorite(enemy.getX(), enemy.getY(), 2);
