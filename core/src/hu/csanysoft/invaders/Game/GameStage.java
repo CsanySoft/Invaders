@@ -303,6 +303,8 @@ this.weapon = weapon;
 
     public void explode(MyActor actor){
         Explosion ex = new Explosion();
+        ex.setWidth(actor.getWidth()*1.2f);
+        ex.setHeight(actor.getHeight()*1.2f);
         ex.setPosition(actor.getX()+actor.getWidth()/2-ex.getWidth()/2, actor.getY()+actor.getHeight()/2-ex.getHeight()/2);
         addActor(ex);
     }
