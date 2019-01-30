@@ -12,7 +12,7 @@ public class Explosion extends OneSpriteAnimatedActor {
         long f = Assets.manager.get(Assets.SOUND_BOOM).play();
         Assets.manager.get(Assets.SOUND_BOOM).setVolume(f, 0.2f);
         setFps(45);
-        setOrigintoCenter();
+        //setOrigintoCenter();
         setRotation(random(0,360));
     }
 
