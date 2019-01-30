@@ -24,7 +24,7 @@ public class Ghost extends Enemy {
             GameStage gameStage = (GameStage) getStage();
             elapsedTime=0;
         }
-
+        getCollisionShape("BaseRectangle").setX(getSprite("alap").getX());
         getSprite("alap").setX((float)(x + Math.sin(moveTime*5) * 30));
         getSprite("szem").setX((float)(x+12.8 + Math.sin((moveTime-.05f)*5) * 30));
     }
