@@ -271,11 +271,11 @@ this.weapon = weapon;
         if(points < 0)
             gameover();
 
-        if(elapsedTime % 10 > -0.1 && elapsedTime % 10 < 0.1){
+        if(elapsedTime % 10 > -0.02 && elapsedTime % 10 < 0.02){
             if(random(1,5) == 1){
                 Decoration deco = new Decoration(0,0);
                 deco.setPosition(random(0, (int)(Globals.WORLD_WIDTH-deco.getWidth())), (int)getCameraMoveToY()+Globals.WORLD_HEIGHT+400);
-                addActor();
+                addActor(deco);
             }
         }
     }
