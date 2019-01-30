@@ -1,17 +1,13 @@
 package hu.csanysoft.invaders.Game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
-import java.security.Key;
-import java.util.ArrayList;
 import java.util.Random;
 
 import hu.csanysoft.invaders.Actors.Background;
@@ -22,7 +18,6 @@ import hu.csanysoft.invaders.Actors.Explosion;
 import hu.csanysoft.invaders.Actors.Ghost;
 import hu.csanysoft.invaders.Actors.Laser;
 import hu.csanysoft.invaders.Actors.Meteorite;
-import hu.csanysoft.invaders.Actors.PointPopup;
 import hu.csanysoft.invaders.Actors.Popup;
 import hu.csanysoft.invaders.Actors.Ship;
 import hu.csanysoft.invaders.Actors.SubMeteorite;
@@ -31,7 +26,6 @@ import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.Invaders;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyActor;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyStage;
-import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 import static hu.csanysoft.invaders.Global.Globals.random;
 
@@ -56,7 +50,6 @@ public class GameStage extends MyStage {
     Background foregroundActors[];
     Random rand = new Random();
     Image white;
-    Popup popup;
     float whiteTimer = 0;
     public short weapon = 1;
     boolean shipAt500 = false;
@@ -158,7 +151,7 @@ this.weapon = weapon;
                     if (enemy.getY() + enemy.getHeight() < getCameraMoveToY() - Globals.WORLD_HEIGHT / 2) {
                         if(enemy.isVisible() & !(enemy instanceof  SubMeteorite)) {
                             points -= 10;
-                            addActor(new PointPopup(-10, (int)enemy.getX(), (int)getCameraMoveToY()-Globals.WORLD_HEIGHT/2+60));
+                            addActor(new Popup(-10, (int)enemy.getX(), (int)getCameraMoveToY()-Globals.WORLD_HEIGHT/2+60));
                         }
                         getActors().removeValue(enemy, true);
                     }
@@ -179,14 +172,11 @@ this.weapon = weapon;
 
                             if (laser.overlaps(enemy) && laser.isFel() && laser.isVisible() && enemy.isVisible()) {
                                 System.out.println(killsSinceLastShot);
-                                if (++killsSinceLastShot > 2) {
+                                if (++killsSinceLastShot == 2) {
+                                    killsSinceLastShot=0;
                                     points += 10;
-                                    popup = new Popup(Assets.manager.get(Assets.DOUBLE_TEXTURE));
-                                    addActor(popup);
-                                    popup.setPosition(
-                                            getCameraMoveToX() - popup.getWidth() / 2,
-                                            getCameraMoveToY() - popup.getHeight() / 2
-                                    );
+                                    addActor(new Popup("Double kill!",(int)laser.getX(), (int)laser.getY()));
+                                    addActor(new Popup(10,(int)laser.getX(), (int)laser.getY()-30));
                                 }
                                 if(enemy instanceof Meteorite && ! (enemy instanceof SubMeteorite)){
                                     System.out.println("SÜTI");
@@ -196,7 +186,7 @@ this.weapon = weapon;
                                 }
                                 if(enemy instanceof SubMeteorite){
                                     points += 5;
-                                    addActor(new PointPopup(5, (int)enemy.getX(), (int)enemy.getY()));
+                                    addActor(new Popup(5, (int)enemy.getX(), (int)enemy.getY()));
                                 }else if (enemy instanceof Boss){
                                     ((Boss) enemy).getShot();
                                     if(((Boss) enemy).getHealth() == 0) {
@@ -208,7 +198,7 @@ this.weapon = weapon;
                                     }
                                 } else{
                                     points += 10;
-                                    addActor(new PointPopup(10, (int)enemy.getX(), (int)enemy.getY()));
+                                    addActor(new Popup(10, (int)enemy.getX(), (int)enemy.getY()));
                                 }
                                if(!boss) {
                                    explode(enemy);
