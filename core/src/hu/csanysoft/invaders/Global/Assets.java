@@ -14,6 +14,8 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 
+import static hu.csanysoft.invaders.Global.Globals.random;
+
 public class Assets {
     public static AssetManager manager;
 
@@ -132,5 +134,16 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
     }
     public static void unload() {
         manager.dispose();
+    }
+
+
+
+
+    public static AssetDescriptor<Texture> getRandomDecoration(){
+        switch(random(1,2)){
+            case 1: return GAMEOVER_TEXTURE;
+            case 2: return DOUBLE_TEXTURE;
+        }
+        return EMPTY_TEXTURE;
     }
 }
