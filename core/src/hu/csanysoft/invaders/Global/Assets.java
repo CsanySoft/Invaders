@@ -156,9 +156,11 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
 
 
     public static AssetDescriptor<Texture> getRandomDecoration(){
-        switch(random(1,2)){
-            case 1: return GAMEOVER_TEXTURE;
-            case 2: return DOUBLE_TEXTURE;
+        switch(random(1,4)){
+            case 1: return SATURN_TEXTURE;
+            case 2: return VENUS_TEXTURE;
+            case 3: return JUPITER_TEXTURE;
+            case 4: return TESLA_TEXTURE;
         }
         return EMPTY_TEXTURE;
     }
