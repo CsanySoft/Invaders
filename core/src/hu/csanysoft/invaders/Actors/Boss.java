@@ -66,6 +66,7 @@ public class Boss extends Enemy {
                 switchWeapon();
             }
         }
+
         getSprite("alap").setX((float)(x + Math.sin(moveTime*5) * 90));
         getSprite("szem").setX((float)(x+38.4 + Math.sin((moveTime-.05f)*5) * 90));
         GameStage gameStage = (GameStage) getStage();
