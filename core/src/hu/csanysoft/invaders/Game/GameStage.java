@@ -202,7 +202,10 @@ this.weapon = weapon;
                                         getActors().removeValue(enemy, true);
                                         enemy.setVisible(false);
                                     }
-                                } else points += 10;
+                                } else{
+                                    points += 10;
+                                    addActor(new PointPopup(10, (int)enemy.getX(), (int)enemy.getY()));
+                                }
                                if(!boss) {
                                    explode(enemy);
                                    enemy.remove();
@@ -211,19 +214,6 @@ this.weapon = weapon;
                                }
                                 laser.remove();
                                 getActors().removeValue(laser, true);
-                                } else{
-                                    points += 10;
-                                    addActor(new PointPopup(10, (int)enemy.getX(), (int)enemy.getY()));
-                                }
-
-                                explode(enemy);
-                                enemy.remove();
-                                laser.remove();
-                                getActors().removeValue(enemy, true);
-                                getActors().removeValue(laser, true);
-                                enemy.setVisible(false);
-                                laser.setVisible(false);
-
 
                             } else if (!laser.isFel() && laser.overlaps(ship) && isAlive && !flyout) {
                                 gameover();
