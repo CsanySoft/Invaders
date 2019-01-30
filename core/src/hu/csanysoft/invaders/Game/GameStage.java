@@ -275,7 +275,7 @@ this.weapon = weapon;
 
             if (flyout) {
                 white.setPosition(getCameraMoveToX() - Globals.WORLD_WIDTH / 2, getCameraMoveToY() - Globals.WORLD_HEIGHT / 2);
-                white.setColor(255, 255, 255, whiteTimer += 0.008f);
+                white.setColor(255, 255, 255, whiteTimer += 0.0006f);
                 if (!ship.isInFrustum(4)) {
                     nextStage();
                 }
