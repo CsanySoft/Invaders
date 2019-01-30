@@ -80,7 +80,7 @@ public class GameStage extends MyStage {
         }
 
 
-this.weapon = weapon;
+        this.weapon = weapon;
         ship = new Ship(texture);
         addActor(ship);
         ship.setPosition(getWidth() / 2 - ship.getWidth() / 2, ship.getHeight() * .5f);
@@ -88,6 +88,7 @@ this.weapon = weapon;
         white.setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
         addActor(white);
         white.setColor(255, 255, 255, 0);
+        ControlStage.setLevelIndicator(weapon);
     }
 
     @Override
