@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import hu.csanysoft.invaders.Actors.Background;
+import hu.csanysoft.invaders.Actors.Boss;
 import hu.csanysoft.invaders.Actors.Enemy;
 import hu.csanysoft.invaders.Actors.Explosion;
 import hu.csanysoft.invaders.Actors.Ghost;
@@ -38,6 +39,8 @@ public class GameStage extends MyStage {
     public boolean isShooting = false;
     public boolean isAlive = true;
     public boolean flyout = false;
+    public boolean boss = false;
+    boolean vanBoss = false;
     float timer = 0;
     float szorzo = 0.03f;
     float szamolo = 0;
@@ -122,7 +125,7 @@ this.weapon = weapon;
 
         szamolo = elapsedTime * szorzo;
         if (szamolo > 4.6f) szamolo = 4.6f;
-        if (timer > 5 - szamolo && !flyout && isAlive) {
+        if (timer > 5 - szamolo && !flyout && isAlive && !boss) {
             timer = 0;
             if(rand.nextInt(10) > 3) {
                 Ghost enemy = new Ghost(new Random().nextInt(Globals.WORLD_WIDTH - 129) + new Random().nextFloat(), getCameraMoveToY() + Globals.WORLD_HEIGHT);
@@ -196,7 +199,12 @@ this.weapon = weapon;
                                 }
                                 if(enemy instanceof SubMeteorite){
                                     points += 5;
-                                }else points += 10;
+                                }else if (enemy instanceof Boss){
+                                    ((Boss) enemy).getShot();
+                                    if(((Boss) enemy).getHealth() == 0) {
+                                        flyout = true;
+                                    }
+                                } else points += 10;
                                 explode(enemy);
                                 enemy.remove();
                                 laser.remove();
@@ -256,7 +264,12 @@ this.weapon = weapon;
             moveBackgrounds();
 
             if (points >= 100 * weapon) {
-                flyout = true;
+                boss = true;
+                if(!vanBoss) {
+                    addActor(new Boss(0, getCameraMoveToY()+Globals.WORLD_HEIGHT/2));
+                    System.out.println("BOSS");
+                    vanBoss = true;
+                }
             }
 
             if (flyout) {
@@ -309,6 +322,8 @@ this.weapon = weapon;
             flyout=true;
         } else if (keyCode == Input.Keys.U && weapon < 4) {
             weapon++;
+        } else if(keyCode == Input.Keys.B) {
+            points = 100;
         }
         return super.keyDown(keyCode);
     }

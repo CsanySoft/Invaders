@@ -13,7 +13,7 @@ public class Laser extends OneSpriteStaticActor {
     public Laser(float x, float y, float angle) {
         super(Assets.manager.get(Assets.LASER_TEXTURE));
         setPosition(x, y);
-        this.fel = angle != 180;
+        this.fel = angle > -90 && angle < 90;
         addBaseCollisionRectangleShape();
         this.bal = angle < 0  && angle != 180;
         this.jobb = angle > 0 && angle != 180;
