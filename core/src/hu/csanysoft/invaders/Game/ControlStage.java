@@ -1,6 +1,7 @@
 package hu.csanysoft.invaders.Game;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -18,7 +19,7 @@ import hu.csanysoft.invaders.MyBaseClasses.UI.MyLabel;
 public class ControlStage extends MyStage {
 
     GameStage gameStage;
-    static MyLabel pointCounter;
+    static MyLabel pointCounter, levelLabel = new MyLabel("0", Invaders.getColorLabelStyle(Color.WHITE));
     public static OneSpriteStaticActor gameover;
 
     public ControlStage(Invaders game, GameStage gs) {
@@ -52,18 +53,21 @@ public class ControlStage extends MyStage {
                 });
             }
         });
-        addActor(pointCounter = new MyLabel("0", game.getLabelStyle()){
+        addActor(pointCounter = new MyLabel("0 pont", game.getColorLabelStyle(Color.WHITE)){
             @Override
             public void init() {
                 super.init();
                 setPosition(10, Globals.WORLD_HEIGHT-getHeight()-10);
             }
         });
+        addActor(levelLabel);
+        levelLabel.setPosition(10, Globals.WORLD_HEIGHT-90);
     }
 
     public static void setPoints(int points){
-        pointCounter.setText(points);
+        pointCounter.setText(points+" pont");
     }
+    public static void setLevelIndicator(int level){levelLabel.setText(level+". szint");}
 
     @Override
     public void act(float delta) {

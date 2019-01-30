@@ -80,7 +80,7 @@ public class GameStage extends MyStage {
         }
 
 
-this.weapon = weapon;
+        this.weapon = weapon;
         ship = new Ship(texture);
         addActor(ship);
         ship.setPosition(getWidth() / 2 - ship.getWidth() / 2, ship.getHeight() * .5f);
@@ -88,6 +88,7 @@ this.weapon = weapon;
         white.setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
         addActor(white);
         white.setColor(255, 255, 255, 0);
+        ControlStage.setLevelIndicator(weapon);
     }
 
     @Override
@@ -349,10 +350,13 @@ this.weapon = weapon;
 
     public void explode(MyActor actor){
         Explosion ex = new Explosion();
-        ex.setWidth(actor.getWidth()*3);
-        ex.setHeight(actor.getHeight()*3);
-        ex.setOrigintoCenter();
-        ex.setPosition(actor.getX()+actor.getWidth()/2, actor.getY()+actor.getHeight()/2);
+        //ex.setWidth(actor.getWidth()*3);
+        //ex.setHeight(actor.getHeight()*3);
+        //ex.setOrigintoCenter();
+        ex.setSize(actor.getWidth()*4, actor.getHeight()*4);
+        ex.setPosition(actor.getX()+actor.getWidth()/2-ex.getWidth()/2, actor.getY()+actor.getHeight()/2-ex.getWidth()/2);
+
+
         addActor(ex);
     }
     public void shoot(){
