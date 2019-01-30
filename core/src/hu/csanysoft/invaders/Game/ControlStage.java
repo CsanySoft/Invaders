@@ -1,7 +1,9 @@
 package hu.csanysoft.invaders.Game;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -33,15 +35,12 @@ public class ControlStage extends MyStage {
                 addListener(new ClickListener(){
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        gameStage.isShooting = true;
-                        gameStage.killsSinceLastShot = 0;
-                        if(!gameStage.isAlive)
-                            game.setScreenBackByStackPop();
+                        gameStage.shoot();
                         return super.touchDown(event, x, y, pointer, button);
                     }
                     @Override
                     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                        gameStage.isShooting = false;
+                        gameStage.unshoot();
                         super.touchUp(event, x, y, pointer, button);
                     }
                 });

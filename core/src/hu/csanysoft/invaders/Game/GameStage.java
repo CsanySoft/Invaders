@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -168,25 +169,14 @@ this.weapon = weapon;
 
                             if (laser.overlaps(enemy) && laser.isFel() && laser.isVisible() && enemy.isVisible()) {
                                 System.out.println(killsSinceLastShot);
-                                switch (++killsSinceLastShot){
-                                    case 2:
-                                        points += 10;
-                                        popup = new Popup(Assets.manager.get(Assets.DOUBLE_TEXTURE));
-                                        addActor(popup);
-                                        popup.setPosition(
-                                                getCameraMoveToX() - popup.getWidth() / 2,
-                                                getCameraMoveToY() - popup.getHeight() / 2
-                                        );
-                                         break;
-                                    case 3:
-                                        points += 20;
-                                        popup = new Popup(Assets.manager.get(Assets.DOUBLE_TEXTURE));
-                                        addActor(popup);
-                                        popup.setPosition(
-                                                getCameraMoveToX() - popup.getWidth() / 2,
-                                                getCameraMoveToY() - popup.getHeight() / 2
-                                        );
-                                        break;
+                                if (++killsSinceLastShot > 2) {
+                                    points += 10;
+                                    popup = new Popup(Assets.manager.get(Assets.DOUBLE_TEXTURE));
+                                    addActor(popup);
+                                    popup.setPosition(
+                                            getCameraMoveToX() - popup.getWidth() / 2,
+                                            getCameraMoveToY() - popup.getHeight() / 2
+                                    );
                                 }
                                 if(enemy instanceof Meteorite && ! (enemy instanceof SubMeteorite)){
                                     System.out.println("SÜTI");
@@ -277,9 +267,6 @@ this.weapon = weapon;
         }
         if(points < 0)
             gameover();
-
-        if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
-            isShooting = true;
     }
 
     void moveBackgrounds() {
@@ -312,7 +299,16 @@ this.weapon = weapon;
         } else if (keyCode == Input.Keys.U && weapon < 4) {
             weapon++;
         }
+        else if(keyCode == Input.Keys.SPACE)
+            shoot();
         return super.keyDown(keyCode);
+    }
+
+    @Override
+    public boolean keyUp(int keyCode) {
+        if(keyCode == Input.Keys.SPACE)
+            unshoot();
+        return super.keyUp(keyCode);
     }
 
     @Override
@@ -337,5 +333,14 @@ this.weapon = weapon;
         ex.setHeight(actor.getHeight()*1.2f);
         ex.setPosition(actor.getX()+actor.getWidth()/2-ex.getWidth()/2, actor.getY()+actor.getHeight()/2-ex.getHeight()/2);
         addActor(ex);
+    }
+    public void shoot(){
+        isShooting = true;
+        killsSinceLastShot = 0;
+        if(!isAlive)
+            game.setScreenBackByStackPop();
+    }
+    public void unshoot(){
+        isShooting = false;
     }
 }
