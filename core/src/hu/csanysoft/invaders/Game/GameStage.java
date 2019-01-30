@@ -22,6 +22,7 @@ import hu.csanysoft.invaders.Actors.Explosion;
 import hu.csanysoft.invaders.Actors.Ghost;
 import hu.csanysoft.invaders.Actors.Laser;
 import hu.csanysoft.invaders.Actors.Meteorite;
+import hu.csanysoft.invaders.Actors.PointPopup;
 import hu.csanysoft.invaders.Actors.Popup;
 import hu.csanysoft.invaders.Actors.Ship;
 import hu.csanysoft.invaders.Actors.SubMeteorite;
@@ -191,12 +192,17 @@ this.weapon = weapon;
                                 }
                                 if(enemy instanceof SubMeteorite){
                                     points += 5;
+                                    addActor(new PointPopup(5, (int)enemy.getX(), (int)enemy.getY()));
                                 }else if (enemy instanceof Boss){
                                     ((Boss) enemy).getShot();
                                     if(((Boss) enemy).getHealth() == 0) {
                                         flyout = true;
                                     }
-                                } else points += 10;
+                                } else{
+                                    points += 10;
+                                    addActor(new PointPopup(10, (int)enemy.getX(), (int)enemy.getY()));
+                                }
+
                                 explode(enemy);
                                 enemy.remove();
                                 laser.remove();

@@ -56,6 +56,18 @@ public class Invaders extends Game {
 		return style;
 	}
 
+	public static Label.LabelStyle getColorLabelStyle(Color c) {
+		Label.LabelStyle style;
+		style = new Label.LabelStyle();
+		style.font = Assets.manager.get(Assets.ARIAL_30_FONT);
+		style.fontColor = c;
+		Pixmap p = new Pixmap(1, 1, Pixmap.Format.RGB888);
+		p.setColor(0.4f, 0.2f, 0.8f, 0.5f);
+		p.fill();
+		return style;
+	}
+
+
 	public TextField.TextFieldStyle getTextFieldStyle_White() {
 		TextField.TextFieldStyle style = new TextField.TextFieldStyle();
 		//style.background.setLeftWidth(style.background.getLeftWidth()+20);
