@@ -92,7 +92,7 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
             = new AssetDescriptor<Texture>("triple.png", Texture.class);
 
     public static final AssetDescriptor<TextureAtlas> EXPLOSION_TEXTURE
-            = new AssetDescriptor<TextureAtlas>("animations/explosion.atlas", TextureAtlas.class);
+            = new AssetDescriptor<TextureAtlas>("animations/explosion2.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<Texture> SATURN_TEXTURE
             = new AssetDescriptor<Texture>("planets/saturn.png", Texture.class);
