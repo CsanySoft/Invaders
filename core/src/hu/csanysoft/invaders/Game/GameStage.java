@@ -50,7 +50,6 @@ public class GameStage extends MyStage {
     float flytimer = 0;
     Background backgroundActors[];
     Background foregroundActors[];
-    OneSpriteStaticActor gameover;
     Random rand = new Random();
     Image white;
     Popup popup;
@@ -261,12 +260,6 @@ this.weapon = weapon;
                 for (Background bg : backgroundActors) bg.setMoving(false);
                 for (Background bg : foregroundActors) bg.setMoving(false);
             }
-            if (gameover != null) {
-                gameover.setPosition(
-                        getCameraMoveToX() - gameover.getWidth() / 2,
-                        getCameraMoveToY() - gameover.getHeight() / 2
-                );
-            }
         }
         if(points < 0)
             gameover();
@@ -331,9 +324,7 @@ this.weapon = weapon;
         ship.setVisible(false);
         explode(ship);
         isAlive = false;
-        gameover = new OneSpriteStaticActor(Assets.manager.get(Assets.GAMEOVER_TEXTURE));
-        gameover.setSize(gameover.getWidth() / 3.6f, gameover.getHeight() / 3.6f);
-        addActor(gameover);
+        ControlStage.gameover.setVisible(true);
     }
 
     public void explode(MyActor actor){

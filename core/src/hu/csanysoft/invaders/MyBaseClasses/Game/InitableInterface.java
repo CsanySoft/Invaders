@@ -5,5 +5,5 @@ package hu.csanysoft.invaders.MyBaseClasses.Game;
  */
 
 public interface InitableInterface {
-    public void init();
+    void init();
 }

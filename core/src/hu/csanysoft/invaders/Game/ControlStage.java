@@ -19,10 +19,16 @@ public class ControlStage extends MyStage {
 
     GameStage gameStage;
     static MyLabel pointCounter;
+    public static OneSpriteStaticActor gameover;
 
     public ControlStage(Invaders game, GameStage gs) {
         super(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)), new SpriteBatch(), game);
+        gameover = new OneSpriteStaticActor(Assets.manager.get(Assets.GAMEOVER_TEXTURE));
+        gameover.setSize(gameover.getWidth() / 3.6f, gameover.getHeight() / 3.6f);
+        gameover.setVisible(false);
+        addActor(gameover);
         gameStage = gs;
+        gameover.setPositionCenterOfActorToCenterOfViewport();
     }
 
     @Override
