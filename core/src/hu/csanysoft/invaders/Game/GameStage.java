@@ -65,27 +65,15 @@ public class GameStage extends MyStage {
             Background x =  new Background();
             backgroundActors[i] = x;
             addActor(x);
-            x.setSize(x.getWidth()*(rand.nextFloat()/2+1),x.getHeight());
+            x.setSize(x.getWidth()*(rand.nextFloat()/2+1.01f), x.getHeight());
             x.setPosition(-rand.nextInt((int)x.getWidth() - Globals.WORLD_WIDTH), Globals.WORLD_HEIGHT * i);
-            /*TODO: Ezt még nem dobta: tessék Bence, mára abbahagyom
-            Exception in thread "LWJGL Application" java.lang.IllegalArgumentException: bound must be positive
-                at java.util.Random.nextInt(Random.java:388)
-                at hu.csanysoft.invaders.Game.GameStage.<init>(GameStage.java:69)
-                at hu.csanysoft.invaders.Game.GameScreen.<init>(GameScreen.java:30)
-                at hu.csanysoft.invaders.Game.GameStage.nextStage(GameStage.java:298)
-                at hu.csanysoft.invaders.Game.GameStage.act(GameStage.java:262)
-                at hu.csanysoft.invaders.Game.GameScreen.render(GameScreen.java:52)
-                at com.badlogic.gdx.Game.render(Game.java:46)
-                at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(LwjglApplication.java:225)
-                at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(LwjglApplication.java:126)
-                    */
             x.setSpeed(0);
         }
         for (int i = 0; i < 3; i++) {
             Background x =  new Background();
             foregroundActors[i] = x;
             addActor(x);
-            x.setSize(x.getWidth()*(rand.nextFloat()/2+1),x.getHeight());
+            x.setSize(x.getWidth()*(rand.nextFloat()/2+1.01f),x.getHeight());
             x.setPosition(-rand.nextInt((int)x.getWidth() - Globals.WORLD_WIDTH), Globals.WORLD_HEIGHT * i);
             x.setSpeed(0);
             x.getSprite().flip(false, true);
@@ -267,7 +255,7 @@ this.weapon = weapon;
 
             moveBackgrounds();
 
-            if (points == 100 * weapon) {
+            if (points >= 100 * weapon) {
                 flyout = true;
             }
 
