@@ -146,7 +146,7 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
     }
 
     public static void afterLoaded() {
-
+        manager.get(MUSIC_BACKGROUND).setLooping(true);
     }
     public static void unload() {
         manager.dispose();
