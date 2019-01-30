@@ -289,7 +289,9 @@ this.weapon = weapon;
         }
         if(points < 0)
             gameover();
-        isShooting = Gdx.input.isKeyPressed(Input.Keys.SPACE);
+
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
+            isShooting = true;
     }
 
     void moveBackgrounds() {
