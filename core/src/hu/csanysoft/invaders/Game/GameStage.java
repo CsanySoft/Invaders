@@ -196,14 +196,20 @@ this.weapon = weapon;
                                     ((Boss) enemy).getShot();
                                     if(((Boss) enemy).getHealth() == 0) {
                                         flyout = true;
+                                        explode(enemy);
+                                        enemy.remove();
+                                        getActors().removeValue(enemy, true);
+                                        enemy.setVisible(false);
                                     }
                                 } else points += 10;
-                                explode(enemy);
-                                enemy.remove();
+                               if(!boss) {
+                                   explode(enemy);
+                                   enemy.remove();
+                                   getActors().removeValue(enemy, true);
+                                   enemy.setVisible(false);
+                               }
                                 laser.remove();
-                                getActors().removeValue(enemy, true);
                                 getActors().removeValue(laser, true);
-                                enemy.setVisible(false);
                                 laser.setVisible(false);
 
 
@@ -259,7 +265,7 @@ this.weapon = weapon;
             if (points >= 100 * weapon) {
                 boss = true;
                 if(!vanBoss) {
-                    addActor(new Boss(0, getCameraMoveToY()+Globals.WORLD_HEIGHT/2));
+                    addActor(new Boss(Globals.WORLD_WIDTH / 2 - 384 / 2, getCameraMoveToY()+Globals.WORLD_HEIGHT/2));
                     System.out.println("BOSS");
                     vanBoss = true;
                 }
