@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import hu.csanysoft.invaders.Actors.Background;
+import hu.csanysoft.invaders.Actors.Decoration;
 import hu.csanysoft.invaders.Actors.Enemy;
 import hu.csanysoft.invaders.Actors.Explosion;
 import hu.csanysoft.invaders.Actors.Ghost;
@@ -28,6 +29,8 @@ import hu.csanysoft.invaders.Invaders;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyActor;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyStage;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
+
+import static hu.csanysoft.invaders.Global.Globals.random;
 
 public class GameStage extends MyStage {
 
@@ -251,7 +254,7 @@ this.weapon = weapon;
                 lastshot = 0;
             }
 
-            ControlStage.setPoints(points);
+            ControlStage.setPoints(points * 10);
 
             moveBackgrounds();
 
@@ -280,6 +283,13 @@ this.weapon = weapon;
 
         if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
             isShooting = true;
+
+
+        if(elapsedTime % 10 > -0.1 && elapsedTime % 10 < 0.1){
+            if(random(1,5) == 1){
+                addActor(new Decoration(random(200, Globals.WORLD_WIDTH-200), (int)getCameraMoveToY()+Globals.WORLD_HEIGHT+400));
+            }
+        }
     }
 
     void moveBackgrounds() {
