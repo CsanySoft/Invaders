@@ -319,7 +319,7 @@ this.weapon = weapon;
         } else if (keyCode == Input.Keys.U && weapon < 4) {
             weapon++;
         } else if(keyCode == Input.Keys.B) {
-            points = 100;
+            points = 100*weapon;
         }
         else if(keyCode == Input.Keys.SPACE)
             shoot();
