@@ -94,6 +94,18 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
     public static final AssetDescriptor<TextureAtlas> EXPLOSION_TEXTURE
             = new AssetDescriptor<TextureAtlas>("animations/explosion.atlas", TextureAtlas.class);
 
+    public static final AssetDescriptor<Texture> SATURN_TEXTURE
+            = new AssetDescriptor<Texture>("planets/saturn.png", Texture.class);
+
+    public static final AssetDescriptor<Texture> JUPITER_TEXTURE
+            = new AssetDescriptor<Texture>("planets/jupiter.png", Texture.class);
+
+    public static final AssetDescriptor<Texture> TESLA_TEXTURE
+            = new AssetDescriptor<Texture>("planets/tesla.png", Texture.class);
+
+    public static final AssetDescriptor<Texture> VENUS_TEXTURE
+            = new AssetDescriptor<Texture>("planets/venus.png", Texture.class);
+
 
     public static void prepare() {
         manager = new AssetManager();
@@ -127,6 +139,10 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
         manager.load(SOUND_BOOM);
         manager.load(DOUBLE_TEXTURE);
         manager.load(TRIPLE_TEXTURE);
+        manager.load(SATURN_TEXTURE);
+        manager.load(JUPITER_TEXTURE);
+        manager.load(TESLA_TEXTURE);
+        manager.load(VENUS_TEXTURE);
     }
 
     public static void afterLoaded() {
