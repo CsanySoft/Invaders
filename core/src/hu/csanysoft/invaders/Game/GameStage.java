@@ -156,8 +156,10 @@ this.weapon = weapon;
                         gameover();
                     }
                     if (enemy.getY() + enemy.getHeight() < getCameraMoveToY() - Globals.WORLD_HEIGHT / 2) {
-                        if(enemy.isVisible() & !(enemy instanceof  SubMeteorite))
+                        if(enemy.isVisible() & !(enemy instanceof  SubMeteorite)) {
                             points -= 10;
+                            addActor(new PointPopup(-10, (int)enemy.getX(), (int)getCameraMoveToY()-Globals.WORLD_HEIGHT/2+60));
+                        }
                         getActors().removeValue(enemy, true);
                     }
                     for (Actor b : getActors().toArray()) {
