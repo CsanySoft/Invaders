@@ -8,14 +8,14 @@ import hu.csanysoft.invaders.MyBaseClasses.UI.MyLabel;
 
 public class PointPopup extends MyLabel {
     public PointPopup(int points, int x, int y) {
-        super(points > 0 ? "+"+points : ""+points, points > 0 ? Invaders.getColorLabelStyle(Color.GREEN) : Invaders.getColorLabelStyle(Color.RED));
+        super(points > 0 ? "+"+points*10 : ""+points*10, points > 0 ? Invaders.getColorLabelStyle(Color.GREEN) : Invaders.getColorLabelStyle(Color.RED));
         setPosition(x,y);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        moveBy(0,1);
+        moveBy(0,5);
         if(elapsedtime > 1) addAction(Actions.alpha(0, 1));
         if(elapsedtime > 2) getStage().getActors().removeValue(this, true);
     }
