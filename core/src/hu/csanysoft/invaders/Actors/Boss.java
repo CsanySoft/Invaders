@@ -9,7 +9,7 @@ import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class Boss extends Enemy {
 
     int weapon = 2;
-    float switchTimer = 0, shoot = 1, health = 100;
+    float switchTimer = 0, shoot = 0.75f, health = 100;
 
     public Boss(float x, float y) {
         super(x, y);
@@ -22,7 +22,7 @@ public class Boss extends Enemy {
     public void switchWeapon() {
         if(weapon == 1) {
             weapon = 2;
-            shoot = 1;
+            shoot = 0.75f;
         }
         else {
             weapon = 1;
@@ -44,7 +44,7 @@ public class Boss extends Enemy {
         if(isVisible() && elapsedTime > shoot) {
             if(weapon == 1)
             for (int i = 0; i <=40 ; i+=10) {
-                Laser laser = new Laser(getX()+getWidth()/2, getY()-getHeight(), -i);
+                Laser laser = new Laser(getSprite("alap").getX() + getWidth() / 2 - 30, getY()-getHeight(), -i);
                 laser.fel = false;
                 laser.setRotation(-i);
                 getStage().addActor(laser);
@@ -54,22 +54,27 @@ public class Boss extends Enemy {
                 getStage().addActor(laser);
             }
             else if (weapon == 2) {
-                Laser laser = new Laser(getX()+getWidth()/2, getY()-getHeight(), 180);
+                System.out.println(getSprite("alap").getX() + getWidth() / 2 - 30);
+                Laser laser = new Laser(getSprite("alap").getX() / 2 - 30, getY()-getHeight(), 180);
                 laser.setSize(laser.getWidth()*2, laser.getHeight()*2);
                 getStage().addActor(laser);
             }
 
 
             elapsedTime=0;
-            if(switchTimer > 10) {
+            if(switchTimer > 5) {
                 switchTimer = 0;
                 switchWeapon();
             }
         }
+        GameStage gameStage = (GameStage) getStage();
+
+        if(getY() < gameStage.getCameraMoveToY() + Globals.WORLD_HEIGHT / 2 - getHeight())
+            moveBy(0, 2);
 
         getSprite("alap").setX((float)(x + Math.sin(moveTime*5) * 90));
         getSprite("szem").setX((float)(x+38.4 + Math.sin((moveTime-.05f)*5) * 90));
-        GameStage gameStage = (GameStage) getStage();
-        if(getY() < gameStage.getCameraMoveToY() + Globals.WORLD_HEIGHT / 2 - getHeight()) setY(gameStage.getCameraMoveToY() + Globals.WORLD_HEIGHT / 2 - getHeight());
+
+
     }
 }

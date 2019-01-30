@@ -166,11 +166,13 @@ this.weapon = weapon;
                             if (flyout) {
                                 if (whiteTimer > 1)
                                     whiteTimer = 1;
-                                if(enemy instanceof  Ghost) {
+                                if(enemy instanceof Ghost) {
                                     enemy.getSprite("alap").setColor(enemy.getSprite("alap").getColor().r, enemy.getSprite("alap").getColor().g, enemy.getSprite("alap").getColor().b, 1 - whiteTimer);
                                     enemy.getSprite("szem").setColor(enemy.getSprite("szem").getColor().r, enemy.getSprite("szem").getColor().g, enemy.getSprite("szem").getColor().b, 1 - whiteTimer);
-                                    laser.getSprite().setColor(laser.getSprite().getColor().r, laser.getSprite().getColor().g, laser.getSprite().getColor().b, 1 - whiteTimer);
+                                } else if (enemy instanceof Meteorite) {
+                                    enemy.getSprite("alap").setColor(enemy.getSprite("alap").getColor().r, enemy.getSprite("alap").getColor().g, enemy.getSprite("alap").getColor().b, 1 - whiteTimer);
                                 }
+                                laser.getSprite().setColor(laser.getSprite().getColor().r, laser.getSprite().getColor().g, laser.getSprite().getColor().b, 1 - whiteTimer);
                             }
 
                             if (laser.overlaps(enemy) && laser.isFel() && laser.isVisible() && enemy.isVisible()) {
