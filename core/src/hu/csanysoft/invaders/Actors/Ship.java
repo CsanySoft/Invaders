@@ -9,6 +9,8 @@ import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.AnimatedOffsetSprite;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MultiSpriteActor;
+import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyCircle;
+import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyRectangle;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OffsetSprite;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
@@ -31,7 +33,11 @@ public class Ship extends MultiSpriteActor {
             addSprite(flameSprite2 = new AnimatedOffsetSprite(Assets.manager.get(Assets.ROCKET_ATLAS), sprite.getWidth()-35.75f, -50, 50, 50));
         }
 
-        addBaseCollisionRectangleShape();
+        //addBaseCollisionRectangleShape();
+        //addCollisionShape("asd", new MyRectangle(70, 70, 15,15,));
+//        addCollisionShape("asd", new MyCircle(70, 15,15));
+        //addCollisionShape("BaseRectangle",new MyRectangle(70,70,15,0,getOriginX(), getOriginY(), getRotation(), 45, true));
+        addCollisionShape("BaseCircle", new MyCircle(35, 10, 0, getOriginX(), getOriginY(), getX(), getY(), true));
         this.texture = texture;
     }
 
