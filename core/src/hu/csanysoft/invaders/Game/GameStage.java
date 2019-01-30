@@ -273,7 +273,9 @@ this.weapon = weapon;
 
         if(elapsedTime % 10 > -0.1 && elapsedTime % 10 < 0.1){
             if(random(1,5) == 1){
-                addActor(new Decoration(random(200, Globals.WORLD_WIDTH-200), (int)getCameraMoveToY()+Globals.WORLD_HEIGHT+400));
+                Decoration deco = new Decoration(0,0);
+                deco.setPosition(random(0, (int)(Globals.WORLD_WIDTH-deco.getWidth())), (int)getCameraMoveToY()+Globals.WORLD_HEIGHT+400);
+                addActor();
             }
         }
     }

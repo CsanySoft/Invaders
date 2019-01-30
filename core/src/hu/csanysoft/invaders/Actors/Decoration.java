@@ -1,6 +1,8 @@
 package hu.csanysoft.invaders.Actors;
 
 
+import java.util.Random;
+
 import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
@@ -9,11 +11,12 @@ import static hu.csanysoft.invaders.Global.Globals.random;
 public class Decoration extends OneSpriteStaticActor {
 
 
-    int rotation = random(-1,1);
+    float rotation = new Random().nextFloat()*2-1;
+    int size = random(50, 300);
 
     public Decoration(int x, int y) {
         super(Assets.manager.get(Assets.getRandomDecoration()));
-        setSize(200,200);
+        setSize(size, size);
         setPosition(x,y);
     }
 
