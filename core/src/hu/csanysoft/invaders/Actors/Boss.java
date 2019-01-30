@@ -17,6 +17,7 @@ public class Boss extends Enemy {
         addSprite(new OffsetSprite(Assets.manager.get(Assets.GHOST_SZEM_TEXTURE), 30, 130), "szem");
         setSize(384,384);
         setX(Globals.WORLD_WIDTH / 2 - getWidth() / 2);
+        getSprite("szem").setColor(1, 0, 0, 1);
     }
 
     public void switchWeapon() {
