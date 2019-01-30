@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 import java.util.Random;
 
+import hu.csanysoft.invaders.Actors.AnimatedShip;
 import hu.csanysoft.invaders.Actors.Background;
 import hu.csanysoft.invaders.Actors.Boss;
 import hu.csanysoft.invaders.Actors.Decoration;
@@ -33,7 +34,7 @@ public class GameStage extends MyStage {
 
 
     final float shoottimer = .5f;
-    public Ship ship;
+    public AnimatedShip ship;
     public int points = 0;
     public boolean isShooting = false;
     public boolean isAlive = true;
@@ -81,7 +82,7 @@ public class GameStage extends MyStage {
 
 
         this.weapon = weapon;
-        ship = new Ship(texture);
+        ship = new AnimatedShip(texture);
         addActor(ship);
         ship.setPosition(getWidth() / 2 - ship.getWidth() / 2, ship.getHeight() * .5f);
         white = new Image(Assets.manager.get(Assets.WHITE_TEXTURE));
@@ -93,7 +94,6 @@ public class GameStage extends MyStage {
 
     @Override
     public void init() {
-
 
     }
 

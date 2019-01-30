@@ -1,0 +1,82 @@
+ship1.png
+size: 3012, 1004
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+spaceship
+  rotate: false
+  xy: 1, 1
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+spaceship_b1
+  rotate: false
+  xy: 1, 503
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+spaceship_b2
+  rotate: false
+  xy: 503, 1
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+spaceship_b3
+  rotate: false
+  xy: 503, 503
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+spaceship_b4
+  rotate: false
+  xy: 1005, 1
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+spaceship_b5
+  rotate: false
+  xy: 1005, 503
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+spaceship_j1
+  rotate: false
+  xy: 1507, 1
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+spaceship_j2
+  rotate: false
+  xy: 1507, 503
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+spaceship_j3
+  rotate: false
+  xy: 2009, 1
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+spaceship_j4
+  rotate: false
+  xy: 2009, 503
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+spaceship_j5
+  rotate: false
+  xy: 2511, 1
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1

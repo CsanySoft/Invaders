@@ -106,6 +106,12 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
     public static final AssetDescriptor<Texture> VENUS_TEXTURE
             = new AssetDescriptor<Texture>("planets/venus.png", Texture.class);
 
+    public static final AssetDescriptor<TextureAtlas> SHIP1_ATLAS
+            = new AssetDescriptor<TextureAtlas>("ships/ship1.atlas", TextureAtlas.class);
+
+    public static final AssetDescriptor<TextureAtlas> SHIP2_ATLAS
+            = new AssetDescriptor<TextureAtlas>("ships/ship2.atlas", TextureAtlas.class);
+
 
     public static void prepare() {
         manager = new AssetManager();
@@ -143,6 +149,8 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
         manager.load(JUPITER_TEXTURE);
         manager.load(TESLA_TEXTURE);
         manager.load(VENUS_TEXTURE);
+        manager.load(SHIP1_ATLAS);
+        manager.load(SHIP2_ATLAS);
     }
 
     public static void afterLoaded() {
