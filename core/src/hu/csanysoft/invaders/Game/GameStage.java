@@ -58,7 +58,7 @@ public class GameStage extends MyStage {
     Image white;
     Popup popup;
     float whiteTimer = 0;
-    short weapon = 1;
+    public short weapon = 1;
     boolean shipAt500 = false;
     int killsSinceLastShot = 0;
 

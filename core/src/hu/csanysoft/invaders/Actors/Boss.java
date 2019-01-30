@@ -41,6 +41,7 @@ public class Boss extends Enemy {
         super.act(delta);
         moveTime += delta*speed;
         switchTimer += delta;
+        GameStage gameStage = (GameStage) getStage();
         if(isVisible() && elapsedTime > shoot) {
             if(weapon == 1)
             for (int i = 0; i <=40 ; i+=10) {
@@ -62,12 +63,12 @@ public class Boss extends Enemy {
 
 
             elapsedTime=0;
-            if(switchTimer > 5) {
+            if(switchTimer > 10 / gameStage.weapon) {
                 switchTimer = 0;
                 switchWeapon();
             }
         }
-        GameStage gameStage = (GameStage) getStage();
+
 
         if(getY() < gameStage.getCameraMoveToY() + Globals.WORLD_HEIGHT / 2 - getHeight())
             moveBy(0, 2);
