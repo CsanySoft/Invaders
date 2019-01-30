@@ -319,7 +319,7 @@ this.weapon = weapon;
         } else if (keyCode == Input.Keys.U && weapon < 4) {
             weapon++;
         } else if(keyCode == Input.Keys.B) {
-            points = 100;
+            points = 100*weapon;
         }
         else if(keyCode == Input.Keys.SPACE)
             shoot();
@@ -349,9 +349,10 @@ this.weapon = weapon;
 
     public void explode(MyActor actor){
         Explosion ex = new Explosion();
-        ex.setWidth(actor.getWidth()*1.2f);
-        ex.setHeight(actor.getHeight()*1.2f);
-        ex.setPosition(actor.getX()+actor.getWidth()/2-ex.getWidth()/2, actor.getY()+actor.getHeight()/2-ex.getHeight()/2);
+        ex.setWidth(actor.getWidth()*3);
+        ex.setHeight(actor.getHeight()*3);
+        ex.setOrigintoCenter();
+        ex.setPosition(actor.getX()+actor.getWidth()/2, actor.getY()+actor.getHeight()/2);
         addActor(ex);
     }
     public void shoot(){
