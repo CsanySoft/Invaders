@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 import java.util.Random;
 
@@ -59,7 +61,7 @@ public class GameStage extends MyStage {
 
 
     public GameStage(Invaders game, Texture texture, short weapon) {
-        super(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)), new SpriteBatch(), game);
+        super(new StretchViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)), new SpriteBatch(), game);
         backgroundActors = new Background[3];
         foregroundActors = new Background[3];
         for (int i = 0; i < 3; i++) {

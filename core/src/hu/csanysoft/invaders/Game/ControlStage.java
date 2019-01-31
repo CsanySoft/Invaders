@@ -8,6 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Global.Globals;
@@ -23,7 +25,7 @@ public class ControlStage extends MyStage {
     public static OneSpriteStaticActor gameover;
 
     public ControlStage(Invaders game, GameStage gs) {
-        super(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)), new SpriteBatch(), game);
+        super(new StretchViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)), new SpriteBatch(), game);
         gameover = new OneSpriteStaticActor(Assets.manager.get(Assets.GAMEOVER_TEXTURE));
         gameover.setSize(gameover.getWidth() / 3.6f, gameover.getHeight() / 3.6f);
         gameover.setVisible(false);

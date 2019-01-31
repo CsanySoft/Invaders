@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.csanysoft.invaders.Global.Assets;
@@ -21,7 +22,7 @@ public class SelectStage extends MyStage {
     Texture texture1, texture2;
 
     public SelectStage(final Invaders game) {
-        super(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)), new SpriteBatch(), game);
+        super(new StretchViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)), new SpriteBatch(), game);
 
         texture1 = Assets.manager.get(Assets.SHIP_TEXTURE);
         texture2 = Assets.manager.get(Assets.SHIP2_TEXTURE);
