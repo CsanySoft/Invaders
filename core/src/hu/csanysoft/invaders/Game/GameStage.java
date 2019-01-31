@@ -6,13 +6,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 import java.util.Random;
 
-import hu.csanysoft.invaders.Actors.AnimatedShip;
+import hu.csanysoft.invaders.Actors.Ship;
 import hu.csanysoft.invaders.Actors.Background;
 import hu.csanysoft.invaders.Actors.Boss;
 import hu.csanysoft.invaders.Actors.Decoration;
@@ -36,7 +34,7 @@ public class GameStage extends MyStage {
 
 
     final float shoottimer = .5f;
-    public AnimatedShip ship;
+    public Ship ship;
     public int points = 0;
     public boolean isShooting = false;
     public boolean isAlive = true;
@@ -84,7 +82,7 @@ public class GameStage extends MyStage {
 
 
         this.weapon = weapon;
-        ship = new AnimatedShip(texture);
+        ship = new Ship(texture);
         addActor(ship);
         ship.setPosition(getWidth() / 2 - ship.getWidth() / 2, ship.getHeight() * .5f);
         white = new Image(Assets.manager.get(Assets.WHITE_TEXTURE));
