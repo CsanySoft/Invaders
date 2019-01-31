@@ -26,7 +26,7 @@ public class MenuStage extends MyStage {
     }
 
     public void init() {
-        OneSpriteStaticActor spiral = new OneSpriteStaticActor(Assets.manager.get(Assets.SPACE_TEXTURE)){
+        OneSpriteStaticActor background = new OneSpriteStaticActor(Assets.manager.get(Assets.SPACE_TEXTURE)){
             @Override
             public void act(float delta) {
                 super.act(delta);
@@ -91,13 +91,13 @@ public class MenuStage extends MyStage {
                 addListener(new InputListener(){
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        setTexture(Assets.manager.get(Assets.GAMEOVER_TEXTURE));
+                        setTexture(Assets.manager.get(Assets.START_DOWN));
                         return true;
                     }
 
                     @Override
                     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                        game.setScreen(new SelectScreen(game),true);
+                        game.setScreen(new TutorialScreen(game),true);
                         super.touchUp(event, x, y, pointer, button);
                     }
                 });
@@ -105,7 +105,7 @@ public class MenuStage extends MyStage {
         };
 
         addActor(logo);
-        addActor(spiral);
+        addActor(background);
         addActor(start);
         addActor(tutorial);
         addActor(exit);
@@ -114,7 +114,7 @@ public class MenuStage extends MyStage {
         tutorial.magnify(2);
         exit.magnify(2);
         float size = (float)Math.sqrt(Globals.WORLD_WIDTH*Globals.WORLD_WIDTH + Globals.WORLD_HEIGHT*Globals.WORLD_HEIGHT);
-        spiral.setSize(size,size);
+        background.setSize(size,size);
 
         start.setPosition(Globals.WORLD_WIDTH/2-start.getWidth()/2, 600);
         exit.setPosition(Globals.WORLD_WIDTH/2-exit.getWidth()/2, 200);
@@ -123,10 +123,10 @@ public class MenuStage extends MyStage {
 
 
 
-        spiral.setZIndex(10);
-        spiral.setOrigintoCenter();
-        spiral.setPositionCenterOfActorToCenterOfViewport();
-        spiral.setZIndex(0);
+        background.setZIndex(10);
+        background.setOrigintoCenter();
+        background.setPositionCenterOfActorToCenterOfViewport();
+        background.setZIndex(0);
     }
 
     @Override

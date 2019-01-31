@@ -15,6 +15,7 @@ import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.Invaders;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyStage;
+import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class SelectStage extends MyStage {
 
@@ -29,20 +30,28 @@ public class SelectStage extends MyStage {
 
         ship1 = new Image(texture1);
         ship2 = new Image(texture2);
-        Image background = new Image(Assets.manager.get(Assets.SPACE_TEXTURE));
+        OneSpriteStaticActor background = new OneSpriteStaticActor(Assets.manager.get(Assets.SPACE_TEXTURE)){
+            @Override
+            public void act(float delta) {
+                super.act(delta);
+                rotateBy(delta*20);
+            }
+        };
         Assets.manager.get(Assets.MUSIC_BACKGROUND).play();
-        background.setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
+        float size = (float)Math.sqrt(Globals.WORLD_WIDTH*Globals.WORLD_WIDTH + Globals.WORLD_HEIGHT*Globals.WORLD_HEIGHT);
+        background.setSize(size,size);
 
         addActor(background);
         addActor(ship1);
         addActor(ship2);
 
+        background.setPositionCenterOfActorToCenterOfViewport();
 
         ship1.setSize(ship1.getWidth()/2, ship1.getHeight()/2);
         ship2.setSize(ship2.getWidth()/2, ship2.getHeight()/2);
 
-        ship1.setPosition(getWidth()/2 - ship1.getWidth()/2, getHeight()/2 + ship1.getHeight());
-        ship2.setPosition(getWidth()/2 - ship2.getWidth()/2, getHeight()/2 - ship2.getHeight());
+        ship1.setPosition(getWidth()/4 - ship1.getWidth()/2, 200);
+        ship2.setPosition(getWidth()/4*3 - ship2.getWidth()/2, 200);
 
         ship1.addListener(new ClickListener(){
             @Override
