@@ -75,8 +75,9 @@ public class Boss extends Enemy {
         if(getY() < gameStage.getCameraMoveToY() + Globals.WORLD_HEIGHT / 2 - getHeight())
             setY(gameStage.getCameraMoveToY() + Globals.WORLD_HEIGHT / 2 - getHeight());
 
-        getCollisionShape("BaseRectangle").setX(getSprite("alap").getX());
+
         getSprite("alap").setX((float)(x + Math.sin(moveTime*5) * 90));
+        getCollisionShape("BaseRectangle").setX(getSprite("alap").getX());
         getSprite("szem").setX((float)(x+38.4 + Math.sin((moveTime-.05f)*5) * 90));
 
 
