@@ -10,6 +10,7 @@ public class Boss extends Enemy {
 
     int weapon = 2;
     float switchTimer = 0, shoot = 0.75f, health = 100;
+    GameStage gameStage;
 
     public Boss(float x, float y) {
         super(x, y);
@@ -32,7 +33,7 @@ public class Boss extends Enemy {
         }
     }
 
-    public void getShot() {health-=10;}
+    public void getShot() {health-=12-gameStage.weapon*3;}
 
     public float getHealth() {
         return health;
@@ -43,11 +44,11 @@ public class Boss extends Enemy {
         super.act(delta);
         moveTime += delta*speed;
         switchTimer += delta;
-        GameStage gameStage = (GameStage) getStage();
+        gameStage = (GameStage) getStage();
         if(isVisible() && elapsedTime > shoot) {
             if(weapon == 1)
             for (int i = 0; i <=40 ; i+=10) {
-                Laser laser = new Laser(getSprite("alap").getX() + getWidth() / 2 - 30, getY()-getHeight(), -i);
+                Laser laser = new Laser(getSprite("alap").getX() + getWidth() / 2 - 30, getY()-120, -i);
                 laser.fel = false;
                 laser.setRotation(-i);
                 getStage().addActor(laser);
@@ -57,7 +58,7 @@ public class Boss extends Enemy {
                 getStage().addActor(laser);
             }
             else if (weapon == 2) {
-                Laser laser = new Laser(getSprite("alap").getX() + getWidth() / 2 - 30, getY()-getHeight(), 180);
+                Laser laser = new Laser(getSprite("alap").getX() + getWidth() / 2 - 30, getY()-240, 180);
                 laser.setSize(laser.getWidth()*2, laser.getHeight()*2);
                 getStage().addActor(laser);
             }

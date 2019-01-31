@@ -121,6 +121,10 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
     public static final AssetDescriptor<Texture> EXIT_DOWN
             = new AssetDescriptor<Texture>("exit_down_red.png", Texture.class);
 
+    public static final AssetDescriptor<Texture> HP_PIROS_TEXTURE
+            = new AssetDescriptor<Texture>("hp piros.png", Texture.class);
+
+
 
 
     public static void prepare() {
@@ -164,6 +168,7 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
         manager.load(START_DOWN);
         manager.load(EXIT);
         manager.load(EXIT_DOWN);
+        manager.load(HP_PIROS_TEXTURE);
     }
 
     public static void afterLoaded() {
