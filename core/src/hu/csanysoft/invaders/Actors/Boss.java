@@ -19,7 +19,7 @@ public class Boss extends Enemy {
         setSize(384,384);
         setX(Globals.WORLD_WIDTH / 2 - getWidth() / 2);
         getSprite("szem").setColor(1, 0, 0, 1);
-        isBoss=true;
+        gameStage = (GameStage) getStage();
     }
 
     public void switchWeapon() {
@@ -62,8 +62,6 @@ public class Boss extends Enemy {
                 laser.setSize(laser.getWidth()*2, laser.getHeight()*2);
                 getStage().addActor(laser);
             }
-
-
             elapsedTime=0;
             if(switchTimer > 10 / gameStage.weapon) {
                 switchTimer = 0;
@@ -79,7 +77,5 @@ public class Boss extends Enemy {
         getSprite("alap").setX((float)(x + Math.sin(moveTime*5) * 90));
         getCollisionShape("BaseRectangle").setX(getSprite("alap").getX());
         getSprite("szem").setX((float)(x+38.4 + Math.sin((moveTime-.05f)*5) * 90));
-
-
     }
 }

@@ -47,6 +47,7 @@ public class GameStage extends MyStage {
     float speed = 2;
     float lastshot = 0;
     float flytimer = 0;
+    float decorationLast = getElapsedTime();
     Background backgroundActors[];
     Background foregroundActors[];
     Random rand = new Random();
@@ -150,7 +151,7 @@ public class GameStage extends MyStage {
                         gameover();
                     }
                     if (enemy.getY() + enemy.getHeight() < getCameraMoveToY() - Globals.WORLD_HEIGHT / 2) {
-                        if(enemy.isVisible() & !(enemy instanceof  SubMeteorite)) {
+                        if(enemy.isVisible() & !(enemy instanceof  SubMeteorite) & isAlive) {
                             points -= 10;
                             addActor(new Popup(-10, (int)enemy.getX(), (int)getCameraMoveToY()-Globals.WORLD_HEIGHT/2+60));
                         }
@@ -202,7 +203,7 @@ public class GameStage extends MyStage {
                                     points += 10;
                                     addActor(new Popup(10, (int)enemy.getX(), (int)enemy.getY()));
                                 }
-                               if(!enemy.isBoss()) {
+                               if(!(enemy instanceof Boss)) {
                                    explode(enemy);
                                    enemy.remove();
                                    getActors().removeValue(enemy, true);
@@ -284,7 +285,8 @@ public class GameStage extends MyStage {
         if(points < 0)
             gameover();
 
-        if(elapsedTime % 10 > -0.02 && elapsedTime % 10 < 0.02){
+        if(decorationLast - elapsedTime > 20){
+            decorationLast = elapsedTime;
             if(random(1,5) == 1){
                 Decoration deco = new Decoration(0,0);
                 deco.setPosition(random(0, (int)(Globals.WORLD_WIDTH-deco.getWidth())), (int)getCameraMoveToY()+Globals.WORLD_HEIGHT+400);
