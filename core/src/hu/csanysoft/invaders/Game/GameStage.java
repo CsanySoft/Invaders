@@ -47,7 +47,7 @@ public class GameStage extends MyStage {
     float speed = 2;
     float lastshot = 0;
     float flytimer = 0;
-    float decorationLast = getElapsedTime();
+    float decorationLast = 0;
     Background backgroundActors[];
     Background foregroundActors[];
     Random rand = new Random();
@@ -66,7 +66,7 @@ public class GameStage extends MyStage {
         for (int i = 0; i < 3; i++) {
             Background x =  new Background();
             backgroundActors[i] = x;
-            addActor(x);
+            addActor(x,1);
             x.setSize(x.getWidth()*(rand.nextFloat()/2+1.01f), x.getHeight());
             x.setPosition(-rand.nextInt((int)x.getWidth() - Globals.WORLD_WIDTH), Globals.WORLD_HEIGHT * i);
             x.setSpeed(0);
@@ -74,7 +74,7 @@ public class GameStage extends MyStage {
         for (int i = 0; i < 3; i++) {
             Background x =  new Background();
             foregroundActors[i] = x;
-            addActor(x);
+            addActor(x,1);
             x.setSize(x.getWidth()*(rand.nextFloat()/2+1.01f),x.getHeight());
             x.setPosition(-rand.nextInt((int)x.getWidth() - Globals.WORLD_WIDTH), Globals.WORLD_HEIGHT * i);
             x.setSpeed(0);
@@ -285,12 +285,12 @@ public class GameStage extends MyStage {
         if(points < 0)
             gameover();
 
-        if(decorationLast - elapsedTime > 20){
+        if(elapsedTime - decorationLast > 20){
             decorationLast = elapsedTime;
-            if(random(1,5) == 1){
+            if(random(1,1) == 1){
                 Decoration deco = new Decoration(0,0);
                 deco.setPosition(random(0, (int)(Globals.WORLD_WIDTH-deco.getWidth())), (int)getCameraMoveToY()+Globals.WORLD_HEIGHT+400);
-                addActor(deco);
+                addActor(deco,0);
             }
         }
     }
