@@ -2,6 +2,7 @@ package hu.csanysoft.invaders.Menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -13,6 +14,7 @@ import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.Invaders;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyStage;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
+import hu.csanysoft.invaders.MyBaseClasses.UI.MyLabel;
 
 public class TutorialStage extends MyStage {
 
@@ -29,10 +31,15 @@ public class TutorialStage extends MyStage {
                 super.act(delta);
                 rotateBy(delta*20);
             }
+
         };
 
-
-
+        MyLabel label = new MyLabel("Irányításhoz döntse meg eszközét!\n" +
+                "Ha lőni akar tartsa ujját a képernyőn.\n" +
+                "Vigyázzon! A meteoridok darabokra törnek ha szétlövi, \n" +
+                "és ha a hajónak ütköznek akkor meghal!" ,  Invaders.getColorLabelStyle(Color.YELLOW));
+        addActor(label);
+        label.setPosition((Globals.WORLD_WIDTH-label.getWidth())/2,(Globals.WORLD_HEIGHT-label.getHeight())/2+150);
 
         addActor(background);
         float size = (float)Math.sqrt(Globals.WORLD_WIDTH*Globals.WORLD_WIDTH + Globals.WORLD_HEIGHT*Globals.WORLD_HEIGHT);

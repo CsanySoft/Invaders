@@ -1,5 +1,6 @@
 package hu.csanysoft.invaders.Game;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -16,6 +17,7 @@ import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.Invaders;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyStage;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
+import hu.csanysoft.invaders.MyBaseClasses.UI.MyLabel;
 
 public class SelectStage extends MyStage {
 
@@ -37,7 +39,6 @@ public class SelectStage extends MyStage {
                 rotateBy(delta*20);
             }
         };
-        Assets.manager.get(Assets.MUSIC_BACKGROUND).play();
         float size = (float)Math.sqrt(Globals.WORLD_WIDTH*Globals.WORLD_WIDTH + Globals.WORLD_HEIGHT*Globals.WORLD_HEIGHT);
         background.setSize(size,size);
 

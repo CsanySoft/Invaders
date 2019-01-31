@@ -26,6 +26,7 @@ public class MenuStage extends MyStage {
     }
 
     public void init() {
+        Assets.manager.get(Assets.MUSIC_BACKGROUND).play();
         OneSpriteStaticActor background = new OneSpriteStaticActor(Assets.manager.get(Assets.SPACE_TEXTURE)){
             @Override
             public void act(float delta) {
