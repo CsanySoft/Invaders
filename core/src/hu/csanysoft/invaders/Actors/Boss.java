@@ -52,7 +52,7 @@ public class Boss extends Enemy {
                 laser.fel = false;
                 laser.setRotation(-i);
                 getStage().addActor(laser);
-                laser = new Laser(getX()+getWidth()/2, getY()-getHeight(), i);
+                laser = new Laser(getX()+getWidth()/2 - 30, getY()-120, i);
                 laser.fel = false;
                 laser.setRotation(i);
                 getStage().addActor(laser);
