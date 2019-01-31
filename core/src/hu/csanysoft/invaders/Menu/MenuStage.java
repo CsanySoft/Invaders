@@ -42,14 +42,14 @@ public class MenuStage extends MyStage {
             }
         };
 
-        OneSpriteStaticActor start = new OneSpriteStaticActor(Assets.manager.get(Assets.GAMEOVER_TEXTURE)){
+        OneSpriteStaticActor start = new OneSpriteStaticActor(Assets.manager.get(Assets.START)){
             @Override
             public void init() {
                 super.init();
                 addListener(new InputListener(){
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        setTexture(Assets.manager.get(Assets.GAMEOVER_TEXTURE));
+                        setTexture(Assets.manager.get(Assets.START_DOWN));
                         return true;
                     }
 
@@ -62,14 +62,14 @@ public class MenuStage extends MyStage {
             }
         };
 
-        OneSpriteStaticActor exit = new OneSpriteStaticActor(Assets.manager.get(Assets.GAMEOVER_TEXTURE)){
+        OneSpriteStaticActor exit = new OneSpriteStaticActor(Assets.manager.get(Assets.EXIT)){
             @Override
             public void init() {
                 super.init();
                 addListener(new InputListener(){
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        setTexture(Assets.manager.get(Assets.GAMEOVER_TEXTURE));
+                        setTexture(Assets.manager.get(Assets.EXIT_DOWN));
                         return true;
                     }
 
@@ -82,7 +82,7 @@ public class MenuStage extends MyStage {
             }
         };
 
-        OneSpriteStaticActor tutorial = new OneSpriteStaticActor(Assets.manager.get(Assets.GAMEOVER_TEXTURE)){
+      /*  OneSpriteStaticActor tutorial = new OneSpriteStaticActor(Assets.manager.get(Assets.GAMEOVER_TEXTURE)){
             @Override
             public void init() {
                 super.init();
@@ -100,25 +100,25 @@ public class MenuStage extends MyStage {
                     }
                 });
             }
-        };
+        }; */
 
         addActor(logo);
         addActor(spiral);
         addActor(start);
-        addActor(tutorial);
+       // addActor(tutorial);
         addActor(exit);
 
         start.magnify(2);
-        tutorial.magnify(2);
+        //tutorial.magnify(2);
         exit.magnify(2);
         spiral.magnify(2);
 
         start.setPositionCenterOfActorToCenterOfViewport();
         exit.setPositionCenterOfActorToCenterOfViewport();
-        tutorial.setPositionCenterOfActorToCenterOfViewport();
+        //tutorial.setPositionCenterOfActorToCenterOfViewport();
         logo.setPositionCenterOfActorToCenterOfViewport();
 
-        tutorial.changePosition(+400, +200);
+       // tutorial.changePosition(+400, +200);
         exit.changePosition(-400, -200);
         logo.changePosition(-200, +200);
 
