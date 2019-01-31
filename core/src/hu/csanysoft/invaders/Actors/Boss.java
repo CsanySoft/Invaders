@@ -48,17 +48,17 @@ public class Boss extends Enemy {
         if(isVisible() && elapsedTime > shoot) {
             if(weapon == 1)
             for (int i = 0; i <=40 ; i+=10) {
-                Laser laser = new Laser(getSprite("alap").getX() + getWidth() / 2 - 30, getY()-getHeight(), -i);
+                Laser laser = new Laser(getSprite("alap").getX() + getWidth() / 2 - 30, getY()-120, -i);
                 laser.fel = false;
                 laser.setRotation(-i);
                 getStage().addActor(laser);
-                laser = new Laser(getX()+getWidth()/2, getY()-getHeight(), i);
+                laser = new Laser(getX()+getWidth()/2 - 30, getY()-120, i);
                 laser.fel = false;
                 laser.setRotation(i);
                 getStage().addActor(laser);
             }
             else if (weapon == 2) {
-                Laser laser = new Laser(getSprite("alap").getX() + getWidth() / 2 - 30, getY()-getHeight(), 180);
+                Laser laser = new Laser(getSprite("alap").getX() + getWidth() / 2 - 30, getY()-240, 180);
                 laser.setSize(laser.getWidth()*2, laser.getHeight()*2);
                 getStage().addActor(laser);
             }
@@ -75,8 +75,9 @@ public class Boss extends Enemy {
         if(getY() < gameStage.getCameraMoveToY() + Globals.WORLD_HEIGHT / 2 - getHeight())
             setY(gameStage.getCameraMoveToY() + Globals.WORLD_HEIGHT / 2 - getHeight());
 
-        getCollisionShape("BaseRectangle").setX(getSprite("alap").getX());
+
         getSprite("alap").setX((float)(x + Math.sin(moveTime*5) * 90));
+        getCollisionShape("BaseRectangle").setX(getSprite("alap").getX());
         getSprite("szem").setX((float)(x+38.4 + Math.sin((moveTime-.05f)*5) * 90));
 
 
