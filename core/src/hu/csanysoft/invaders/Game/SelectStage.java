@@ -39,7 +39,6 @@ public class SelectStage extends MyStage {
                 rotateBy(delta*20);
             }
         };
-        Assets.manager.get(Assets.MUSIC_BACKGROUND).play();
         float size = (float)Math.sqrt(Globals.WORLD_WIDTH*Globals.WORLD_WIDTH + Globals.WORLD_HEIGHT*Globals.WORLD_HEIGHT);
         background.setSize(size,size);
 
