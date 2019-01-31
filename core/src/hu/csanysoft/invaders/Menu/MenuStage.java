@@ -49,6 +49,11 @@ public class MenuStage extends MyStage {
                 super.init();
                 addListener(new InputListener(){
                     @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        return true;
+                    }
+
+                    @Override
                     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                         game.setScreen(new SelectScreen(game), true);
                         super.touchUp(event, x, y, pointer, button);
@@ -82,6 +87,10 @@ public class MenuStage extends MyStage {
             public void init() {
                 super.init();
                 addListener(new InputListener(){
+                    @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        return true;
+                    }
 
                     @Override
                     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
