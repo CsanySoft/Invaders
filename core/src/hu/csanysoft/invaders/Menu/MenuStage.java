@@ -49,12 +49,6 @@ public class MenuStage extends MyStage {
                 super.init();
                 addListener(new InputListener(){
                     @Override
-                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        setTexture(Assets.manager.get(Assets.START_DOWN));
-                        return true;
-                    }
-
-                    @Override
                     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                         game.setScreen(new SelectScreen(game), true);
                         super.touchUp(event, x, y, pointer, button);
@@ -71,8 +65,6 @@ public class MenuStage extends MyStage {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         System.exit(0);
-                        setTexture(Assets.manager.get(Assets.GAMEOVER_TEXTURE));
-                        setTexture(Assets.manager.get(Assets.EXIT_DOWN));
                         return true;
                     }
 
@@ -90,11 +82,6 @@ public class MenuStage extends MyStage {
             public void init() {
                 super.init();
                 addListener(new InputListener(){
-                    @Override
-                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        setTexture(Assets.manager.get(Assets.START_DOWN));
-                        return true;
-                    }
 
                     @Override
                     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
