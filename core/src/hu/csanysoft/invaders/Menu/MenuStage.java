@@ -26,11 +26,11 @@ public class MenuStage extends MyStage {
     }
 
     public void init() {
-        OneSpriteStaticActor spiral = new OneSpriteStaticActor(Assets.manager.get(Assets.SPIRAL)){
+        OneSpriteStaticActor spiral = new OneSpriteStaticActor(Assets.manager.get(Assets.SPACE_TEXTURE)){
             @Override
             public void act(float delta) {
                 super.act(delta);
-                rotateBy(delta*100);
+                rotateBy(delta*20);
             }
         };
 
@@ -84,7 +84,7 @@ public class MenuStage extends MyStage {
             }
         };
 
-      /*  OneSpriteStaticActor tutorial = new OneSpriteStaticActor(Assets.manager.get(Assets.GAMEOVER_TEXTURE)){
+        OneSpriteStaticActor tutorial = new OneSpriteStaticActor(Assets.manager.get(Assets.START)){
             @Override
             public void init() {
                 super.init();
@@ -102,27 +102,26 @@ public class MenuStage extends MyStage {
                     }
                 });
             }
-        }; */
+        };
 
         addActor(logo);
         addActor(spiral);
         addActor(start);
-       // addActor(tutorial);
+        addActor(tutorial);
         addActor(exit);
 
         start.magnify(2);
-        //tutorial.magnify(2);
+        tutorial.magnify(2);
         exit.magnify(2);
-        spiral.magnify(2);
+        float size = (float)Math.sqrt(Globals.WORLD_WIDTH*Globals.WORLD_WIDTH + Globals.WORLD_HEIGHT*Globals.WORLD_HEIGHT);
+        spiral.setSize(size,size);
 
-        start.setPositionCenterOfActorToCenterOfViewport();
-        exit.setPositionCenterOfActorToCenterOfViewport();
-        //tutorial.setPositionCenterOfActorToCenterOfViewport();
-        logo.setPositionCenterOfActorToCenterOfViewport();
+        start.setPosition(Globals.WORLD_WIDTH/2-start.getWidth()/2, 600);
+        exit.setPosition(Globals.WORLD_WIDTH/2-exit.getWidth()/2, 200);
+        tutorial.setPosition(Globals.WORLD_WIDTH/2-tutorial.getWidth()/2, 350);
+        logo.setPosition(Globals.WORLD_WIDTH/2-logo.getWidth()/2, 900);
 
-       // tutorial.changePosition(+400, +200);
-        exit.changePosition(-400, -200);
-        logo.changePosition(-200, +200);
+
 
         spiral.setZIndex(10);
         spiral.setOrigintoCenter();

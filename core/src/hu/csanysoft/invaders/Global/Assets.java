@@ -103,9 +103,6 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
     public static final AssetDescriptor<TextureAtlas> SHIP2_ATLAS
             = new AssetDescriptor<TextureAtlas>("ships/ship2.atlas", TextureAtlas.class);
 
-    public static final AssetDescriptor<Texture> SPIRAL
-            = new AssetDescriptor<Texture>("spiral_red.png", Texture.class);
-
     public static final AssetDescriptor<Texture> LOGO
             = new AssetDescriptor<Texture>("bloodyhell.png", Texture.class);
 
@@ -162,7 +159,6 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
         manager.load(VENUS_TEXTURE);
         manager.load(SHIP1_ATLAS);
         manager.load(SHIP2_ATLAS);
-        manager.load(SPIRAL);
         manager.load(LOGO);
         manager.load(START);
         manager.load(START_DOWN);
