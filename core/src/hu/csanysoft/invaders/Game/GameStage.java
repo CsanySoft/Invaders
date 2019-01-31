@@ -47,7 +47,7 @@ public class GameStage extends MyStage {
     float speed = 2;
     float lastshot = 0;
     float flytimer = 0;
-    float decorationLast = getElapsedTime();
+    float decorationLast = 0;
     Background backgroundActors[];
     Background foregroundActors[];
     Random rand = new Random();
@@ -285,7 +285,7 @@ public class GameStage extends MyStage {
         if(points < 0)
             gameover();
 
-        if(decorationLast - elapsedTime > 20){
+        if(elapsedTime - decorationLast > 20){
             decorationLast = elapsedTime;
             if(random(1,1) == 1){
                 Decoration deco = new Decoration(0,0);
