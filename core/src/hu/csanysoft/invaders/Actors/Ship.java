@@ -36,7 +36,7 @@ public class Ship extends MultiSpriteActor {
             flameSprite2.setFps(20);
         }
 
-
+        setZIndex(1000);
 
         //addBaseCollisionRectangleShape();
         //addCollisionShape("asd", new MyRectangle(70, 70, 15,15,));

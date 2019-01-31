@@ -18,6 +18,7 @@ public class Decoration extends OneSpriteStaticActor {
         super(Assets.manager.get(Assets.getRandomDecoration()));
         setSize(size, size);
         setPosition(x,y);
+        setZIndex(1);
     }
 
     @Override

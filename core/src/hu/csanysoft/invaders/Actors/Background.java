@@ -12,6 +12,7 @@ public class Background extends OneSpriteStaticActor {
     public Background() {
         super(Assets.manager.get(Assets.SPACE_TEXTURE));
         setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
+        setZIndex(100);
     }
 
     public void setSpeed(float speed) {

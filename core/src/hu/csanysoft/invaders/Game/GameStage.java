@@ -87,7 +87,7 @@ public class GameStage extends MyStage {
         ship.setPosition(getWidth() / 2 - ship.getWidth() / 2, ship.getHeight() * .5f);
         white = new Image(Assets.manager.get(Assets.WHITE_TEXTURE));
         white.setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
-        addActor(white);
+        //addActor(white);
         white.setColor(255, 255, 255, 0);
         ControlStage.setLevelIndicator(weapon);
     }

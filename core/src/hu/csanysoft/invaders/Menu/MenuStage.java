@@ -69,13 +69,13 @@ public class MenuStage extends MyStage {
                 addListener(new InputListener(){
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        System.exit(0);
                         setTexture(Assets.manager.get(Assets.GAMEOVER_TEXTURE));
                         return true;
                     }
 
                     @Override
                     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                        System.exit(0);
                         super.touchUp(event, x, y, pointer, button);
                     }
                 });

@@ -24,6 +24,7 @@ public class Enemy extends MultiSpriteActor {
         this.x = x; this.y = y;
         rand = new Random();
         speed = rand.nextInt(2)+1;
+        setZIndex(500);
     }
 
     @Override
