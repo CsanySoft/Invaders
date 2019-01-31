@@ -17,11 +17,12 @@ public class Ship extends MultiSpriteActor {
     float multiplier = 1;
     AnimatedOffsetSprite sprite;
     AnimatedOffsetSprite flameSprite, flameSprite2;
-    Texture texture;
+    int variety;
 
-    public Ship(Texture texture) {
+    public Ship(int variety) {
         super(100, 100);
-        if(texture == Assets.manager.get(Assets.SHIP2_TEXTURE)) {
+        this.variety = variety;
+        if(variety == 2) {
             addSprite(sprite = new AnimatedOffsetSprite(Assets.manager.get(Assets.SHIP2_ATLAS), 0,0, 100,100));
             addSprite(flameSprite = new AnimatedOffsetSprite(Assets.manager.get(Assets.ROCKET_ATLAS), 25, -50, 50, 50));
             flameSprite.setFps(20);
@@ -34,16 +35,12 @@ public class Ship extends MultiSpriteActor {
         }
 
         addCollisionShape("BaseCircle", new MyCircle(35, 10, 0, getOriginX(), getOriginY(), getX(), getY(), true));
-        this.texture = texture;
 
         sprite.stop();
         sprite.setFrame(0);
         setZIndex(Integer.MAX_VALUE);
     }
 
-    public Texture getTexture() {
-        return texture;
-    }
 
     public void setSpeed(float speed) {
         this.speed = speed;
@@ -88,5 +85,9 @@ public class Ship extends MultiSpriteActor {
             }
         }
 
+    }
+
+    public int getVariety() {
+        return variety;
     }
 }

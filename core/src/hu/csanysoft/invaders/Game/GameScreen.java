@@ -16,7 +16,7 @@ public class GameScreen extends MyScreen {
 
     public GameScreen(Invaders game) {
         super(game);
-        stage = new GameStage(game, Assets.manager.get(Assets.SHIP_TEXTURE), (short)1);
+        stage = new GameStage(game, 1, (short)1);
         controlStage = new ControlStage(game, stage);
         inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(stage);
@@ -25,9 +25,9 @@ public class GameScreen extends MyScreen {
     }
 
 
-    public GameScreen(Invaders game, Texture texture, short weapon) {
+    public GameScreen(Invaders game, int variety, short weapon) {
         super(game);
-        stage = new GameStage(game, texture, weapon);
+        stage = new GameStage(game, variety, weapon);
         controlStage = new ControlStage(game, stage);
         inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(stage);
