@@ -5,17 +5,15 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.csanysoft.invaders.Game.SelectScreen;
 import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Invaders;
-import hu.csanysoft.invaders.Game.GameScreen;
 import hu.csanysoft.invaders.Global.Globals;
-import hu.csanysoft.invaders.MyBaseClasses.MyTextButton;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyStage;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
+import hu.csanysoft.invaders.Tutorial.TutorialScreen;
 
 public class MenuStage extends MyStage {
 

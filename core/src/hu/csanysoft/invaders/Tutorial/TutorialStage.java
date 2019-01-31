@@ -1,4 +1,4 @@
-package hu.csanysoft.invaders.Menu;
+package hu.csanysoft.invaders.Tutorial;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
