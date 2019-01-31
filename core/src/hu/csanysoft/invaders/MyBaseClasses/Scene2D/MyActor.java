@@ -6,7 +6,9 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -28,6 +30,7 @@ abstract public class MyActor extends Actor implements InitableInterface {
     @Deprecated
     protected Circle circle = new Circle();
     protected HashMap<String, MyShape> shapeMap;
+    protected int zIndex = 0;
 
     protected static float debugPointSize = 30f;
 
@@ -164,6 +167,33 @@ abstract public class MyActor extends Actor implements InitableInterface {
     public void changePosition(int dx, int dy){
         setPosition(getX()+dx, getY()+dy);
     }
+
+
+    @Override
+    public boolean setZIndex(int index) {
+
+        this.zIndex = index;
+
+        Group parent = this.getParent();
+
+        if (parent == null) return false;
+
+        Array<Actor> children = parent.getChildren();
+
+        if (children.size == 1) return false;
+        if (getStage() != null){
+            if (getStage() instanceof MyStage){
+                ((MyStage)getStage()).sortActorsByZindex();
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int getZIndex() {
+        return zIndex;
+    }
+
 
     public void setOrigintoCenter(){
         setOrigin(getWidth()/2, getHeight()/2);
