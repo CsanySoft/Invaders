@@ -15,6 +15,7 @@ public class Enemy extends MultiSpriteActor {
     float speed;
     float timer = 2;
     float moveTime = 0;
+    boolean isBoss = false;
 
     public Enemy(float x, float y) {
         super(300,300);
@@ -30,5 +31,14 @@ public class Enemy extends MultiSpriteActor {
         super.act(delta);
 
 
+    }
+
+
+    public boolean isBoss() {
+        return isBoss;
+    }
+
+    public void setBoss(boolean boss) {
+        isBoss = boss;
     }
 }

@@ -201,7 +201,7 @@ public class GameStage extends MyStage {
                                     points += 10;
                                     addActor(new Popup(10, (int)enemy.getX(), (int)enemy.getY()));
                                 }
-                               if(!boss) {
+                               if(!enemy.isBoss()) {
                                    explode(enemy);
                                    enemy.remove();
                                    getActors().removeValue(enemy, true);

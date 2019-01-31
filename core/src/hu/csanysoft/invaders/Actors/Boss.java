@@ -18,6 +18,7 @@ public class Boss extends Enemy {
         setSize(384,384);
         setX(Globals.WORLD_WIDTH / 2 - getWidth() / 2);
         getSprite("szem").setColor(1, 0, 0, 1);
+        isBoss=true;
     }
 
     public void switchWeapon() {
