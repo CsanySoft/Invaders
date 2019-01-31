@@ -180,13 +180,13 @@ abstract public class MyActor extends Actor implements InitableInterface {
 
         Array<Actor> children = parent.getChildren();
 
-        if (children.size == 1) return false;
+        if (children.size == 1) return true;
         if (getStage() != null){
             if (getStage() instanceof MyStage){
                 ((MyStage)getStage()).sortActorsByZindex();
             }
         }
-        return false;
+        return true;
     }
 
     @Override
