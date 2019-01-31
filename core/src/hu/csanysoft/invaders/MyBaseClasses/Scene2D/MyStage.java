@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import hu.csanysoft.invaders.Invaders;
 import hu.csanysoft.invaders.MyBaseClasses.Game.InitableInterface;
@@ -26,6 +27,7 @@ abstract public class MyStage extends Stage implements InitableInterface {
     protected float elapsedTime = 0;
     protected ArrayList<MyLevel> levels = new ArrayList();
     protected short currentLevel = 0;
+    protected static int ZIndexAutoInc = 1;
 
     public MyStage(Viewport viewport, Batch batch, Invaders game) {
         super(viewport, batch);
@@ -315,6 +317,42 @@ abstract public class MyStage extends Stage implements InitableInterface {
         c.zoom = z;
         c.update();
         return b;
+    }
+
+    @Override
+    /**
+
+     * Automatikusan növekvő Z index 1-től.
+     * @param actor
+     */
+    public void addActor(Actor actor) {
+        addActor(actor, ZIndexAutoInc);
+        ZIndexAutoInc++;
+    }
+
+    /**
+     * A nagy érték van elől!
+     * @param actor
+     * @param ZIndex A nagy érték van elől!
+     */
+
+    public void addActor(Actor actor, int ZIndex) {
+        super.addActor(actor);
+       actor.setZIndex(ZIndex);
+    }
+
+    public void sortActorsByZindex(){
+
+        getActors().sort(new Comparator<Actor>() {
+            @Override
+            public int compare(Actor actor, Actor t1) {
+         if (actor instanceof MyActor && t1 instanceof MyActor){
+             return ((MyActor) actor).zIndex - ((MyActor) t1).zIndex;
+                }else {
+                    return 0;
+                }
+            }
+   });
     }
 
 

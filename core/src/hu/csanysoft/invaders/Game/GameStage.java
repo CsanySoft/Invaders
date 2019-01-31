@@ -59,7 +59,7 @@ public class GameStage extends MyStage {
 
 
 
-    public GameStage(Invaders game, Texture texture, short weapon) {
+    public GameStage(Invaders game, int shipVariety, short weapon) {
         super(new StretchViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)), new SpriteBatch(), game);
         backgroundActors = new Background[3];
         foregroundActors = new Background[3];
@@ -83,7 +83,7 @@ public class GameStage extends MyStage {
 
 
         this.weapon = weapon;
-        ship = new Ship(texture);
+        ship = new Ship(shipVariety);
         addActor(ship);
         ship.setPosition(getWidth() / 2 - ship.getWidth() / 2, ship.getHeight() * .5f);
         white = new Image(Assets.manager.get(Assets.WHITE_TEXTURE));
@@ -314,7 +314,7 @@ public class GameStage extends MyStage {
 
     void nextStage() {
         for (Background bg : backgroundActors) bg.setMoving(false);
-        game.setScreen(new GameScreen(game, ship.getTexture(), ++weapon));
+        game.setScreen(new GameScreen(game, ship.getVariety(), ++weapon));
         dispose();
     }
 

@@ -40,23 +40,24 @@ public class Assets {
 
     public static final AssetDescriptor<Texture> SPACE_TEXTURE
             = new AssetDescriptor<Texture>("stars.png", Texture.class);
-public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
-            = new AssetDescriptor<Texture>("ghost_alap.png", Texture.class);
+
+    public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
+            = new AssetDescriptor<Texture>("sprites/ghost_alap.png", Texture.class);
 
     public static final AssetDescriptor<Texture> GHOST_SZEM_TEXTURE
-            = new AssetDescriptor<Texture>("ghost_szem.png", Texture.class);
+            = new AssetDescriptor<Texture>("sprites/ghost_szem.png", Texture.class);
 
     public static final AssetDescriptor<Texture> LASER_TEXTURE
-            = new AssetDescriptor<Texture>("laser.png", Texture.class);
+            = new AssetDescriptor<Texture>("sprites/laser.png", Texture.class);
 
     public static final AssetDescriptor<Texture> EMPTY_TEXTURE
             = new AssetDescriptor<Texture>("zolipls.png", Texture.class);
 
     public static final AssetDescriptor<Texture> SHIP_TEXTURE
-            = new AssetDescriptor<Texture>("spaceship.png", Texture.class);
+            = new AssetDescriptor<Texture>("sprites/spaceship.png", Texture.class);
 
     public static final AssetDescriptor<Texture> SHIP2_TEXTURE
-            = new AssetDescriptor<Texture>("spaceship2.png", Texture.class);
+            = new AssetDescriptor<Texture>("sprites/spaceship2.png", Texture.class);
 
     public static final AssetDescriptor<Texture> GAMEOVER_TEXTURE
             = new AssetDescriptor<Texture>("gameover.png", Texture.class);
@@ -65,10 +66,10 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
             = new AssetDescriptor<Texture>("white.jpg", Texture.class);
 
     public static final AssetDescriptor<TextureAtlas> ROCKET_ATLAS
-            = new AssetDescriptor<TextureAtlas>("rocket_anim.txt", TextureAtlas.class);
+            = new AssetDescriptor<TextureAtlas>("sprites/rocket_anim.txt", TextureAtlas.class);
 
     public static final AssetDescriptor<Texture> METEORITE_TEXTURE
-            = new AssetDescriptor<Texture>("meteorite.png", Texture.class);
+            = new AssetDescriptor<Texture>("sprites/meteorite.png", Texture.class);
 
     public static final AssetDescriptor<Sound> SOUND_LASER
             = new AssetDescriptor<Sound>("sound/laser.wav", Sound.class);
@@ -103,23 +104,20 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
     public static final AssetDescriptor<TextureAtlas> SHIP2_ATLAS
             = new AssetDescriptor<TextureAtlas>("ships/ship2.atlas", TextureAtlas.class);
 
-    public static final AssetDescriptor<Texture> SPIRAL
-            = new AssetDescriptor<Texture>("spiral_red.png", Texture.class);
-
     public static final AssetDescriptor<Texture> LOGO
-            = new AssetDescriptor<Texture>("bloodyhell.png", Texture.class);
+            = new AssetDescriptor<Texture>("invaders.png", Texture.class);
 
     public static final AssetDescriptor<Texture> START
-            = new AssetDescriptor<Texture>("start_red.png", Texture.class);
+            = new AssetDescriptor<Texture>("buttons/start_red.png", Texture.class);
 
     public static final AssetDescriptor<Texture> START_DOWN
-            = new AssetDescriptor<Texture>("start_down_red.png", Texture.class);
+            = new AssetDescriptor<Texture>("buttons/start_down_red.png", Texture.class);
 
     public static final AssetDescriptor<Texture> EXIT
-            = new AssetDescriptor<Texture>("exit_red.png", Texture.class);
+            = new AssetDescriptor<Texture>("buttons/exit_red.png", Texture.class);
 
     public static final AssetDescriptor<Texture> EXIT_DOWN
-            = new AssetDescriptor<Texture>("exit_down_red.png", Texture.class);
+            = new AssetDescriptor<Texture>("buttons/exit_down_red.png", Texture.class);
 
     public static final AssetDescriptor<Texture> HP_PIROS_TEXTURE
             = new AssetDescriptor<Texture>("hp piros.png", Texture.class);
@@ -162,7 +160,6 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
         manager.load(VENUS_TEXTURE);
         manager.load(SHIP1_ATLAS);
         manager.load(SHIP2_ATLAS);
-        manager.load(SPIRAL);
         manager.load(LOGO);
         manager.load(START);
         manager.load(START_DOWN);
