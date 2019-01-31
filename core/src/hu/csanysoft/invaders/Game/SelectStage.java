@@ -1,5 +1,6 @@
 package hu.csanysoft.invaders.Game;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -16,6 +17,7 @@ import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.Invaders;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyStage;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
+import hu.csanysoft.invaders.MyBaseClasses.UI.MyLabel;
 
 public class SelectStage extends MyStage {
 
@@ -69,6 +71,14 @@ public class SelectStage extends MyStage {
                 super.clicked(event, x, y);
                 game.setScreen(new GameScreen(game, 2, (short)1), true);
                 dispose();
+            }
+        });
+
+        addActor(new MyLabel("Válassz űrhajót!", game.getColorLabelStyle(Color.WHITE)) {
+            @Override
+            public void init() {
+                super.init();
+                setPosition(Globals.WORLD_WIDTH / 2 - getWidth() / 2, Globals.WORLD_HEIGHT / 3 * 2);
             }
         });
     }
