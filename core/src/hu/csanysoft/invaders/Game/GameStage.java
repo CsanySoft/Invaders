@@ -54,7 +54,7 @@ public class GameStage extends MyStage {
     float whiteTimer = 0;
     public short weapon = 1;
     boolean shipAt500 = false;
-    int killsSinceLastShot = 0;
+    public int killsSinceLastShot = 0;
 
 
 
@@ -172,9 +172,7 @@ public class GameStage extends MyStage {
                             }
 
                             if (laser.overlaps(enemy) && laser.isFel() && laser.isVisible() && enemy.isVisible()) {
-                                System.out.println(killsSinceLastShot);
                                 if (++killsSinceLastShot == 2) {
-                                    killsSinceLastShot=0;
                                     points += 10;
                                     addActor(new Popup("Double kill!",(int)laser.getX(), (int)laser.getY()));
                                     addActor(new Popup(10,(int)laser.getX(), (int)laser.getY()-30));
@@ -230,6 +228,7 @@ public class GameStage extends MyStage {
             }
 
             if (lastshot > shoottimer && isShooting && isAlive) {
+                killsSinceLastShot=0;
                 switch (weapon) {
                     case 1:
                         Laser laser1 = new Laser(ship.getX() + ship.getWidth() / 2 - 5, ship.getY() + ship.getHeight(), 0);
@@ -361,7 +360,6 @@ public class GameStage extends MyStage {
     }
     public void shoot(){
         isShooting = true;
-        killsSinceLastShot = 0;
         if(!isAlive)
             game.setScreenBackByStackPop();
     }
