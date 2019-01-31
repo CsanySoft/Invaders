@@ -109,6 +109,19 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
     public static final AssetDescriptor<Texture> LOGO
             = new AssetDescriptor<Texture>("bloodyhell.png", Texture.class);
 
+    public static final AssetDescriptor<Texture> START
+            = new AssetDescriptor<Texture>("start_red.png", Texture.class);
+
+    public static final AssetDescriptor<Texture> START_DOWN
+            = new AssetDescriptor<Texture>("start_down_red.png", Texture.class);
+
+    public static final AssetDescriptor<Texture> EXIT
+            = new AssetDescriptor<Texture>("exit_red.png", Texture.class);
+
+    public static final AssetDescriptor<Texture> EXIT_DOWN
+            = new AssetDescriptor<Texture>("exit_down_red.png", Texture.class);
+
+
 
     public static void prepare() {
         manager = new AssetManager();
@@ -147,6 +160,10 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
         manager.load(SHIP2_ATLAS);
         manager.load(SPIRAL);
         manager.load(LOGO);
+        manager.load(START);
+        manager.load(START_DOWN);
+        manager.load(EXIT);
+        manager.load(EXIT_DOWN);
     }
 
     public static void afterLoaded() {
