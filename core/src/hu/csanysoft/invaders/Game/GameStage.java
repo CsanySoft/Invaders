@@ -17,10 +17,10 @@ import hu.csanysoft.invaders.Actors.Decoration;
 import hu.csanysoft.invaders.Actors.Enemy;
 import hu.csanysoft.invaders.Actors.Explosion;
 import hu.csanysoft.invaders.Actors.Ghost;
+import hu.csanysoft.invaders.Actors.HPActorPiros;
 import hu.csanysoft.invaders.Actors.Laser;
 import hu.csanysoft.invaders.Actors.Meteorite;
 import hu.csanysoft.invaders.Actors.Popup;
-import hu.csanysoft.invaders.Actors.Ship;
 import hu.csanysoft.invaders.Actors.SubMeteorite;
 import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Global.Globals;
@@ -188,7 +188,7 @@ public class GameStage extends MyStage {
                                     addActor(new Popup(5, (int)enemy.getX(), (int)enemy.getY()));
                                 }else if (enemy instanceof Boss){
                                     ((Boss) enemy).getShot();
-                                    if(((Boss) enemy).getHealth() == 0) {
+                                    if(((Boss) enemy).getHealth() <= 0) {
                                         flyout = true;
                                         explode(enemy);
                                         enemy.remove();
@@ -261,8 +261,9 @@ public class GameStage extends MyStage {
             if (points >= 100 * weapon) {
                 boss = true;
                 if(!vanBoss) {
-                    addActor(new Boss(Globals.WORLD_WIDTH / 2 - 384 / 2, getCameraMoveToY()+Globals.WORLD_HEIGHT/2));
-                    System.out.println("BOSS");
+                    Boss boss = new Boss(Globals.WORLD_WIDTH / 2 - 384 / 2, getCameraMoveToY()+Globals.WORLD_HEIGHT/2);
+                    addActor(boss);
+                    addActor(new HPActorPiros(boss));
                     vanBoss = true;
                 }
             }
