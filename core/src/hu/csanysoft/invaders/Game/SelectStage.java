@@ -72,6 +72,14 @@ public class SelectStage extends MyStage {
                 dispose();
             }
         });
+
+        addActor(new MyLabel("Válassz űrhajót!", game.getColorLabelStyle(Color.WHITE)) {
+            @Override
+            public void init() {
+                super.init();
+                setPosition(Globals.WORLD_WIDTH / 2 - getWidth() / 2, Globals.WORLD_HEIGHT / 3 * 2);
+            }
+        });
     }
 
     @Override
