@@ -48,7 +48,7 @@ public class Boss extends Enemy {
         if(isVisible() && elapsedTime > shoot) {
             if(weapon == 1)
             for (int i = 0; i <=40 ; i+=10) {
-                Laser laser = new Laser(getSprite("alap").getX() + getWidth() / 2 - 30, getY()-getHeight(), -i);
+                Laser laser = new Laser(getSprite("alap").getX() + getWidth() / 2 - 30, getY()-120, -i);
                 laser.fel = false;
                 laser.setRotation(-i);
                 getStage().addActor(laser);
@@ -58,7 +58,7 @@ public class Boss extends Enemy {
                 getStage().addActor(laser);
             }
             else if (weapon == 2) {
-                Laser laser = new Laser(getSprite("alap").getX() + getWidth() / 2 - 30, getY()-getHeight(), 180);
+                Laser laser = new Laser(getSprite("alap").getX() + getWidth() / 2 - 30, getY()-240, 180);
                 laser.setSize(laser.getWidth()*2, laser.getHeight()*2);
                 getStage().addActor(laser);
             }
