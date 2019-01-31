@@ -176,11 +176,14 @@ public class GameStage extends MyStage {
                             if (laser.overlaps(enemy) && laser.isFel() && laser.isVisible() && enemy.isVisible()) {
                                 if (++killsSinceLastShot == 2) {
                                     points += 10;
-                                    addActor(new Popup("Double kill!",(int)laser.getX(), (int)laser.getY()));
+                                    addActor(new Popup("Double shot!",(int)laser.getX(), (int)laser.getY()));
+                                    addActor(new Popup(10,(int)laser.getX(), (int)laser.getY()-30));
+                                } else if(killsSinceLastShot == 3) {
+                                    points += 10;
+                                    addActor(new Popup("Triple shot!",(int)laser.getX(), (int)laser.getY()));
                                     addActor(new Popup(10,(int)laser.getX(), (int)laser.getY()-30));
                                 }
                                 if(enemy instanceof Meteorite && ! (enemy instanceof SubMeteorite)){
-                                    System.out.println("SÜTI");
                                     SubMeteorite m1 = new SubMeteorite(enemy.getX(), enemy.getY(), 1); SubMeteorite m2 = new SubMeteorite(enemy.getX(), enemy.getY(), 2);
                                     SubMeteorite m3 = new SubMeteorite(enemy.getX(), enemy.getY(), 3); SubMeteorite m4 = new SubMeteorite(enemy.getX(), enemy.getY(), 4);
                                     addActor(m1); addActor(m2); addActor(m3); addActor(m4);
@@ -362,6 +365,7 @@ public class GameStage extends MyStage {
     }
     public void shoot(){
         isShooting = true;
+        killsSinceLastShot = 0;
         if(!isAlive)
             game.setScreenBackByStackPop();
     }
