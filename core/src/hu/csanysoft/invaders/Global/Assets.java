@@ -61,9 +61,6 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
     public static final AssetDescriptor<Texture> GAMEOVER_TEXTURE
             = new AssetDescriptor<Texture>("gameover.png", Texture.class);
 
-    public static final AssetDescriptor<Texture> ENEMY1_TEXTURE
-            = new AssetDescriptor<Texture>("enemy1.png", Texture.class);
-
     public static final AssetDescriptor<Texture> WHITE_TEXTURE
             = new AssetDescriptor<Texture>("white.jpg", Texture.class);
 
@@ -85,12 +82,6 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
     public static final AssetDescriptor<Texture> TUTORIAL_TEXTURE
             = new AssetDescriptor<Texture>("tutorial.png", Texture.class);
 
-    public static final AssetDescriptor<Texture> DOUBLE_TEXTURE
-            = new AssetDescriptor<Texture>("double.png", Texture.class);
-
-    public static final AssetDescriptor<Texture> TRIPLE_TEXTURE
-            = new AssetDescriptor<Texture>("triple.png", Texture.class);
-
     public static final AssetDescriptor<TextureAtlas> EXPLOSION_TEXTURE
             = new AssetDescriptor<TextureAtlas>("animations/explosion2.atlas", TextureAtlas.class);
 
@@ -111,6 +102,12 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
 
     public static final AssetDescriptor<TextureAtlas> SHIP2_ATLAS
             = new AssetDescriptor<TextureAtlas>("ships/ship2.atlas", TextureAtlas.class);
+
+    public static final AssetDescriptor<Texture> SPIRAL
+            = new AssetDescriptor<Texture>("spiral_red.png", Texture.class);
+
+    public static final AssetDescriptor<Texture> LOGO
+            = new AssetDescriptor<Texture>("bloodyhell.png", Texture.class);
 
 
     public static void prepare() {
@@ -134,7 +131,6 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
         manager.load(SHIP_TEXTURE);
         manager.load(SHIP2_TEXTURE);
         manager.load(GAMEOVER_TEXTURE);
-        manager.load(ENEMY1_TEXTURE);
         manager.load(WHITE_TEXTURE);
         manager.load(ROCKET_ATLAS);
         manager.load(METEORITE_TEXTURE);
@@ -143,14 +139,14 @@ public static final AssetDescriptor<Texture> GHOST_ALAP_TEXTURE
         manager.load(MUSIC_BACKGROUND);
         manager.load(EXPLOSION_TEXTURE);
         manager.load(SOUND_BOOM);
-        manager.load(DOUBLE_TEXTURE);
-        manager.load(TRIPLE_TEXTURE);
         manager.load(SATURN_TEXTURE);
         manager.load(JUPITER_TEXTURE);
         manager.load(TESLA_TEXTURE);
         manager.load(VENUS_TEXTURE);
         manager.load(SHIP1_ATLAS);
         manager.load(SHIP2_ATLAS);
+        manager.load(SPIRAL);
+        manager.load(LOGO);
     }
 
     public static void afterLoaded() {

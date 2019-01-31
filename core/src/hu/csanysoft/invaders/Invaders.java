@@ -12,7 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Stack;
 
 import hu.csanysoft.invaders.Global.Assets;
-import hu.csanysoft.invaders.Menu.LoadingScreen;
+import hu.csanysoft.invaders.Loading.LoadingScreen;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyScreen;
 
 public class Invaders extends Game {

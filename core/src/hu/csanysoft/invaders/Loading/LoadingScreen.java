@@ -1,4 +1,4 @@
-package hu.csanysoft.invaders.Menu;
+package hu.csanysoft.invaders.Loading;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -9,10 +9,10 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
-import hu.csanysoft.invaders.Game.GameScreen;
 import hu.csanysoft.invaders.Game.SelectScreen;
 import hu.csanysoft.invaders.Invaders;
 import hu.csanysoft.invaders.Global.Assets;
+import hu.csanysoft.invaders.Menu.MenuScreen;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyActor;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyScreen;
 
@@ -112,7 +112,7 @@ public class LoadingScreen extends MyScreen {
 
         if(Assets.manager.update()) {
             if(Gdx.input.isTouched()) {
-                game.setScreen(new SelectScreen(game), true);
+                game.setScreen(new MenuScreen(game), true);
             }
         }
 

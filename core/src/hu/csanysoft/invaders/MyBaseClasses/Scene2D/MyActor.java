@@ -161,6 +161,10 @@ abstract public class MyActor extends Actor implements InitableInterface {
         */
     }
 
+    public void changePosition(int dx, int dy){
+        setPosition(getX()+dx, getY()+dy);
+    }
+
     public void setOrigintoCenter(){
         setOrigin(getWidth()/2, getHeight()/2);
     }
