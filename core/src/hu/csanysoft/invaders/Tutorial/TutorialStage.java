@@ -41,10 +41,11 @@ public class TutorialStage extends MyStage {
 
         MyLabel label = new MyLabel("Irányításhoz döntse meg eszközét!\n" +
                 "Ha lőni akar tartsa ujját a képernyőn.\n" +
-                "Vigyázzon! A meteoridok darabokra törnek ha szétlövi, \n" +
+                "Vigyázzon! A meteoridok darabokra törnek\nha szétlövi, " +
                 "és ha a hajónak ütköznek akkor meghal!" ,  Invaders.getColorLabelStyle(Color.YELLOW));
         addActor(label);
-        label.setPosition((Globals.WORLD_WIDTH-label.getWidth())/2,(Globals.WORLD_HEIGHT-label.getHeight())/2+150);
+        label.scaleBy(.5f);
+        label.setPosition(10,(Globals.WORLD_HEIGHT-label.getHeight())/2+150);
         addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.TUTORIAL_TEXTURE)){
             @Override
             public void init() {
