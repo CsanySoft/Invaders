@@ -104,6 +104,7 @@ public class Assets {
     public static final AssetDescriptor<TextureAtlas> SHIP2_ATLAS
             = new AssetDescriptor<TextureAtlas>("ships/ship2.atlas", TextureAtlas.class);
 
+
     public static final AssetDescriptor<Texture> LOGO
             = new AssetDescriptor<Texture>("invaders.png", Texture.class);
 
