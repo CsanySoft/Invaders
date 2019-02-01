@@ -47,7 +47,7 @@ public class GameStage extends MyStage {
     float speed = 2;
     float lastshot = 0;
     float flytimer = 0;
-    float decorationLast = getElapsedTime();
+    float decorationLast = 0;
     Background backgroundActors[];
     Background foregroundActors[];
     Random rand = new Random();
@@ -56,6 +56,7 @@ public class GameStage extends MyStage {
     public short weapon = 1;
     boolean shipAt500 = false;
     public int killsSinceLastShot = 0;
+    float deathTime;
 
 
 
@@ -103,6 +104,7 @@ public class GameStage extends MyStage {
         super.act(delta);
         timer += delta;
         lastshot += delta;
+        if (deathTime>.5f)deathTime += delta;
         if (!flyout) {
             if (ship.getY() > 500) {
                 setCameraMoveToY(Globals.WORLD_HEIGHT / 2 + ship.getY() - ship.getHeight() * .5f);
@@ -285,7 +287,7 @@ public class GameStage extends MyStage {
         if(points < 0)
             gameover();
 
-        if(decorationLast - elapsedTime > 20){
+        if(elapsedTime - decorationLast > 20){
             decorationLast = elapsedTime;
             if(random(1,1) == 1){
                 Decoration deco = new Decoration(0,0);
@@ -345,6 +347,7 @@ public class GameStage extends MyStage {
     }
 
     public void gameover() {
+       if(deathTime<1) deathTime = 1;
         if(flyout | !isAlive)
             return;
         ship.setVisible(false);
@@ -368,7 +371,7 @@ public class GameStage extends MyStage {
         isShooting = true;
         killsSinceLastShot = 0;
         if(!isAlive)
-            game.setScreenBackByStackPop();
+            if(deathTime > 3) game.setScreenBackByStackPop();
     }
     public void unshoot(){
         isShooting = false;

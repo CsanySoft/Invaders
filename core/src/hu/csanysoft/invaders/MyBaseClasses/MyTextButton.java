@@ -19,8 +19,7 @@ public class MyTextButton extends TextButton {
 
 
     static {
-        refresh();
-    }
+        refresh(); }
 
     public static void refresh() {
         textButtonStyle = new TextButtonStyle();
@@ -83,5 +82,9 @@ public class MyTextButton extends TextButton {
         style.over = new TextureRegionDrawable(new TextureRegion(new Texture(p)));
         style.down = new TextureRegionDrawable(new TextureRegion(new Texture(p)));
         this.setStyle(style);
+    }
+
+    public void magnify(float mul){
+        setSize(getWidth()*mul, getHeight()*mul);
     }
 }

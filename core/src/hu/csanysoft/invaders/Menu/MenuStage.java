@@ -5,17 +5,17 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.csanysoft.invaders.Game.SelectScreen;
 import hu.csanysoft.invaders.Global.Assets;
 import hu.csanysoft.invaders.Invaders;
-import hu.csanysoft.invaders.Game.GameScreen;
 import hu.csanysoft.invaders.Global.Globals;
 import hu.csanysoft.invaders.MyBaseClasses.MyTextButton;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.MyStage;
 import hu.csanysoft.invaders.MyBaseClasses.Scene2D.OneSpriteStaticActor;
+import hu.csanysoft.invaders.MyBaseClasses.UI.MyLabel;
+import hu.csanysoft.invaders.Tutorial.TutorialScreen;
 
 public class MenuStage extends MyStage {
 
@@ -26,6 +26,7 @@ public class MenuStage extends MyStage {
     }
 
     public void init() {
+        Assets.manager.get(Assets.MUSIC_BACKGROUND).play();
         OneSpriteStaticActor background = new OneSpriteStaticActor(Assets.manager.get(Assets.SPACE_TEXTURE)){
             @Override
             public void act(float delta) {
@@ -42,14 +43,13 @@ public class MenuStage extends MyStage {
             }
         };
 
-        OneSpriteStaticActor start = new OneSpriteStaticActor(Assets.manager.get(Assets.START)){
+        MyTextButton start = new MyTextButton("Start"){
             @Override
             public void init() {
                 super.init();
                 addListener(new InputListener(){
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        setTexture(Assets.manager.get(Assets.START_DOWN));
                         return true;
                     }
 
@@ -62,7 +62,7 @@ public class MenuStage extends MyStage {
             }
         };
 
-        OneSpriteStaticActor exit = new OneSpriteStaticActor(Assets.manager.get(Assets.EXIT)){
+        MyTextButton exit = new MyTextButton("Exit"){
             @Override
             public void init() {
                 super.init();
@@ -70,8 +70,6 @@ public class MenuStage extends MyStage {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         System.exit(0);
-                        setTexture(Assets.manager.get(Assets.GAMEOVER_TEXTURE));
-                        setTexture(Assets.manager.get(Assets.EXIT_DOWN));
                         return true;
                     }
 
@@ -84,14 +82,13 @@ public class MenuStage extends MyStage {
             }
         };
 
-        OneSpriteStaticActor tutorial = new OneSpriteStaticActor(Assets.manager.get(Assets.START)){
+        MyTextButton tutorial = new MyTextButton("Tutorial"){
             @Override
             public void init() {
                 super.init();
                 addListener(new InputListener(){
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        setTexture(Assets.manager.get(Assets.START_DOWN));
                         return true;
                     }
 
