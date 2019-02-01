@@ -4,10 +4,13 @@ Zene
 Hangeffektek
 Intenzív játékélmény
 Animációk
-Főellenfél
-Külön szintek
+Több szint
+Főellenfél a szintek végén
 Változatos fegyverzet
 Különféle dekorációs elemek
 Változó nehézségi szint
 Végtelen játékmenet
 Tutorial
+Memória optimalizált
+Pontszámítás
+Ergonomikus kezelőfelület, irányítás
