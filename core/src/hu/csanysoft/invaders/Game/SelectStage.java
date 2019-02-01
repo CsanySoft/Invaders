@@ -1,5 +1,6 @@
 package hu.csanysoft.invaders.Game;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -80,6 +81,14 @@ public class SelectStage extends MyStage {
                 setPosition(Globals.WORLD_WIDTH / 2 - getWidth() / 2, Globals.WORLD_HEIGHT / 3 * 2);
             }
         });
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        if(keyCode == Input.Keys.BACK){
+            game.setScreenBackByStackPop();
+        }
+        return super.keyDown(keyCode);
     }
 
     @Override

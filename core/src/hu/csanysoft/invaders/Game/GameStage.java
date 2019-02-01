@@ -89,7 +89,7 @@ public class GameStage extends MyStage {
         ship.setPosition(getWidth() / 2 - ship.getWidth() / 2, ship.getHeight() * .5f);
         white = new Image(Assets.manager.get(Assets.WHITE_TEXTURE));
         white.setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
-        //addActor(white);
+        addActor(white);
         white.setColor(255, 255, 255, 0);
         ControlStage.setLevelIndicator(weapon);
     }
@@ -322,15 +322,11 @@ public class GameStage extends MyStage {
 
     @Override
     public boolean keyDown(int keyCode) {
-        if (keyCode == Input.Keys.X) {
-            flyout=true;
-        } else if (keyCode == Input.Keys.U && weapon < 4) {
-            weapon++;
-        } else if(keyCode == Input.Keys.B) {
-            points = 100*weapon;
-        }
-        else if(keyCode == Input.Keys.SPACE)
+        if(keyCode == Input.Keys.SPACE)
             shoot();
+        if(keyCode == Input.Keys.BACK){
+            game.setScreenBackByStackPop();
+        }
         return super.keyDown(keyCode);
     }
 
